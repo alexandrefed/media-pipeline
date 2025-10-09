@@ -1,0 +1,303 @@
+openapi: 3.1.0
+info:
+  title: AI Knowledge Base Query API
+  description: Natural language search API for AI tool knowledge base from YouTube videos
+  version: 1.0.0
+  contact:
+    name: AI Knowledge Base Support
+    email: support@yourdomain.com
+servers:
+  - url: https://api.yourdomain.com
+    description: Production server
+paths:
+  /api/v1/query:
+    post:
+      operationId: searchKnowledgeBase
+      summary: Search the AI Knowledge Base
+      description: |
+        Perform natural language search across AI tool video transcripts with complete metadata.
+        
+        Returns search results with:
+        - Video title and channel information
+        - Published date in ISO format
+        - Direct YouTube timestamp URLs for each result
+        - Tools mentioned in the content
+        - Quality scores and similarity ratings
+        - Surrounding context for better understanding
+      security:
+        - ApiKeyAuth: []
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+            examples:
+              basic:
+                summary: Basic query
+                value:
+                  query: "How to use n8n with databases"
+                  max_results: 10
+              advanced:
+                summary: Advanced query with options
+                value:
+                  query: "n8n automation workflows"
+                  max_results: 5
+                  search_mode: "precise"
+                  include_context: true
+                  quality_threshold: 0.7
+      responses:
+        '200':
+          description: Successful query response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+              example:
+                query: "How to use n8n with databases"
+                total_found: 3
+                search_time_ms: 245.3
+                detected_entities: ["n8n"]
+                search_strategy: "entity_focused_hybrid"
+                suggestions: 
+                  - "n8n database integration tutorials"
+                  - "n8n MySQL connector setup"
+                results:
+                  - chunk_id: 123
+                    content: "n8n provides native database nodes for MySQL, PostgreSQL, and MongoDB. To connect, add a database node and configure credentials..."
+                    similarity_score: 0.89
+                    source_title: "Complete n8n Database Integration Guide"
+                    source_url: "https://youtube.com/watch?v=abc123"
+                    channel_name: "AI Automation Channel"
+                    start_time: 120.5
+                    end_time: 185.3
+                    mentioned_tools: ["n8n", "MySQL", "PostgreSQL"]
+                    quality_score: 0.85
+                    published_date: "2025-01-15T10:30:00Z"
+                    source_id: 42
+                    timestamp_url: "https://youtube.com/watch?v=abc123&t=120s"
+                    context_before: "In this section, we'll explore database integrations."
+                    context_after: "Next, we'll look at advanced query builders."
+        '401':
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      tags:
+        - Query
+  /health:
+    get:
+      operationId: checkHealth
+      summary: Health check
+      description: Check if the API is operational
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: ["healthy"]
+                  timestamp:
+                    type: string
+                    format: date-time
+                  database:
+                    type: string
+                    enum: ["connected", "disconnected"]
+      tags:
+        - Health
+components:
+  schemas:
+    QueryRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Natural language search query
+          minLength: 3
+          maxLength: 500
+          example: "How to integrate Claude with n8n workflows"
+        max_results:
+          type: integer
+          description: Maximum number of results to return
+          minimum: 1
+          maximum: 50
+          default: 10
+        search_mode:
+          type: string
+          description: Search precision mode
+          enum: ["precise", "balanced", "exploratory"]
+          default: "balanced"
+        include_context:
+          type: boolean
+          description: Include surrounding context in results
+          default: true
+        quality_threshold:
+          type: number
+          description: Minimum quality score for results (0-1)
+          minimum: 0
+          maximum: 1
+          default: 0.2
+    ChunkResult:
+      type: object
+      required:
+        - chunk_id
+        - content
+        - similarity_score
+        - source_title
+        - source_url
+        - channel_name
+        - start_time
+        - end_time
+        - mentioned_tools
+        - quality_score
+        - published_date
+        - source_id
+        - timestamp_url
+      properties:
+        chunk_id:
+          type: integer
+          description: Unique identifier for this chunk
+        content:
+          type: string
+          description: The actual transcript content
+        similarity_score:
+          type: number
+          description: Relevance score (0-1, higher is better)
+          minimum: 0
+          maximum: 1
+        source_title:
+          type: string
+          description: Title of the source YouTube video
+        source_url:
+          type: string
+          format: uri
+          description: Original YouTube video URL
+        channel_name:
+          type: string
+          description: YouTube channel name
+        start_time:
+          type: number
+          description: Start time in seconds
+        end_time:
+          type: number
+          description: End time in seconds
+        mentioned_tools:
+          type: array
+          items:
+            type: string
+          description: AI tools mentioned in this chunk
+        quality_score:
+          type: number
+          description: Content quality score (0-1)
+          minimum: 0
+          maximum: 1
+        published_date:
+          type: string
+          format: date-time
+          description: When the video was published (ISO format)
+        source_id:
+          type: integer
+          description: Source video ID for full metadata retrieval
+        timestamp_url:
+          type: string
+          format: uri
+          description: Direct YouTube link with timestamp to this segment
+        context_before:
+          type: string
+          description: Text from preceding segment for context
+          default: ""
+        context_after:
+          type: string
+          description: Text from following segment for context
+          default: ""
+    QueryResponse:
+      type: object
+      required:
+        - query
+        - results
+        - total_found
+        - search_time_ms
+        - detected_entities
+        - search_strategy
+        - suggestions
+      properties:
+        query:
+          type: string
+          description: The original search query
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChunkResult'
+          description: Array of search results
+        total_found:
+          type: integer
+          description: Total number of matching results
+        search_time_ms:
+          type: number
+          description: Query execution time in milliseconds
+        detected_entities:
+          type: array
+          items:
+            type: string
+          description: AI tools detected in the query
+        search_strategy:
+          type: string
+          description: Search strategy used for this query
+          example: "entity_focused_hybrid"
+        suggestions:
+          type: array
+          items:
+            type: string
+          description: Suggested follow-up queries
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - timestamp
+      properties:
+        error:
+          type: string
+          description: Error message
+        detail:
+          type: string
+          description: Additional error details
+        timestamp:
+          type: string
+          format: date-time
+          description: When the error occurred
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication
+tags:
+  - name: Query
+    description: Knowledge base search operations
+  - name: Health
+    description: Service health monitoring

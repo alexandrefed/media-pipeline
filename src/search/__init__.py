@@ -1,0 +1,3 @@
+"""
+Search and query functionality.
+"""

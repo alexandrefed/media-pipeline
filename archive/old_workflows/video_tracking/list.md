@@ -1,0 +1,29 @@
+https://www.youtube.com/watch?v=LEMLntjfihA ✅ DONE
+https://www.youtube.com/watch?v=arWg7gYVD_0&t=619s ✅ DONE
+https://www.youtube.com/watch?v=u2NluvotA80 ✅ DONE
+https://www.youtube.com/watch?v=6eBSHbLKuN0 ❌ NO SUBTITLES
+https://www.youtube.com/watch?v=eM_Tg8_BGx4 ✅ DONE
+https://www.youtube.com/watch?v=hGg3nWp7afg ✅ DONE
+https://www.youtube.com/watch?v=Y2XI2nk44WE&t=78s ✅ DONE
+https://www.youtube.com/watch?v=Nvm9hv38z2o&t=669s ✅ DONE
+https://www.youtube.com/watch?app=desktop&v=LXk8nWwOPuY&t=123s ✅ DONE
+https://www.youtube.com/watch?v=J5B9UGTuNoM ✅ DONE
+https://www.youtube.com/watch?v=9ijnN985O_c&t=57s ✅ DONE
+https://www.youtube.com/watch?v=7LWl3EbcFTc&t=216s ✅ DONE
+https://www.youtube.com/watch?v=2TIXl2rlA6Q&t=271s ✅ DONE
+https://www.youtube.com/watch?v=JjVvYDPVrAQ ✅ DONE
+https://www.youtube.com/watch?v=4SnvMieJiuw ✅ DONE
+https://www.youtube.com/watch?v=9ipM_vDwflI ✅ DONE
+https://www.youtube.com/watch?v=mKEq_YaJjPI&t=615s ✅ DONE
+https://www.youtube.com/watch?v=f8RnRuaxee8&t=12s ✅ DONE
+https://www.youtube.com/watch?v=y-_xknNOapo&t=158s ✅ DONE
+https://www.youtube.com/watch?v=LvkZuY7rJOM ✅ DONE
+https://www.youtube.com/watch?v=6fCqj4xFCZI ✅ DONE
+https://www.youtube.com/watch?v=rOUs76wtv60 ✅ DONE
+https://www.youtube.com/watch?v=5TxSqvPbnWw ✅ DONE
+https://www.youtube.com/watch?v=L4Qbx8OM9l4 ✅ DONE
+https://www.youtube.com/watch?v=Tw9HButMNu8 ✅ DONE
+https://www.youtube.com/watch?v=xf2i6Acs1mI ✅ DONE
+https://www.youtube.com/watch?v=eIUYSC6SilA&t=1s ✅ DONE
+https://www.youtube.com/watch?v=6Rg5M69bMgQ ✅ DONE
+https://www.youtube.com/watch?v=_9tAANHDJb4 ❌ RATE LIMITED (Spanish - Make.com automation)
