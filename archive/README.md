@@ -42,10 +42,12 @@ Obsolete Claude Code commands:
 Old Python import scripts from PostgreSQL phase (14 files):
 - add_*_source.py scripts for database imports
 
-### `old_workflows/pending/` & `old_workflows/processed/`
+### `old_workflows/pending/` & `old_workflows/processed/` ⚠️ LOCAL ONLY
 Original manual chunking workflow directories:
-- Contains 29 processed videos with manual chunks
-- Contains 435 high-quality chunks from PostgreSQL phase
+- **65 files preserved locally** - enhanced transcripts and manual chunks
+- **NOT uploaded to VPS** - these files exist only in local repository
+- **NOT in git** - excluded by .gitignore to keep repo size manageable
+- **Important**: Do not delete these directories - they contain processed work not yet migrated
 
 ### `test_files/`
 Test and experimental files:
@@ -75,7 +77,7 @@ Test and experimental files:
 ## 📖 Why Files Were Archived
 
 ### PostgreSQL Documentation
-Still technically functional but no longer the primary workflow. The PostgreSQL VPS contains 29 videos with 435 chunks that can still be queried via API if needed. However, new videos use the MCP KB Memory approach for better Claude Code integration.
+Still technically functional but no longer the primary workflow. The PostgreSQL VPS contains **29 videos with 435 chunks** that can still be queried via API if needed. However, **65+ additional processed files exist locally** in `archive/old_workflows/processed/` that were never uploaded to VPS. New videos use the MCP KB Memory approach for better Claude Code integration.
 
 ### Custom GPT Files
 OpenAI Custom GPT integration was explored but not adopted. The agentic workflow with MCP KB Memory provides better integration with Claude Code without requiring external API configurations.

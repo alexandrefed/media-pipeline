@@ -7,7 +7,9 @@ outputs/
 !tests/fixtures/*.json
 !.github/workflows/*.json
 
-# Processed video content (ignore all content but keep directory structure)
+# Processed video content (keep locally but don't commit to git)
+# ⚠️ IMPORTANT: Do not delete archive/old_workflows/processed/ or pending/
+# These contain 65+ files not yet uploaded to VPS - local work only!
 processed/manual_chunks/*.json
 processed/enhanced_transcripts/*.txt
 pending/raw_transcripts/*.txt
