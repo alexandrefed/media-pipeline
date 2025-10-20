@@ -1,0 +1,53 @@
+# Knowledge Base Notification System Configuration
+# Copy this file to config.yaml and fill in your values
+
+# Telegram Bot Configuration
+telegram:
+  # Your Telegram bot token (get from @BotFather)
+  bot_token: "YOUR_BOT_TOKEN_HERE"
+
+  # Your Telegram chat ID (get by messaging @userinfobot)
+  chat_id: "YOUR_CHAT_ID_HERE"
+
+# Notification Settings
+notifications:
+  # Immediate notifications (sent after each video is processed)
+  immediate:
+    enabled: true
+    max_takeaways: 5  # Number of key takeaways to include
+
+  # Weekly digest (aggregates all videos from the week)
+  weekly_digest:
+    enabled: false
+    day: "sunday"     # Day of week to send
+    time: "19:00"     # Time to send (24-hour format)
+
+  # Spaced repetition (resurfaces insights for long-term retention)
+  spaced_repetition:
+    enabled: false
+    daily_time: "09:00"  # Time to send daily reminder
+    intervals:           # Time intervals to resurface content
+      - 7                # 1 week ago
+      - 30               # 1 month ago
+      - 90               # 3 months ago
+
+# Message Formatting
+formatting:
+  # Use HTML for all messages (more reliable than Markdown)
+  parse_mode: "HTML"
+
+  # Disable link previews in messages
+  disable_web_preview: false
+
+  # Truncation limits
+  max_summary_length: 500
+  max_takeaway_length: 200
+
+# Advanced Settings
+advanced:
+  # Request timeout in seconds
+  timeout: 10
+
+  # Retry failed requests
+  retry_attempts: 3
+  retry_delay: 2  # seconds

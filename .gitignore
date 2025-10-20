@@ -182,3 +182,6 @@ logs/
 # Backup files
 *.bak
 *.backup
+
+# Notification system config (contains Telegram bot token - NEVER commit!)
+notifications/config/config.yaml.github/workflows/
