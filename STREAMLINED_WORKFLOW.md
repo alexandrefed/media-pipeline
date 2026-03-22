@@ -4,6 +4,12 @@
 
 The streamlined workflow uses an intelligent agent-based system to process YouTube videos into high-quality knowledge base entries with **10x faster processing** and **zero manual work**.
 
+**NEW**: The system now supports **dual-pipeline processing** optimized for different content types:
+- **AI Tools Pipeline**: Technical tutorials, coding workflows, tool demonstrations
+- **Sports Pipeline**: Training protocols, exercise science, biomechanical analysis
+
+See `DUAL_PIPELINE_GUIDE.md` for complete dual-pipeline documentation.
+
 ## Workflow Comparison
 
 ### Old Manual Workflow (25 minutes per video)
@@ -16,19 +22,51 @@ The streamlined workflow uses an intelligent agent-based system to process YouTu
 ```
 
 ### New Streamlined Workflow (2 minutes per video)
+
+**AI Tools Pipeline**:
 ```
-1. Extract transcript                          → 30 seconds
-2. Auto-enhancement (174+ corrections)         → 5 seconds
+1. Extract transcript                            → 30 seconds
+2. Auto-enhancement (174+ corrections)           → 5 seconds
 3. Agent analysis (@youtube-transcript-analyzer) → 30 seconds
-4. Store in MCP KB Memory                      → instant query
+4. Generate detailed summary                     → 10 seconds
+5. Store in unified-memory                        → instant
+6. /compact (clean context)                      → instant
+```
+
+**Sports Pipeline**:
+```
+1. Extract transcript                              → 30 seconds
+2. Auto-enhancement (174+ corrections)             → 5 seconds
+3. Agent analysis (@sports-transcript-analyzer)    → 30 seconds
+4. Generate sports summary                         → 10 seconds
+5. Store in unified-memory (sport-specific tags)    → instant
+6. /compact (clean context)                        → instant
 ```
 
 ## Quick Start
 
+**AI Tools Videos** (Claude Code, development tools, programming):
 ```bash
-# Complete workflow in one command
+# Use slash command
+/process-youtube
+
+# Or manual streamlined command
 uv run python main.py streamlined "https://youtube.com/watch?v=VIDEO_ID"
 ```
+
+**Sports Training Videos** (exercise protocols, scientific research):
+```bash
+# Use slash command
+/process-sports-video
+
+# This command handles sport-specific extraction, evidence tiers, and biomechanics
+```
+
+**How to Choose**:
+- **Code/tools/workflows** → AI Tools Pipeline (`/process-youtube`)
+- **Exercise/training/physiology** → Sports Pipeline (`/process-sports-video`)
+
+See `DUAL_PIPELINE_GUIDE.md` for detailed decision criteria.
 
 ## Step-by-Step Guide
 
@@ -63,7 +101,33 @@ claude "Use @youtube-transcript-analyzer to analyze raw_text_for_enhancement_nGh
 
 **Output**: High-quality JSON with structured knowledge
 
-### 3. Store in MCP KB Memory
+### 3. Generate Detailed Human-Readable Summary
+
+After analysis, generate a comprehensive markdown summary:
+
+```bash
+uv run python scripts/generate_detailed_summary.py VIDEO_ID
+```
+
+**What Gets Generated**:
+- 📄 Detailed markdown summary with 20+ sections
+- 🔧 Technical implementation details (code snippets, configurations)
+- 📝 Step-by-step setup guides
+- 💡 Real-world examples and use cases
+- ✅ Action items and checklists
+
+**Output**: `workspace/summaries/VIDEO_ID_detailed_summary.md`
+
+**Template**: Based on `src/templates/detailed_summary_template.md`
+
+**Quality Standards**:
+- ✅ Full code blocks with inline comments
+- ✅ Actual configuration files (not descriptions)
+- ✅ Complete command sequences with all flags
+- ✅ File paths and directory structures
+- ✅ Before/after examples for comparisons
+
+### 4. Store in unified-memory
 
 ```bash
 # Prepare content for MCP KB
@@ -73,24 +137,45 @@ uv run python scripts/store_in_mcp_kb.py raw_text_for_enhancement_nGhsgdQplHw_au
 **Output**:
 - `raw_text_for_enhancement_nGhsgdQplHw_auto_enhanced_mcp_kb_ready.txt`
 
-Then store in MCP KB Memory:
+Then store in unified-memory:
 
 ```
-Use mcp__mcp-kb-memory__store_memory with the content from the _mcp_kb_ready.txt file
+Use mcp__unified-memory__memory_store with the content from the _mcp_kb_ready.txt file
 ```
 
-### 4. Query Anytime
+### 5. Clean Up Context (Recommended)
+
+After successfully storing the video knowledge, clean up your conversation context:
 
 ```
-Use mcp__mcp-kb-memory__retrieve_memory with query: "Claude Code context window management"
+/compact
 ```
 
-## The Specialized Agent
+**Why this matters**:
+- Frees up 5-10% of context window for next video
+- Removes processing noise from conversation history
+- Maintains clean context between videos
+- Follows best practices from AI Jason's context optimization video
 
-Located at: `.claude/agents/youtube-transcript-analyzer.md`
+**When to skip**: If you need to reference the current conversation for documentation or troubleshooting.
 
-### Agent Capabilities
+### 6. Query Anytime
 
+```
+Use mcp__unified-memory__memory_search with query: "Claude Code context window management"
+```
+
+## The Specialized Agents
+
+The system uses domain-specific agents optimized for different content types:
+
+### AI Tools Agent (@youtube-transcript-analyzer)
+
+**Location**: `.claude/agents/youtube-transcript-analyzer.md`
+
+**Optimized For**: Technical tutorials, coding workflows, tool demonstrations
+
+**Capabilities**:
 1. **Content Comprehension**: Understands technical tutorials, demos, workflows
 2. **Tool Identification**: Filters real tools from conversational noise
 3. **Command Extraction**: Finds actual executable commands
@@ -98,6 +183,23 @@ Located at: `.claude/agents/youtube-transcript-analyzer.md`
 5. **Workflow Analysis**: Captures multi-step processes with full context
 6. **Takeaway Synthesis**: Distills actionable insights with metrics
 7. **Implementation Details**: Extracts exact setup steps, configuration values, code snippets, and troubleshooting guides
+
+### Sports Agent (@sports-transcript-analyzer)
+
+**Location**: `.claude/agents/sports-transcript-analyzer.md`
+
+**Optimized For**: Training protocols, exercise science, biomechanical analysis
+
+**Capabilities**:
+1. **Protocol Extraction**: Volume, frequency, intensity, tempo, progression
+2. **Evidence Classification**: Scientific citations with 4-tier evidence system
+3. **Biomechanics Quantification**: Joint angles, muscle activation, force vectors
+4. **WHY Reasoning**: Biomechanical, physiological, and tactical rationale
+5. **Injury Considerations**: Contraindications, modifications, safety
+6. **Equipment Analysis**: Specifications, alternatives, substitution quality
+7. **Neo4j Integration**: Direct mapping to knowledge graph schema
+
+See `DUAL_PIPELINE_GUIDE.md` for agent comparison and selection criteria.
 
 ### Quality Standards
 
@@ -183,7 +285,7 @@ Located at: `.claude/agents/youtube-transcript-analyzer.md`
 
 ### Scalability
 - **Old**: PostgreSQL VPS, API complexity
-- **New**: Local MCP KB Memory, instant queries
+- **New**: Local unified-memory, instant queries
 - **Improvement**: Simpler infrastructure
 
 ### Accessibility
@@ -202,11 +304,15 @@ YouTube URL
     ↓
 [@youtube-transcript-analyzer] → _analysis.json (intelligent extraction)
     ↓
+[Generate Detailed Summary] → workspace/summaries/VIDEO_ID_detailed_summary.md
+    ↓
 [MCP KB Storage] → _mcp_kb_ready.txt
     ↓
-[mcp__mcp-kb-memory__store_memory] → Stored in KB
+[mcp__unified-memory__memory_store] → Stored in KB
     ↓
-[Query Anytime] via mcp__mcp-kb-memory__retrieve_memory
+[/compact] → Clean context for next video
+    ↓
+[Query Anytime] via mcp__unified-memory__memory_search
 ```
 
 ## Learning System Integration
@@ -235,10 +341,10 @@ claude "Use @youtube-transcript-analyzer to analyze..."
 **Option 2**: Keep existing PostgreSQL data
 - VPS database still functional
 - Can query via API as before
-- New videos use MCP KB Memory
+- New videos use unified-memory
 
 ### Recommended Approach
-Use the streamlined workflow for all new videos. The MCP KB Memory provides better integration with Claude Code and faster development cycles.
+Use the streamlined workflow for all new videos. The unified-memory provides better integration with Claude Code and faster development cycles.
 
 ## Troubleshooting
 
@@ -256,13 +362,13 @@ claude "list agents"
 - Check that the enhanced file has corrections applied
 - Review the agent's quality standards section
 
-### MCP KB Memory Issues
+### unified-memory Issues
 ```bash
 # Check MCP KB stats
-mcp__mcp-kb-memory__check_database_health
+mcp__unified-memory__sync_status
 
 # Verify storage worked
-mcp__mcp-kb-memory__search_by_tag with tag "youtube-knowledge-base"
+mcp__unified-memory__memory_search with tag "youtube-knowledge-base"
 ```
 
 ## Future Enhancements

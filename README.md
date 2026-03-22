@@ -5,23 +5,36 @@
 [![Claude Code Ready](https://img.shields.io/badge/Claude%20Code-Ready-purple)](https://claude.ai/code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Transform YouTube videos into a searchable AI knowledge base using **Phase 1 Agentic Workflow** with intelligent specialized agents and MCP KB Memory integration.
+Transform YouTube videos into a searchable AI knowledge base using **dual-pipeline processing** with intelligent specialized agents and unified-memory integration.
 
-## ✨ Phase 1: Agentic Processing System
+## ✨ Dual-Pipeline Processing System
 
-- 🤖 **Specialized Agents** - Channel-specific analyzers (IndyDevDan, Sean Kochel)
+The system now supports **two specialized pipelines** optimized for different content types:
+
+### 🔧 AI Tools Pipeline
+- 🤖 **Channel-Specific Agents** - IndyDevDan, Sean Kochel analyzers
+- 💻 **Code & Tools Focus** - Commands, workflows, implementation details
+- ⚡ **Auto-Enhancement** - 174+ transcription corrections
 - 🎯 **Intelligent Orchestration** - R&D Framework (Reduce and Delegate)
-- ⚡ **Auto-Enhancement** - 174+ transcription corrections applied automatically
-- 📊 **Agent Analysis** - 10-100x better quality than regex extraction
-- 💾 **MCP KB Memory** - Native Claude Code integration
+
+### 🏃 Sports Pipeline
+- 🎯 **Protocol Extraction** - Volume, frequency, intensity, tempo
+- 📚 **Evidence Classification** - 4-tier scientific evidence system
+- 🧬 **Biomechanics Analysis** - Joint angles, muscle activation, force vectors
+- 🧠 **WHY Reasoning** - Biomechanical, physiological, tactical rationale
+- 🔗 **Neo4j Integration** - Direct knowledge graph mapping
+
+**Shared Benefits**:
+- 💾 **unified-memory** - Native Claude Code integration
 - 🚀 **12.5x Faster** - 2 minutes vs 25 minutes per video
+- 📊 **10-100x Better Quality** - Domain-specific extraction vs generic
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 - Python 3.11+
 - uv package manager
-- Claude Code with MCP KB Memory
+- Claude Code with unified-memory
 
 ### Installation
 
@@ -55,7 +68,7 @@ Transform YouTube videos into a searchable AI knowledge base using **Phase 1 Age
    DB_SCHEMA=ai_kb
 
    # Optional for API server:
-   API_SERVER_URL=http://your-server:8001
+   API_SERVER_URL=http://your-server:8085
    API_KEY=your-secure-api-key
    ```
 
@@ -70,15 +83,29 @@ Transform YouTube videos into a searchable AI knowledge base using **Phase 1 Age
 
 ### Complete Workflow (One Command)
 
+**AI Tools Videos** (Claude Code, development tools, programming):
 ```bash
-# Process entire video with one slash command
-/process-youtube https://youtube.com/watch?v=VIDEO_ID
+# Process AI tool tutorial
+/process-youtube
 ```
 
-This command executes the Scout-Plan-Build pattern:
+**Sports Training Videos** (exercise protocols, scientific research):
+```bash
+# Process sports training video
+/process-sports-video
+```
+
+**How to Choose**:
+- **Code/tools/workflows** → `/process-youtube` (AI Tools Pipeline)
+- **Exercise/training/physiology** → `/process-sports-video` (Sports Pipeline)
+
+Both commands execute the Scout-Plan-Summarize-Build pattern:
 1. **Scout**: Extract → Auto-enhance (174+ corrections)
-2. **Plan**: Orchestrate → Delegate to specialist → Analyze
-3. **Build**: Store in MCP KB Memory → Instant queries
+2. **Plan**: Analyze with domain-specific agent
+3. **Summarize**: Generate detailed markdown summary
+4. **Build**: Store in unified-memory → Instant queries
+
+See `DUAL_PIPELINE_GUIDE.md` for detailed pipeline comparison.
 
 ### Step-by-Step Workflow
 
@@ -98,19 +125,19 @@ The orchestrator will:
 - Delegate to specialized analyst
 - Generate high-quality structured JSON
 
-#### 3. Store in MCP KB Memory
+#### 3. Store in unified-memory
 ```bash
 uv run python scripts/store_in_mcp_kb.py [analysis_file].json
 ```
 
 Then store using Claude Code:
 ```
-Use mcp__mcp-kb-memory__store_memory with the prepared content
+Use mcp__unified-memory__memory_store with the prepared content
 ```
 
 #### 4. Query Anytime
 ```
-Use mcp__mcp-kb-memory__retrieve_memory with query: "Claude Code sub-agents"
+Use mcp__unified-memory__memory_search with query: "Claude Code sub-agents"
 ```
 
 ## 🏗️ Project Structure
@@ -130,12 +157,14 @@ ai-knowledge-base/
 │   └── mcp_ready/               # Prepared MCP KB content
 ├── .claude/                      # Claude Code configuration (NEW)
 │   ├── agents/                  # Specialized agents
-│   │   ├── youtube-transcript-analyzer.md
+│   │   ├── youtube-transcript-analyzer.md      # AI tools agent
+│   │   ├── sports-transcript-analyzer.md       # Sports agent
 │   │   ├── youtube-processing-orchestrator.md
 │   │   ├── indydevdan-analyzer.md
 │   │   └── seankochel-analyzer.md
 │   └── commands/                # Custom slash commands
-│       └── process-youtube.md
+│       ├── process-youtube.md          # AI tools pipeline
+│       └── process-sports-video.md     # Sports pipeline
 ├── archive/                      # Historical files (NEW)
 │   ├── old_workflows/           # PostgreSQL VPS phase
 │   └── unused/                  # Explored but not adopted
@@ -187,40 +216,54 @@ User → Orchestrator → Detects Channel → Specialist → High Quality
 
 ## ✨ Specialized Agents
 
-### 1. YouTube Transcript Analyzer (General-Purpose)
+### AI Tools Pipeline Agents
+
+**1. YouTube Transcript Analyzer (General-Purpose AI Tools)**
 - Filters fragments, extracts real tools
 - Identifies executable commands
 - Captures complete workflows
 - Synthesizes actionable takeaways
 - Extracts implementation details (setup, configuration, troubleshooting)
 
-### 2. IndyDevDan Analyzer (Advanced Claude Code)
+**2. IndyDevDan Analyzer (Advanced Claude Code)**
 - Extracts agentic coding patterns
 - Captures philosophical frameworks
 - Identifies prompt engineering techniques
 - Recognizes context management strategies
 - Documents exact commands, file paths, and performance metrics
 
-### 3. Sean Kochel Analyzer (Productivity)
+**3. Sean Kochel Analyzer (Productivity)**
 - Extracts step-by-step methodologies
 - Captures time-saving metrics
 - Identifies professional workflow principles
 - Recognizes tool integration patterns
 - Documents procedures with exact configuration values
 
-### 4. YouTube Processing Orchestrator
+**4. YouTube Processing Orchestrator**
 - Implements R&D Framework
 - Detects channel automatically
 - Routes to appropriate specialist
 - Coordinates workflow execution
 
+### Sports Pipeline Agent
+
+**5. Sports Transcript Analyzer**
+- Extracts exercise protocols (volume, frequency, intensity, tempo)
+- Classifies scientific evidence (4-tier system)
+- Quantifies biomechanics (joint angles, muscle activation, force vectors)
+- Identifies WHY reasoning (biomechanical, physiological, tactical)
+- Documents injury considerations and modifications
+- Maps to Neo4j knowledge graph schema
+
+See `DUAL_PIPELINE_GUIDE.md` for complete agent comparison.
+
 ## 🛠️ Tech Stack
 
 - **Language**: Python 3.11+
 - **Package Manager**: uv (10-100x faster than pip)
-- **Core Libraries**: yt-dlp, sentence-transformers, rapidfuzz, pydantic
-- **Embedding Model**: sentence-transformers/all-MiniLM-L6-v2
-- **Storage**: MCP KB Memory (Claude Code integration)
+- **Core Libraries**: yt-dlp, rapidfuzz, pydantic
+- **Embedding Model**: nomic-embed-text (768-dim, via Ollama)
+- **Storage**: unified-memory (Claude Code integration)
 - **Enhancement**: Auto-enhancer with 174+ corrections
 
 ## 📊 Quality Comparison
@@ -257,10 +300,17 @@ uv run pytest tests/         # Run tests
 ## 📚 Documentation
 
 **Current Workflow:**
-- [STREAMLINED_WORKFLOW.md](STREAMLINED_WORKFLOW.md) - Complete Phase 1 workflow
-- [PHASE1_COMPLETE.md](PHASE1_COMPLETE.md) - Agentic patterns implementation
+- [DUAL_PIPELINE_GUIDE.md](DUAL_PIPELINE_GUIDE.md) - **NEW** - Complete dual-pipeline architecture
+- [STREAMLINED_WORKFLOW.md](STREAMLINED_WORKFLOW.md) - Updated for dual pipelines
 - [CLAUDE.md](CLAUDE.md) - Project overview and instructions
 - [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) - Complete docs map
+
+**Agent Documentation:**
+- `.claude/agents/youtube-transcript-analyzer.md` - AI tools agent
+- `.claude/agents/sports-transcript-analyzer.md` - Sports agent
+- `.claude/agents/youtube-processing-orchestrator.md` - Orchestrator
+- `.claude/agents/indydevdan-analyzer.md` - IndyDevDan specialist
+- `.claude/agents/seankochel-analyzer.md` - Sean Kochel specialist
 
 **Historical Reference:**
 - [archive/README.md](archive/README.md) - Archived workflows and docs
@@ -302,7 +352,7 @@ uv run python main.py extract "YOUTUBE_URL"
 **Option 2**: Keep existing PostgreSQL data
 - VPS database still functional (29 videos, 435 chunks)
 - Can query via API as before
-- New videos use MCP KB Memory
+- New videos use unified-memory
 
 See `archive/old_workflows/postgresql/` for complete VPS documentation.
 
@@ -312,7 +362,7 @@ See `archive/old_workflows/postgresql/` for complete VPS documentation.
 - Custom slash commands
 - Orchestrator agent
 - Specialized channel analysts
-- MCP KB Memory integration
+- unified-memory integration
 
 ### Phase 2: Batch & Parallel (Future)
 - Monitor folder for new videos

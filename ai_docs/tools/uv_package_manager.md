@@ -182,6 +182,6 @@ dev-dependencies = [
 ## Project-Specific Notes
 
 - Use Python 3.11+ for compatibility with all ML libraries
-- The 384-dimensional embeddings require `sentence-transformers` with model `all-MiniLM-L6-v2`
+- Embeddings use `nomic-embed-text` (768-dim) via Ollama on the gaming-PC
 - Database connections use `psycopg2-binary` for simplicity
 - All scripts should be run with `uv run` to ensure proper environment
