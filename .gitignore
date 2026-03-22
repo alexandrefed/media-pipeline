@@ -184,4 +184,12 @@ logs/
 *.backup
 
 # Notification system config (contains Telegram bot token - NEVER commit!)
-notifications/config/config.yaml.github/workflows/
+notifications/config/config.yaml
+**/config.yaml
+
+# Data directories (local only)
+Audio/
+Sports/
+workspace/
+.playwright-mcp/
+entrepreneurs_part_*

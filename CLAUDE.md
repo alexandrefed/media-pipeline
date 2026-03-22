@@ -4,7 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the AI Knowledge Base System - a YouTube-first knowledge management tool designed to process AI tool videos and create a searchable expertise database. The project is now properly structured and GitHub-ready.
+This is the AI Knowledge Base System - a YouTube-first knowledge management tool designed to process videos and create a searchable expertise database. The project now supports **dual-pipeline processing** optimized for different content types:
+
+- **AI Tools Pipeline**: Technical tutorials, coding workflows, development tools
+- **Sports Pipeline**: Training protocols, exercise science, biomechanical analysis
+
+Both pipelines share the same infrastructure (extraction, auto-enhancement, MCP KB storage) but use domain-specific agents and templates for optimal extraction quality. See `DUAL_PIPELINE_GUIDE.md` for complete documentation.
 
 ## Project Status
 
@@ -12,7 +17,7 @@ This is the AI Knowledge Base System - a YouTube-first knowledge management tool
 - Clean, professional project structure
 - Database schema deployed on VPS (PostgreSQL 16 + pgvector)
 - Complete YouTube processing pipeline with manual enhancement workflow
-- **API Server running on VPS** at port 8001 (soon: https://api.vecia.fr)
+- **Unified Memory API running on VPS** at port 8085 (https://api.vecia.fr)
 - 29 videos processed with 435 high-quality chunks
 - Ready for OpenAI Custom GPT integration
 
@@ -31,9 +36,9 @@ See `CLAUDE_CODE_WORKFLOW.md` for detailed instructions.
 
 - **Language**: Python 3.11+
 - **Package Manager**: uv (see ai_docs/tools/uv_package_manager.md)
-- **Database**: PostgreSQL 16 with pgvector (384-dim embeddings)
-- **Core Libraries**: yt-dlp, rapidfuzz, sentence-transformers, psycopg2/asyncpg, pydantic
-- **Embedding Model**: sentence-transformers/all-MiniLM-L6-v2
+- **Database**: PostgreSQL 16 with pgvector (768-dim embeddings)
+- **Core Libraries**: yt-dlp, rapidfuzz, psycopg2/asyncpg, pydantic
+- **Embedding Model**: nomic-embed-text (768-dim, via Ollama)
 - **Automation**: n8n for email workflows
 - **Environment**: Virtual environment managed by uv
 
@@ -59,12 +64,14 @@ ai-knowledge-base/
 │   └── processing_history.md
 ├── .claude/                      # Claude Code configuration
 │   ├── agents/                  # Specialized agents
-│   │   ├── youtube-transcript-analyzer.md
+│   │   ├── youtube-transcript-analyzer.md      # AI tools agent
+│   │   ├── sports-transcript-analyzer.md       # Sports agent
 │   │   ├── youtube-processing-orchestrator.md
 │   │   ├── indydevdan-analyzer.md
 │   │   └── seankochel-analyzer.md
 │   └── commands/                # Custom slash commands
-│       └── process-youtube.md
+│       ├── process-youtube.md          # AI tools pipeline
+│       └── process-sports-video.md     # Sports pipeline
 ├── scripts/                      # Utility scripts
 ├── docs/                         # Documentation
 ├── main.py                       # CLI entry point
@@ -165,23 +172,38 @@ The system now supports both local processing and API access:
 3. **Query via API or CLI** → Get results with timestamps and metadata
 
 ### Quick Start for New Video
+
+**AI Tools Videos** (Claude Code, development tools, programming):
 ```bash
-# 1. Extract
-uv run python main.py extract "https://youtube.com/watch?v=VIDEO_ID"
+# Use slash command for automated pipeline
+/process-youtube
 
-# 2. Enhance manually in Claude Code
-
-# 3. Chunk
-uv run python manual_chunker.py
-
-# 4. Import
-uv run python scripts/import_manual_chunks.py
-
-# 5. Query (choose one)
-uv run python main.py query "your search"  # Local
-# OR
-curl -X POST ${API_SERVER_URL}/api/v1/query ...  # API (requires .env configuration)
+# Or manual steps:
+# 1. Extract & enhance: uv run python main.py streamlined "URL"
+# 2. Analyze: Use @youtube-transcript-analyzer
+# 3. Summary: uv run python scripts/generate_detailed_summary.py VIDEO_ID
+# 4. Store: uv run python scripts/store_in_mcp_kb.py analysis.json
+# 5. Clean: /compact
 ```
+
+**Sports Training Videos** (exercise protocols, scientific research):
+```bash
+# Use slash command for automated pipeline
+/process-sports-video
+
+# This handles sport-specific extraction:
+# - Protocols (volume, frequency, intensity, tempo)
+# - Evidence tiers (1-4 classification)
+# - Biomechanics (joint angles, muscle activation)
+# - WHY reasoning (biomechanical, physiological, tactical)
+# - Neo4j mapping for knowledge graph integration
+```
+
+**How to Choose Pipeline**:
+- **Code/tools/workflows** → `/process-youtube` (AI Tools Pipeline)
+- **Exercise/training/physiology** → `/process-sports-video` (Sports Pipeline)
+
+See `DUAL_PIPELINE_GUIDE.md` for detailed decision criteria and architecture.
 
 ## Manual Enhancement Workflow with Learning System
 
@@ -263,11 +285,22 @@ uv run pytest tests/
 
 ## Domain-Specific Knowledge
 
-The system is designed to build expertise about:
+The system uses dual pipelines to build expertise in multiple domains:
+
+**AI Tools & Development** (AI Tools Pipeline):
 - AI automation tools (n8n, Make.com, Zapier)
-- AI development tools (Cursor, v0, Claude)
+- AI development tools (Cursor, v0, Claude Code)
 - Agency strategies and best practices
 - Client implementation patterns
+- Programming workflows and code patterns
+
+**Sports & Training** (Sports Pipeline):
+- Exercise protocols and programming
+- Scientific research and evidence-based training
+- Biomechanical analysis and movement patterns
+- Training periodization and concurrent training
+- Injury prevention and rehabilitation
+- Sport-specific adaptations (ultra-running, Hyrox, strength training)
 
 ## GitHub Integration
 

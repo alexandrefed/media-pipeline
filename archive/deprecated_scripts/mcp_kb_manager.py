@@ -149,7 +149,7 @@ class MCPKBManager:
             List of matching video summaries
         """
         # Placeholder for MCP KB retrieve functionality
-        # In actual implementation, this would call mcp__mcp-kb-memory__retrieve_memory
+        # In actual implementation, this would call mcp__unified-memory__memory_search
         return []
 
     def retrieve_by_tag(self, tag: str) -> List[Dict]:
@@ -163,7 +163,7 @@ class MCPKBManager:
             List of matching video summaries
         """
         # Placeholder for MCP KB search by tag functionality
-        # In actual implementation, this would call mcp__mcp-kb-memory__search_by_tag
+        # In actual implementation, this would call mcp__unified-memory__memory_search
         return []
 
     def get_statistics(self) -> Dict:
