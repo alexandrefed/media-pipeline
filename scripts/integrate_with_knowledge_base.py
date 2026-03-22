@@ -4,19 +4,14 @@ Integration script to send processed videos to the Knowledge Base system
 This bridges the local processing pipeline with n8n workflows
 """
 
-import sys
 import json
+import sys
 from pathlib import Path
 
 # Add notifications module to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "notifications" / "src"))
 
-from core.db_logger import (
-    KnowledgeBaseLogger,
-    VideoMetadata,
-    VideoInsight,
-    send_to_knowledge_base
-)
+from core.db_logger import KnowledgeBaseLogger, VideoInsight, VideoMetadata, send_to_knowledge_base
 
 
 def extract_video_id_from_url(url: str) -> str:
@@ -49,17 +44,17 @@ def main():
         sys.exit(1)
 
     # Load analysis data to get video details
-    with open(analysis_file, 'r') as f:
+    with open(analysis_file) as f:
         data = json.load(f)
 
     # Extract video ID from filename or data
-    video_id = data.get('video_id')
+    video_id = data.get("video_id")
     if not video_id:
         # Try to extract from filename
         filename = analysis_file.stem
-        video_id = filename.replace('_analysis', '')
+        video_id = filename.replace("_analysis", "")
 
-    url = data.get('url') or f"https://youtube.com/watch?v={video_id}"
+    url = data.get("url") or f"https://youtube.com/watch?v={video_id}"
 
     print("=" * 60)
     print("AI Knowledge Base Integration")
@@ -77,10 +72,7 @@ def main():
 
     # Send to knowledge base
     result = send_to_knowledge_base(
-        video_id=video_id,
-        analysis_file=analysis_file,
-        url=url,
-        dry_run=dry_run
+        video_id=video_id, analysis_file=analysis_file, url=url, dry_run=dry_run
     )
 
     # Print result
@@ -89,14 +81,14 @@ def main():
         print("DRY RUN RESULT")
         print("=" * 60)
         print(json.dumps(result, indent=2))
-    elif result.get('success'):
+    elif result.get("success"):
         print("✅ SUCCESS")
         print("=" * 60)
         print(f"Video ID: {result['video_id']}")
         print(f"Status Code: {result['status_code']}")
-        if 'response' in result:
-            print(f"\nResponse:")
-            print(json.dumps(result['response'], indent=2))
+        if "response" in result:
+            print("\nResponse:")
+            print(json.dumps(result["response"], indent=2))
     else:
         print("❌ ERROR")
         print("=" * 60)
@@ -123,7 +115,7 @@ def example_programmatic_usage():
             timestamp_end=240,
             quality_score=0.85,
             priority="high",
-            actionable=True
+            actionable=True,
         ),
         VideoInsight(
             text="Set credentials in n8n for secure API authentication",
@@ -134,8 +126,8 @@ def example_programmatic_usage():
             timestamp_end=420,
             quality_score=0.9,
             priority="high",
-            actionable=True
-        )
+            actionable=True,
+        ),
     ]
 
     # Create video metadata
@@ -149,13 +141,13 @@ def example_programmatic_usage():
         pipeline_type="ai_tools",
         tags=["n8n", "automation", "workflow", "tutorial"],
         total_chunks=25,
-        insights=insights
+        insights=insights,
     )
 
     # Send to knowledge base
     result = logger.store_video_insights(video)
 
-    if result['success']:
+    if result["success"]:
         print(f"✅ Successfully stored {len(insights)} insights for video {video.video_id}")
     else:
         print(f"❌ Error: {result['error']}")

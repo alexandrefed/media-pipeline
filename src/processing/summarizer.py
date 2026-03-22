@@ -8,31 +8,33 @@ for storage in MCP KB Memory.
 import json
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+
 from pydantic import BaseModel
 
 
 class TechnicalInfo(BaseModel):
     """Extracted technical information."""
-    tools_mentioned: List[str] = []
-    commands: List[str] = []
-    key_concepts: List[str] = []
-    workflows: List[str] = []
-    code_examples: List[str] = []
-    timestamps: List[Dict[str, str]] = []  # {"time": "10:30", "topic": "..."}
+
+    tools_mentioned: list[str] = []
+    commands: list[str] = []
+    key_concepts: list[str] = []
+    workflows: list[str] = []
+    code_examples: list[str] = []
+    timestamps: list[dict[str, str]] = []  # {"time": "10:30", "topic": "..."}
 
 
 class VideoSummary(BaseModel):
     """Complete video summary with technical details."""
+
     video_id: str
-    channel_name: Optional[str] = None
-    title: Optional[str] = None
+    channel_name: str | None = None
+    title: str | None = None
     summary: str  # 200-300 word summary
     technical_info: TechnicalInfo
     content_type: str  # e.g., "technical_tutorial", "workflow_demo", etc.
-    key_takeaways: List[str] = []
-    tags: List[str] = []
-    duration_seconds: Optional[int] = None
+    key_takeaways: list[str] = []
+    tags: list[str] = []
+    duration_seconds: int | None = None
 
 
 class TranscriptSummarizer:
@@ -45,32 +47,37 @@ class TranscriptSummarizer:
         self.known_tools = self._extract_known_tools()
         self.video_patterns = self.knowledge_base.get("video_patterns", {})
 
-    def _load_knowledge_base(self) -> Dict:
+    def _load_knowledge_base(self) -> dict:
         """Load the processing knowledge base."""
         if self.kb_path.exists():
-            with open(self.kb_path, 'r', encoding='utf-8') as f:
+            with open(self.kb_path, encoding="utf-8") as f:
                 return json.load(f)
         return {}
 
-    def _extract_known_tools(self) -> Set[str]:
+    def _extract_known_tools(self) -> set[str]:
         """Extract all known tool names from knowledge base."""
         tools = set()
 
         # From technical terms
-        tech_terms = self.knowledge_base.get("transcription_corrections", {}).get("technical_terms", {})
+        tech_terms = self.knowledge_base.get("transcription_corrections", {}).get(
+            "technical_terms", {}
+        )
         if "AI_tools" in tech_terms:
             tools.update(tech_terms["AI_tools"])
         if "development_tools" in tech_terms:
             tools.update(tech_terms["development_tools"])
 
         # From common errors (the corrected values)
-        common_errors = self.knowledge_base.get("transcription_corrections", {}).get("common_errors", {})
+        common_errors = self.knowledge_base.get("transcription_corrections", {}).get(
+            "common_errors", {}
+        )
         tools.update(common_errors.values())
 
         return tools
 
-    def summarize(self, text: str, video_id: str, channel_name: Optional[str] = None,
-                 title: Optional[str] = None) -> VideoSummary:
+    def summarize(
+        self, text: str, video_id: str, channel_name: str | None = None, title: str | None = None
+    ) -> VideoSummary:
         """
         Generate summary and extract technical information.
 
@@ -106,7 +113,7 @@ class TranscriptSummarizer:
             technical_info=technical_info,
             content_type=content_type,
             key_takeaways=key_takeaways,
-            tags=tags
+            tags=tags,
         )
 
     def _extract_technical_info(self, text: str) -> TechnicalInfo:
@@ -120,11 +127,11 @@ class TranscriptSummarizer:
         # Extract commands (looking for command patterns)
         commands = []
         command_patterns = [
-            r'`([^`]+)`',  # Inline code
-            r'```([^```]+)```',  # Code blocks
-            r'(?:run|execute|type|use)\s+([a-z]+\s+[a-z\-]+)',  # Command-like phrases
-            r'(?:slash|/|command:)\s*([a-z\-]+)',  # Slash commands
-            r'\$\s+([a-z][a-z\s\-\.]+)',  # Shell commands
+            r"`([^`]+)`",  # Inline code
+            r"```([^```]+)```",  # Code blocks
+            r"(?:run|execute|type|use)\s+([a-z]+\s+[a-z\-]+)",  # Command-like phrases
+            r"(?:slash|/|command:)\s*([a-z\-]+)",  # Slash commands
+            r"\$\s+([a-z][a-z\s\-\.]+)",  # Shell commands
         ]
 
         for pattern in command_patterns:
@@ -137,9 +144,9 @@ class TranscriptSummarizer:
         # Extract key concepts (capitalized phrases, technical terms)
         key_concepts = []
         concept_patterns = [
-            r'\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b',  # Title Case Phrases
-            r'\b(AI|API|MCP|CLI|SDK|JSON|YAML|REST|GPT|LLM)\b',  # Common acronyms
-            r'\b([a-z]+(?:-[a-z]+)+)\b',  # hyphenated-terms
+            r"\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b",  # Title Case Phrases
+            r"\b(AI|API|MCP|CLI|SDK|JSON|YAML|REST|GPT|LLM)\b",  # Common acronyms
+            r"\b([a-z]+(?:-[a-z]+)+)\b",  # hyphenated-terms
         ]
 
         for pattern in concept_patterns:
@@ -151,8 +158,8 @@ class TranscriptSummarizer:
         # Extract workflows (step-based patterns)
         workflows = []
         workflow_patterns = [
-            r'(?:Step\s+\d+|First|Second|Third|Finally)[:\s]+([^.]+)',
-            r'(?:workflow|process|pipeline)[:\s]+([^.]+)',
+            r"(?:Step\s+\d+|First|Second|Third|Finally)[:\s]+([^.]+)",
+            r"(?:workflow|process|pipeline)[:\s]+([^.]+)",
         ]
 
         for pattern in workflow_patterns:
@@ -163,7 +170,7 @@ class TranscriptSummarizer:
 
         # Extract timestamps (if present)
         timestamps = []
-        timestamp_pattern = r'\[?(\d{1,2}:\d{2}(?::\d{2})?)\]?\s*[:-]?\s*([^\n]+)'
+        timestamp_pattern = r"\[?(\d{1,2}:\d{2}(?::\d{2})?)\]?\s*[:-]?\s*([^\n]+)"
         matches = re.findall(timestamp_pattern, text)
         for time, topic in matches[:15]:  # Limit to 15 timestamps
             timestamps.append({"time": time, "topic": topic.strip()[:100]})
@@ -173,10 +180,10 @@ class TranscriptSummarizer:
             commands=commands,
             key_concepts=key_concepts,
             workflows=workflows,
-            timestamps=timestamps
+            timestamps=timestamps,
         )
 
-    def _detect_content_type(self, text: str, channel_name: Optional[str]) -> str:
+    def _detect_content_type(self, text: str, channel_name: str | None) -> str:
         """Detect content type from text and channel patterns."""
         if channel_name:
             # Normalize channel name
@@ -204,27 +211,27 @@ class TranscriptSummarizer:
         else:
             return "technical_tutorial"
 
-    def _generate_summary(self, text: str, title: Optional[str], content_type: str) -> str:
+    def _generate_summary(self, text: str, title: str | None, content_type: str) -> str:
         """Generate a 200-300 word summary."""
         # Extract first paragraph or first 500 characters as base
-        lines = text.strip().split('\n')
+        lines = text.strip().split("\n")
         intro_lines = []
 
         for line in lines:
-            if line.strip() and not line.startswith('='):
+            if line.strip() and not line.startswith("="):
                 intro_lines.append(line.strip())
-                if len(' '.join(intro_lines)) > 300:
+                if len(" ".join(intro_lines)) > 300:
                     break
 
-        summary_base = ' '.join(intro_lines[:10])  # First 10 lines max
+        summary_base = " ".join(intro_lines[:10])  # First 10 lines max
 
         # Clean up summary
-        summary = summary_base.replace('  ', ' ').strip()
+        summary = summary_base.replace("  ", " ").strip()
 
         # Truncate to approximately 300 words
         words = summary.split()
         if len(words) > 300:
-            summary = ' '.join(words[:300]) + "..."
+            summary = " ".join(words[:300]) + "..."
 
         # Add title context if available
         if title and title not in summary[:100]:
@@ -232,14 +239,14 @@ class TranscriptSummarizer:
 
         return summary
 
-    def _extract_key_takeaways(self, text: str, content_type: str) -> List[str]:
+    def _extract_key_takeaways(self, text: str, content_type: str) -> list[str]:
         """Extract 3-5 key takeaways."""
         takeaways = []
 
         # Look for explicit takeaway sections
         takeaway_patterns = [
-            r'(?:Key takeaway|Key learning|Important point|Remember)[:\s]+([^.]+\.)',
-            r'(?:\d+\.|•|-)\s+([A-Z][^.]+\.)',  # Bullet points or numbered lists
+            r"(?:Key takeaway|Key learning|Important point|Remember)[:\s]+([^.]+\.)",
+            r"(?:\d+\.|•|-)\s+([A-Z][^.]+\.)",  # Bullet points or numbered lists
         ]
 
         for pattern in takeaway_patterns:
@@ -251,9 +258,12 @@ class TranscriptSummarizer:
 
         # If no takeaways found, extract from text structure
         if not takeaways:
-            sentences = re.split(r'[.!?]+', text)
+            sentences = re.split(r"[.!?]+", text)
             for sentence in sentences:
-                if any(word in sentence.lower() for word in ['should', 'must', 'important', 'key', 'essential', 'critical']):
+                if any(
+                    word in sentence.lower()
+                    for word in ["should", "must", "important", "key", "essential", "critical"]
+                ):
                     if len(sentence.strip()) > 30:
                         takeaways.append(sentence.strip())
                         if len(takeaways) >= 5:
@@ -261,8 +271,9 @@ class TranscriptSummarizer:
 
         return takeaways[:5]
 
-    def _generate_tags(self, channel_name: Optional[str], content_type: str,
-                      technical_info: TechnicalInfo) -> List[str]:
+    def _generate_tags(
+        self, channel_name: str | None, content_type: str, technical_info: TechnicalInfo
+    ) -> list[str]:
         """Generate relevant tags."""
         tags = []
 
@@ -284,7 +295,7 @@ class TranscriptSummarizer:
 
         return list(dict.fromkeys(tags))[:10]  # Limit to 10 unique tags
 
-    def summarize_file(self, input_file: str, output_file: Optional[str] = None) -> VideoSummary:
+    def summarize_file(self, input_file: str, output_file: str | None = None) -> VideoSummary:
         """
         Summarize a transcript file.
 
@@ -301,7 +312,7 @@ class TranscriptSummarizer:
             raise FileNotFoundError(f"Input file not found: {input_file}")
 
         # Read input file
-        with open(input_path, 'r', encoding='utf-8') as f:
+        with open(input_path, encoding="utf-8") as f:
             text = f.read()
 
         # Extract metadata from filename
@@ -315,7 +326,7 @@ class TranscriptSummarizer:
         title = None
         channel_name = None
         if text.startswith("Video:"):
-            lines = text.split('\n')
+            lines = text.split("\n")
             for line in lines[:5]:
                 if line.startswith("Video:"):
                     title = line.replace("Video:", "").strip()
@@ -327,7 +338,7 @@ class TranscriptSummarizer:
 
         # Output to JSON if requested
         if output_file:
-            with open(output_file, 'w', encoding='utf-8') as f:
+            with open(output_file, "w", encoding="utf-8") as f:
                 json.dump(summary.model_dump(), f, indent=2)
             print(f"✅ Summary saved to: {output_file}")
 
@@ -343,11 +354,13 @@ def main():
         print("\nUsage:")
         print("  python -m src.processing.summarizer <input_file> [output_file]")
         print("\nExample:")
-        print("  python -m src.processing.summarizer raw_text_for_enhancement_VIDEO_ID_auto_enhanced.txt summary.json")
+        print(
+            "  python -m src.processing.summarizer raw_text_for_enhancement_VIDEO_ID_auto_enhanced.txt summary.json"
+        )
         return
 
     input_file = sys.argv[1]
-    output_file = sys.argv[2] if len(sys.argv) > 2 else input_file.replace('.txt', '_summary.json')
+    output_file = sys.argv[2] if len(sys.argv) > 2 else input_file.replace(".txt", "_summary.json")
 
     try:
         summarizer = TranscriptSummarizer()
@@ -362,12 +375,13 @@ def main():
         print(f"🔧 Tools Mentioned: {len(summary.technical_info.tools_mentioned)}")
         print(f"💻 Commands Extracted: {len(summary.technical_info.commands)}")
         print(f"🏷️  Tags: {', '.join(summary.tags[:5])}")
-        print(f"\n📝 Summary Preview:")
+        print("\n📝 Summary Preview:")
         print(f"   {summary.summary[:200]}...")
 
     except Exception as e:
         print(f"❌ Error: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 

@@ -8,18 +8,19 @@ which contains 174+ mapped transcription errors and channel-specific patterns.
 import json
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+
 from pydantic import BaseModel
 
 
 class EnhancementResult(BaseModel):
     """Result of automatic enhancement."""
+
     original_text: str
     enhanced_text: str
     corrections_applied: int
-    corrections_list: List[Dict]  # Changed from Dict[str, str] to allow mixed types
-    channel_name: Optional[str] = None
-    video_id: Optional[str] = None
+    corrections_list: list[dict]  # Changed from Dict[str, str] to allow mixed types
+    channel_name: str | None = None
+    video_id: str | None = None
 
     class Config:
         arbitrary_types_allowed = True
@@ -36,16 +37,17 @@ class AutoEnhancer:
         self.common_errors = self.corrections.get("common_errors", {})
         self.contextual_corrections = self.corrections.get("contextual_corrections", {})
 
-    def _load_knowledge_base(self) -> Dict:
+    def _load_knowledge_base(self) -> dict:
         """Load the processing knowledge base."""
         if not self.kb_path.exists():
             raise FileNotFoundError(f"Knowledge base not found at {self.kb_path}")
 
-        with open(self.kb_path, 'r', encoding='utf-8') as f:
+        with open(self.kb_path, encoding="utf-8") as f:
             return json.load(f)
 
-    def enhance_transcript(self, text: str, channel_name: Optional[str] = None,
-                          video_id: Optional[str] = None) -> EnhancementResult:
+    def enhance_transcript(
+        self, text: str, channel_name: str | None = None, video_id: str | None = None
+    ) -> EnhancementResult:
         """
         Automatically enhance transcript with all corrections.
 
@@ -67,12 +69,14 @@ class AutoEnhancer:
                 # Count occurrences
                 count = enhanced_text.count(error)
                 enhanced_text = enhanced_text.replace(error, correction)
-                corrections_list.append({
-                    "original": error,
-                    "corrected": correction,
-                    "count": count,
-                    "type": "common_error"
-                })
+                corrections_list.append(
+                    {
+                        "original": error,
+                        "corrected": correction,
+                        "count": count,
+                        "type": "common_error",
+                    }
+                )
 
         # Apply contextual corrections
         for context, context_corrections in self.contextual_corrections.items():
@@ -80,10 +84,14 @@ class AutoEnhancer:
                 # Build context-aware pattern
                 if context == "followed_by_code":
                     pattern = rf"\b{re.escape(error)}\s+code\b"
-                    enhanced_text = re.sub(pattern, f"{correction} Code", enhanced_text, flags=re.IGNORECASE)
+                    enhanced_text = re.sub(
+                        pattern, f"{correction} Code", enhanced_text, flags=re.IGNORECASE
+                    )
                 elif context == "followed_by_servers":
                     pattern = rf"\b{re.escape(error)}\s+servers\b"
-                    enhanced_text = re.sub(pattern, f"{correction} servers", enhanced_text, flags=re.IGNORECASE)
+                    enhanced_text = re.sub(
+                        pattern, f"{correction} servers", enhanced_text, flags=re.IGNORECASE
+                    )
 
         # Apply channel-specific patterns if provided
         if channel_name:
@@ -98,7 +106,7 @@ class AutoEnhancer:
             corrections_applied=corrections_applied,
             corrections_list=corrections_list,
             channel_name=channel_name,
-            video_id=video_id
+            video_id=video_id,
         )
 
     def _apply_channel_patterns(self, text: str, channel_name: str) -> str:
@@ -110,7 +118,7 @@ class AutoEnhancer:
         video_patterns = self.knowledge_base.get("video_patterns", {})
 
         if channel_key in video_patterns:
-            channel_data = video_patterns[channel_key]
+            video_patterns[channel_key]
 
             # Apply any channel-specific transcription patterns
             # (Currently channels don't have specific corrections, but structure is ready)
@@ -118,7 +126,7 @@ class AutoEnhancer:
 
         return text
 
-    def enhance_file(self, input_file: str, output_file: Optional[str] = None) -> EnhancementResult:
+    def enhance_file(self, input_file: str, output_file: str | None = None) -> EnhancementResult:
         """
         Enhance a transcript file.
 
@@ -135,7 +143,7 @@ class AutoEnhancer:
             raise FileNotFoundError(f"Input file not found: {input_file}")
 
         # Read input file
-        with open(input_path, 'r', encoding='utf-8') as f:
+        with open(input_path, encoding="utf-8") as f:
             text = f.read()
 
         # Extract metadata from filename if possible
@@ -151,7 +159,7 @@ class AutoEnhancer:
             output_file = str(input_path).replace(".txt", "_auto_enhanced.txt")
 
         # Write enhanced text
-        with open(output_file, 'w', encoding='utf-8') as f:
+        with open(output_file, "w", encoding="utf-8") as f:
             f.write(result.enhanced_text)
             f.write("\n\n")
             f.write("=" * 80)
@@ -162,7 +170,9 @@ class AutoEnhancer:
             f.write(f"\nQuality Score: {self._calculate_quality_score(result):.2f}")
             f.write("\n\nTop Corrections:")
             for i, correction in enumerate(result.corrections_list[:10], 1):
-                f.write(f"\n{i}. \"{correction['original']}\" → \"{correction['corrected']}\" ({correction['count']} occurrences)")
+                f.write(
+                    f"\n{i}. \"{correction['original']}\" → \"{correction['corrected']}\" ({correction['count']} occurrences)"
+                )
             f.write("\n" + "=" * 80 + "\n")
 
         print(f"✅ Enhanced transcript saved to: {output_file}")
@@ -183,15 +193,19 @@ class AutoEnhancer:
         else:
             return 0.95  # Extensive corrections suggest thorough processing
 
-    def get_statistics(self) -> Dict:
+    def get_statistics(self) -> dict:
         """Get statistics about the knowledge base."""
         return {
             "total_common_errors": len(self.common_errors),
             "contextual_correction_types": len(self.contextual_corrections),
             "total_channels_tracked": len(self.knowledge_base.get("video_patterns", {})),
-            "knowledge_base_version": self.knowledge_base.get("metadata", {}).get("version", "unknown"),
+            "knowledge_base_version": self.knowledge_base.get("metadata", {}).get(
+                "version", "unknown"
+            ),
             "last_updated": self.knowledge_base.get("metadata", {}).get("last_updated", "unknown"),
-            "total_videos_processed": self.knowledge_base.get("metadata", {}).get("total_videos_processed", 0)
+            "total_videos_processed": self.knowledge_base.get("metadata", {}).get(
+                "total_videos_processed", 0
+            ),
         }
 
 
