@@ -11,23 +11,16 @@ Usage:
     uv run python scripts/streamlined_process.py <youtube_url>
 """
 
-import sys
 import subprocess
+import sys
 from pathlib import Path
-import json
 
 
 def run_command(cmd: str, description: str) -> tuple[bool, str]:
     """Run a shell command and return success status and output."""
     print(f"\n🔄 {description}...")
     try:
-        result = subprocess.run(
-            cmd,
-            shell=True,
-            check=True,
-            capture_output=True,
-            text=True
-        )
+        result = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
         print(f"✅ {description} complete")
         return True, result.stdout
     except subprocess.CalledProcessError as e:
@@ -64,8 +57,7 @@ def main():
 
     # Step 1: Extract
     success, output = run_command(
-        f'uv run python main.py extract "{youtube_url}"',
-        "Step 1/4: Extracting raw transcript"
+        f'uv run python main.py extract "{youtube_url}"', "Step 1/4: Extracting raw transcript"
     )
     if not success:
         return
@@ -84,7 +76,7 @@ def main():
     # Step 2: Auto-enhance
     success, output = run_command(
         f'uv run python -m src.processing.auto_enhancer "{raw_file}"',
-        "Step 2/4: Auto-enhancing transcript (174+ corrections)"
+        "Step 2/4: Auto-enhancing transcript (174+ corrections)",
     )
     if not success:
         return
@@ -99,21 +91,21 @@ def main():
     # Use Claude Code to invoke the specialized agent
     agent_cmd = f'claude "Use @youtube-transcript-analyzer to analyze {enhanced_file} and save the JSON output to {enhanced_file.replace(".txt", "_analysis.json")}"'
 
-    print(f"\n   💡 Run this command to use the specialized agent:")
+    print("\n   💡 Run this command to use the specialized agent:")
     print(f"   {agent_cmd}")
-    print(f"\n   Or manually invoke the agent in Claude Code")
+    print("\n   Or manually invoke the agent in Claude Code")
 
     analysis_file = enhanced_file.replace(".txt", "_analysis.json")
 
     # Check if analysis exists (user may have run it)
     if Path(analysis_file).exists():
-        print(f"✅ Step 3/4: Analysis complete")
+        print("✅ Step 3/4: Analysis complete")
         print(f"   📄 Analysis JSON: {analysis_file}")
 
         # Step 4: Prepare for MCP KB
         success, output = run_command(
             f'uv run python scripts/store_in_mcp_kb.py "{analysis_file}"',
-            "Step 4/4: Preparing for MCP KB Memory"
+            "Step 4/4: Preparing for MCP KB Memory",
         )
 
         if success:
@@ -123,18 +115,18 @@ def main():
             print("\n" + "=" * 80)
             print("✅ WORKFLOW COMPLETE!")
             print("=" * 80)
-            print(f"\n📋 Generated Files:")
+            print("\n📋 Generated Files:")
             print(f"   1. Raw: {raw_file}")
             print(f"   2. Enhanced: {enhanced_file}")
             print(f"   3. Analysis: {analysis_file}")
             print(f"   4. MCP KB Ready: {mcp_ready_file}")
-            print(f"\n💡 Next Step:")
+            print("\n💡 Next Step:")
             print(f"   Store in MCP KB Memory using the content in: {mcp_ready_file}")
-            print(f"\n   Use: mcp__mcp-kb-memory__store_memory")
+            print("\n   Use: mcp__unified-memory__memory_store")
             print("=" * 80 + "\n")
     else:
-        print(f"\n⏸️  Workflow paused at Step 3")
-        print(f"   Run the command above to continue with agent analysis")
+        print("\n⏸️  Workflow paused at Step 3")
+        print("   Run the command above to continue with agent analysis")
 
 
 if __name__ == "__main__":
