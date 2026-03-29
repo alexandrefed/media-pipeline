@@ -398,22 +398,87 @@ class DetailedSummaryGenerator:
 
         return True
 
+    def generate_short_form_summary(self) -> Path | None:
+        """Generate a compact summary for short-form content (<2 min)."""
+        # Try to load the short-form analysis JSON
+        analysis_dir = self.workspace / "analysis"
+        short_form_file = analysis_dir / f"{self.video_id}_short_form.json"
+
+        if not short_form_file.exists():
+            print(f"ERROR: Short-form analysis not found: {short_form_file}")
+            return None
+
+        with open(short_form_file, encoding="utf-8") as f:
+            data = json.load(f)
+
+        title = data.get("title", "Unknown")
+        channel = data.get("channel", "Unknown")
+        platform = data.get("platform", "Unknown")
+        duration = data.get("duration_seconds", 0)
+        key_insight = data.get("key_insight", "")
+        tools = data.get("tools_mentioned", [])
+        items = data.get("actionable_items", [])
+        summary_text = data.get("summary", "")
+        url = data.get("url", "")
+
+        tools_section = "\n".join(f"- {t}" for t in tools) if tools else "None"
+        items_section = (
+            "\n".join(
+                f"- [{item.get('actionability', 'reference')}] {item.get('item', '')}"
+                for item in items
+            )
+            if items
+            else "None"
+        )
+
+        date_str = datetime.now().strftime("%Y-%m-%d")
+
+        md_content = f"""# {title}
+**Channel**: {channel} | **Platform**: {platform}
+**Duration**: {duration}s | **Type**: Short-form
+
+## Key Insight
+{key_insight}
+
+## Tools Mentioned
+{tools_section}
+
+## Actionable Items
+{items_section}
+
+## Summary
+{summary_text}
+
+***
+*Processed: {date_str} | Source: {url}*
+"""
+        output_path = self.summaries_dir / f"{self.video_id}_short_form_summary.md"
+        output_path.write_text(md_content, encoding="utf-8")
+        print(f"Short-form summary written to: {output_path}")
+        return output_path
+
 
 def main():
     """CLI entry point."""
-    if len(sys.argv) != 2:
-        print("Usage: python scripts/generate_detailed_summary.py <video_id>")
-        print("\nExample:")
-        print("  python scripts/generate_detailed_summary.py 4nthc76rSl8")
-        sys.exit(1)
+    import argparse
 
-    video_id = sys.argv[1]
-    generator = DetailedSummaryGenerator(video_id)
+    parser = argparse.ArgumentParser(description="Generate video summary")
+    parser.add_argument("video_id", help="Video ID to summarize")
+    parser.add_argument(
+        "--template",
+        choices=["long-form", "short-form"],
+        default="long-form",
+        help="Summary template to use (default: long-form)",
+    )
+    args = parser.parse_args()
 
-    if generator.generate():
-        sys.exit(0)
+    generator = DetailedSummaryGenerator(args.video_id)
+
+    if args.template == "short-form":
+        result = generator.generate_short_form_summary()
+        sys.exit(0 if result else 1)
     else:
-        sys.exit(1)
+        sys.exit(0 if generator.generate() else 1)
 
 
 if __name__ == "__main__":
