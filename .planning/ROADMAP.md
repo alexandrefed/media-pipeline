@@ -30,7 +30,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Each takeaway in any processed content is classified as actionable/reference/awareness and actionable items are tagged with spaced-repetition metadata
   4. Non-URL messages to the bot are handled normally by OpenClaw (not routed to media agent)
   5. Processing failures produce a Telegram error message with suggested fix (e.g., "cookies expired")
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+- [ ] 01-01-PLAN.md -- Update media agent: path fix, faster-whisper, short-form mode, Telegram confirmation
+- [ ] 01-02-PLAN.md -- Actionability tagging in analyzers + standardized tags in store scripts
+- [ ] 01-03-PLAN.md -- OpenClaw Telegram plugin config + orchestrator URL routing
+- [ ] 01-04-PLAN.md -- Gaming-PC environment fix (yt-dlp, faster-whisper, .env, workspace)
+- [ ] 01-05-PLAN.md -- End-to-end integration testing (YouTube + Instagram + negative tests)
 
 ### Phase 2: Scheduled Knowledge Delivery
 **Goal**: User receives daily actionable reminders and weekly content digests via Telegram without lifting a finger
@@ -82,7 +89,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Telegram Intake & Pipeline Wiring | 0/? | Not started | - |
+| 1. Telegram Intake & Pipeline Wiring | 0/5 | Planned | - |
 | 2. Scheduled Knowledge Delivery | 0/? | Not started | - |
 | 3. Automated Creator Watching | 0/? | Not started | - |
 | 4. Operations & Monitoring | 0/? | Not started | - |
