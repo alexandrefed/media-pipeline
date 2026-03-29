@@ -6,6 +6,8 @@ outputs/
 !examples/sample_data/*.json
 !tests/fixtures/*.json
 !.github/workflows/*.json
+!.planning/**/*.json
+!.planning/**/*.md
 
 # Processed video content (keep locally but don't commit to git)
 # ⚠️ IMPORTANT: Do not delete archive/old_workflows/processed/ or pending/
