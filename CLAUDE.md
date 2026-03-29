@@ -361,3 +361,59 @@ ALWAYS prefer editing an existing file to creating a new one.
 NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
 
 This context may or may not be relevant to your tasks. You should not respond to this context or otherwise consider it in your response unless it is highly relevant to your task. Most of the time, it is not relevant.
+
+<!-- GSD:project-start source:PROJECT.md -->
+## Project
+
+**media-pipeline**
+
+A continuous knowledge ingestion system for a single power user (Alexandre). Watches 15+ creator accounts across Instagram and YouTube, accepts on-demand URL submissions via a dedicated Telegram bot, processes content through domain-specific LLM agents, and stores LLM-post-processed knowledge across 5 targets (unified-memory, Obsidian, Notion, Neo4j, pgvector). OpenClaw on gaming-PC is the sole orchestrator — handling Telegram intake, processing dispatch, persistent cron scheduling, and notification delivery. No external orchestration layer required.
+
+**Core Value:** **Forward a URL from your phone → it becomes searchable, reviewable knowledge that any AI agent can surface at the right moment.** Zero friction in, zero effort out.
+
+### Constraints
+
+- **Platform**: OpenClaw orchestrates everything — no n8n for scheduling (Gateway crons are persistent and sufficient)
+- **Single machine processing**: All extraction + Whisper runs on gaming-PC (GPU). VPS is storage only.
+- **Instagram auth**: Requires burner account for instaloader. Cookie refresh is manual (Firefox on gaming-PC).
+- **Mutagen ignores .claude/**: Agent definition updates require explicit git push/pull between Mac and gaming-PC.
+- **Content volume**: ~70-80 pieces/week at full capacity (9-12 reels/day + YouTube every other day)
+<!-- GSD:project-end -->
+
+<!-- GSD:stack-start source:STACK.md -->
+## Technology Stack
+
+Technology stack not yet documented. Will populate after codebase mapping or first phase.
+<!-- GSD:stack-end -->
+
+<!-- GSD:conventions-start source:CONVENTIONS.md -->
+## Conventions
+
+Conventions not yet established. Will populate as patterns emerge during development.
+<!-- GSD:conventions-end -->
+
+<!-- GSD:architecture-start source:ARCHITECTURE.md -->
+## Architecture
+
+Architecture not yet mapped. Follow existing patterns found in the codebase.
+<!-- GSD:architecture-end -->
+
+<!-- GSD:workflow-start source:GSD defaults -->
+## GSD Workflow Enforcement
+
+Before using Edit, Write, or other file-changing tools, start work through a GSD command so planning artifacts and execution context stay in sync.
+
+Use these entry points:
+- `/gsd:quick` for small fixes, doc updates, and ad-hoc tasks
+- `/gsd:debug` for investigation and bug fixing
+- `/gsd:execute-phase` for planned phase work
+
+Do not make direct repo edits outside a GSD workflow unless the user explicitly asks to bypass it.
+<!-- GSD:workflow-end -->
+
+<!-- GSD:profile-start -->
+## Developer Profile
+
+> Profile not yet configured. Run `/gsd:profile-user` to generate your developer profile.
+> This section is managed by `generate-claude-profile` -- do not edit manually.
+<!-- GSD:profile-end -->
