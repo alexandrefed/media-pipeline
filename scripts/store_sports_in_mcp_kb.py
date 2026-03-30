@@ -342,10 +342,12 @@ def generate_mcp_storage_instructions(
 
     all_tags = (
         [
-            "youtube-knowledge-base",
-            f"video-{video_id}",
-            f'channel-{channel.lower().replace(" ", "-")}',
-            "content-type-sports",
+            "source:openclaw-main",
+            "project:youtube-kb",
+            "type:video-knowledge",
+            f"video:{video_id}",
+            f'channel:{channel.lower().replace(" ", "-")}',
+            "content-type:sports",
             evidence_tag,
         ]
         + sport_tags
@@ -453,19 +455,29 @@ def main():
         set(
             [
                 "source:openclaw-main",
-                "project:ai-knowledge-base",
-                "type:context",
+                "project:youtube-kb",
+                "type:video-knowledge",
                 "area:mutora",
-                "youtube-knowledge-base",
-                f"video-{video_id}",
-                f"channel-{channel.lower().replace(' ', '-')}",
-                "content-type-sports",
+                f"video:{video_id}",
+                f"channel:{channel.lower().replace(' ', '-')}",
+                "content-type:sports",
                 evidence_tag,
             ]
             + sport_tags
             + content_tags
         )
     )
+
+    # Add actionability tags from key_takeaways
+    takeaways = analysis.get("key_takeaways", [])
+    has_actionable = False
+    for takeaway in takeaways:
+        if isinstance(takeaway, dict):
+            actionability = takeaway.get("actionability", "")
+            if actionability == "actionable":
+                has_actionable = True
+    if has_actionable:
+        all_tags.append("has-actionable:true")
 
     if dry_run or not API_AVAILABLE:
         # Old behavior: save to file
@@ -488,8 +500,8 @@ def main():
 
         video_url = f"https://youtube.com/watch?v={video_id}"
 
-        # 1. Store NOTE (syncs to Notion)
-        note_title = analysis.get("title", f"Sports: {video_id}")
+        # 1. Store NOTE (syncs to Notion) — STORE-02
+        raw_title = analysis.get("title", f"Sports: {video_id}")
         note_metadata = {
             "area": "mutora",
             "video_id": video_id,
@@ -500,19 +512,26 @@ def main():
             "sport": analysis.get("sport_discipline", ""),
         }
         # Build note: summary + key takeaways (truncated to ~2000 chars)
-        note_parts = [f"# {note_title}", f"**Channel**: {channel}", ""]
+        note_parts = [f"# {raw_title}", f"**Channel**: {channel}", ""]
         if analysis.get("summary"):
             note_parts.extend(["## Summary", analysis["summary"], ""])
         if analysis.get("key_takeaways"):
             note_parts.append("## Key Takeaways")
             for i, t in enumerate(analysis["key_takeaways"], 1):
-                note_parts.append(f"{i}. {t}")
+                text = t.get("takeaway", str(t)) if isinstance(t, dict) else str(t)
+                note_parts.append(f"{i}. {text}")
             note_parts.append("")
         note_parts.append(f"**Watch**: {video_url}")
 
+        # Title format: {YEAR}-{MON}-Video-{SLUG} per CONTEXT.md
+        from datetime import datetime
+
+        now = datetime.now()
+        slug = raw_title.lower().replace(" ", "-").replace(":", "").replace("'", "")[:40]
+        note_title = f"{now.year}-{now.strftime('%b')}-Video-{slug}"
         try:
             note_result = store_note(
-                title=f"Video: {note_title}",
+                title=note_title,
                 content="\n".join(note_parts),
                 note_type="video",
                 metadata=note_metadata,
@@ -532,6 +551,40 @@ def main():
             print(f"✅ Memory stored (agent retrieval): {mem_result.get('id', 'ok')}")
         except Exception as e:
             print(f"⚠️  Memory storage failed: {e}")
+
+        # 3. Store individual takeaway memories with actionability tags
+        for takeaway in takeaways:
+            if not isinstance(takeaway, dict):
+                continue
+            actionability = takeaway.get("actionability", "")
+            takeaway_text = takeaway.get("takeaway", "")
+            if not actionability or not takeaway_text:
+                continue
+
+            takeaway_tags = list(all_tags)
+            takeaway_tags.append(f"takeaway-type:{actionability}")
+            if actionability == "actionable":
+                takeaway_tags.append("spaced-repetition:pending")
+
+            takeaway_content = (
+                f"**Takeaway**: {takeaway_text}\n"
+                f"**Type**: {actionability}\n"
+                f"**Video**: {raw_title}\n"
+                f"**Watch**: {video_url}"
+            )
+            try:
+                store_memory(
+                    content=takeaway_content,
+                    tags=takeaway_tags,
+                    namespace="/alex/openclaw/videos/",
+                    metadata={
+                        "video_id": video_id,
+                        "area": "mutora",
+                        "type": f"takeaway-{actionability}",
+                    },
+                )
+            except Exception as e:
+                print(f"⚠️  Takeaway storage failed: {e}")
 
     print("\nQuick stats:")
     print(f"- Exercises extracted: {len(analysis.get('exercises_demonstrated', []))}")

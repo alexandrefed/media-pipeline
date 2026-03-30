@@ -257,6 +257,20 @@ This is CRITICAL for ensuring the knowledge base is truly actionable, not just c
 5. Maintain technical accuracy and specificity
 ```
 
+## Actionability Classification
+
+Classify EVERY takeaway with one of three labels:
+
+- **actionable**: Concrete step the user can apply immediately (e.g., "Use /scout mode before implementing complex features"). Must be specific enough to act on without further research.
+- **reference**: Factual information about a tool, feature, or capability (e.g., "Claude Code 2.0 supports background tasks"). Useful to know but no immediate action.
+- **awareness**: Industry trend, opinion, or general context (e.g., "AI coding assistants are converging on agentic patterns"). No action needed.
+
+Classification rules:
+1. If the takeaway contains a verb in imperative form ("Use X", "Run Y", "Configure Z"), classify as `actionable`
+2. If the takeaway states a fact about a tool or feature, classify as `reference`
+3. If the takeaway describes a trend or opinion, classify as `awareness`
+4. When in doubt between actionable and reference, prefer `reference`
+
 ## Output Format
 
 **CRITICAL**: Always output your analysis as valid JSON with this EXACT structure:
@@ -289,11 +303,21 @@ This is CRITICAL for ensuring the knowledge base is truly actionable, not just c
   ],
 
   "key_takeaways": [
-    "Actionable insight #1 with explanation of WHY it matters and specific details",
-    "Actionable insight #2 with implementation guidance",
-    "Actionable insight #3 with concrete examples or metrics",
-    "Actionable insight #4 with practical application",
-    "Actionable insight #5 with strategic importance"
+    {
+      "takeaway": "Actionable insight #1 with explanation of WHY it matters and specific details",
+      "actionability": "actionable",
+      "explanation": "Contains imperative verb and specific implementation step"
+    },
+    {
+      "takeaway": "Factual insight #2 about a tool capability or feature",
+      "actionability": "reference",
+      "explanation": "States a fact about a tool without direct action"
+    },
+    {
+      "takeaway": "Industry trend #3 or general context observation",
+      "actionability": "awareness",
+      "explanation": "Describes a trend without immediate action needed"
+    }
   ],
 
   "implementation_details": {
@@ -465,9 +489,21 @@ Given a transcript about Claude Code context management, your output might be:
   ],
 
   "key_takeaways": [
-    "Disable autocompact buffer (/config autocompact false) to preserve 22% of context window space that would otherwise be lost to compression",
-    "Use sub-agent delegation to offload search and discovery tasks, keeping your primary agent's context window free for planning and execution",
-    "Context windows are hard limits that cannot be exceeded—architect your workflows to work within these constraints through the R&D framework"
+    {
+      "takeaway": "Disable autocompact buffer (/config autocompact false) to preserve 22% of context window space that would otherwise be lost to compression",
+      "actionability": "actionable",
+      "explanation": "Contains specific command and imperative action"
+    },
+    {
+      "takeaway": "Use sub-agent delegation to offload search and discovery tasks, keeping your primary agent's context window free for planning and execution",
+      "actionability": "actionable",
+      "explanation": "Concrete workflow step the user can implement"
+    },
+    {
+      "takeaway": "Context windows are hard limits that cannot be exceeded—architect your workflows to work within these constraints through the R&D framework",
+      "actionability": "reference",
+      "explanation": "States a factual constraint about context windows"
+    }
   ]
 }
 ```
