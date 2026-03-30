@@ -329,6 +329,20 @@ Example:
 5. Explain integration with broader training program
 ```
 
+## Actionability Classification
+
+Classify EVERY takeaway or recommendation with one of three labels:
+
+- **actionable**: Concrete training action the user can implement (e.g., "Perform 3x8 Bulgarian split squats at 70% 1RM with 2-0-2-0 tempo"). Must include enough specificity to program into a workout.
+- **reference**: Scientific finding or exercise principle (e.g., "Eccentric loading increases tendon stiffness over 12 weeks"). Useful context but requires further programming.
+- **awareness**: General training philosophy or trend (e.g., "Concurrent training research is moving toward session-level periodization"). No immediate programming action.
+
+Classification rules:
+1. If the takeaway includes sets, reps, intensity, or specific protocol parameters, classify as `actionable`
+2. If the takeaway cites research or states a physiological principle, classify as `reference`
+3. If the takeaway describes a trend or philosophy, classify as `awareness`
+4. When in doubt between actionable and reference, prefer `reference`
+
 ## Output Format
 
 **CRITICAL**: Always output your analysis as valid JSON with this EXACT structure:
@@ -449,11 +463,31 @@ Example:
   },
 
   "key_takeaways": [
-    "Bulgarian split squats provide adequate strength stimulus with 40-50% less load than back squats, reducing interference with running training for hybrid athletes",
-    "Rear-foot elevation increases eccentric demand, building downhill running control critical for ultra marathons",
-    "Unilateral training addresses left-right asymmetries developed from repetitive running gait",
-    "Equipment-flexible (kettlebell, dumbbell, barbell) making it suitable for home gym or commercial gym",
-    "Progression criteria must prioritize form quality over load increases - knee valgus risk increases sharply beyond 8 reps"
+    {
+      "takeaway": "Bulgarian split squats provide adequate strength stimulus with 40-50% less load than back squats, reducing interference with running training for hybrid athletes",
+      "actionability": "reference",
+      "explanation": "States a physiological principle about load reduction"
+    },
+    {
+      "takeaway": "Perform 3x6-8 Bulgarian split squats 2x/week with 3-second eccentric tempo to build downhill running control for ultra marathons",
+      "actionability": "actionable",
+      "explanation": "Includes specific sets, reps, frequency, and tempo parameters"
+    },
+    {
+      "takeaway": "Unilateral training addresses left-right asymmetries developed from repetitive running gait",
+      "actionability": "reference",
+      "explanation": "States a biomechanical principle without specific protocol"
+    },
+    {
+      "takeaway": "Equipment-flexible (kettlebell, dumbbell, barbell) making it suitable for home gym or commercial gym",
+      "actionability": "awareness",
+      "explanation": "General observation about equipment versatility"
+    },
+    {
+      "takeaway": "Progression criteria must prioritize form quality over load increases - knee valgus risk increases sharply beyond 8 reps",
+      "actionability": "actionable",
+      "explanation": "Specific safety threshold (8 reps) for programming decisions"
+    }
   ],
 
   "neo4j_mapping": {
