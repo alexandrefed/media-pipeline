@@ -159,13 +159,12 @@ class EnhancedKBStorage:
 
         base_tags = [
             "source:openclaw-main",
-            "project:ai-knowledge-base",
-            "type:context",
+            "project:youtube-kb",
+            "type:video-knowledge",
             "area:vecia",
-            "youtube-knowledge-base",
-            f"video-{self.video_id}",
-            f"channel-{channel_tag}",
-            f"content-type-{content_type}",
+            f"video:{self.video_id}",
+            f"channel:{channel_tag}",
+            f"content-type:{content_type}",
         ]
 
         # Add entity tags
@@ -196,6 +195,9 @@ class EnhancedKBStorage:
                 # Handle both string and dict format
                 if isinstance(takeaway, dict):
                     takeaway_text = takeaway.get("takeaway", "")
+                    actionability = takeaway.get("actionability", "")
+                    if actionability:
+                        takeaway_text += f" [{actionability}]"
                 else:
                     takeaway_text = str(takeaway)
                 content_parts.append(f"{i}. {takeaway_text}")
@@ -203,9 +205,17 @@ class EnhancedKBStorage:
 
         content_parts.append(f"**Watch**: {metadata['video_url']}")
 
+        # Build tags with actionability metadata
+        tags = self._create_base_tags("overview")
+        has_actionable = any(
+            t.get("actionability") == "actionable" for t in takeaways if isinstance(t, dict)
+        )
+        if has_actionable:
+            tags.append("has-actionable:true")
+
         return {
             "content": "\n".join(content_parts),
-            "tags": self._create_base_tags("overview"),
+            "tags": tags,
             "type": "video-overview",
         }
 
@@ -519,6 +529,41 @@ class EnhancedKBStorage:
             "type": "troubleshooting",
         }
 
+    def create_takeaway_memories(self) -> list[dict]:
+        """Create individual memories for actionable takeaways with spaced-repetition tags."""
+        takeaways = self.analysis_data.get("key_takeaways", [])
+        memories = []
+        for takeaway in takeaways:
+            if not isinstance(takeaway, dict):
+                continue
+            actionability = takeaway.get("actionability", "")
+            if not actionability:
+                continue
+            takeaway_text = takeaway.get("takeaway", "")
+            if not takeaway_text:
+                continue
+
+            tags = self._create_base_tags("takeaway")
+            tags.append(f"takeaway-type:{actionability}")
+            if actionability == "actionable":
+                tags.append("spaced-repetition:pending")
+
+            metadata = self._extract_metadata()
+            content = (
+                f"**Takeaway**: {takeaway_text}\n"
+                f"**Type**: {actionability}\n"
+                f"**Video**: {metadata['video_title']}\n"
+                f"**Watch**: {metadata['video_url']}"
+            )
+            memories.append(
+                {
+                    "content": content,
+                    "tags": tags,
+                    "type": f"takeaway-{actionability}",
+                }
+            )
+        return memories
+
     def generate_all_memories(self) -> list[dict]:
         """Generate all memory objects."""
         memories = []
@@ -555,6 +600,10 @@ class EnhancedKBStorage:
         troubleshooting_mem = self.create_troubleshooting_memory()
         if troubleshooting_mem:
             memories.append(troubleshooting_mem)
+
+        # Memory 8+: Individual takeaway memories with actionability tags
+        takeaway_mems = self.create_takeaway_memories()
+        memories.extend(takeaway_mems)
 
         return memories
 
@@ -682,7 +731,7 @@ def main():
                 print("❌ Unified-memory API unreachable. Use --dry-run to print instead.")
                 sys.exit(1)
 
-            # 1. Store one NOTE (syncs to Notion)
+            # 1. Store one NOTE (syncs to Notion) — STORE-02
             note_content = _build_note_content(storage, memories)
             note_metadata = {
                 "area": "vecia",
@@ -692,9 +741,21 @@ def main():
                 "channel": metadata["channel"],
                 "format": "long",
             }
+            # Title format: {YEAR}-{MON}-Video-{SLUG} per CONTEXT.md
+            from datetime import datetime
+
+            now = datetime.now()
+            slug = (
+                metadata["video_title"]
+                .lower()
+                .replace(" ", "-")
+                .replace(":", "")
+                .replace("'", "")[:40]
+            )
+            note_title = f"{now.year}-{now.strftime('%b')}-Video-{slug}"
             try:
                 note_result = store_note(
-                    title=f"Video: {metadata['video_title']}",
+                    title=note_title,
                     content=note_content,
                     note_type="video",
                     metadata=note_metadata,
