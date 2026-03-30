@@ -33,8 +33,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 5 plans
 
 Plans:
-- [ ] 01-01-PLAN.md -- Update media agent: path fix, faster-whisper, short-form mode, Telegram confirmation
-- [ ] 01-02-PLAN.md -- Actionability tagging in analyzers + standardized tags in store scripts
+- [x] 01-01-PLAN.md -- Update media agent: path fix, faster-whisper, short-form mode, Telegram confirmation
+- [x] 01-02-PLAN.md -- Actionability tagging in analyzers + standardized tags in store scripts
 - [ ] 01-03-PLAN.md -- OpenClaw Telegram plugin config + orchestrator URL routing
 - [ ] 01-04-PLAN.md -- Gaming-PC environment fix (yt-dlp, faster-whisper, .env, workspace)
 - [ ] 01-05-PLAN.md -- End-to-end integration testing (YouTube + Instagram + negative tests)

@@ -26,20 +26,20 @@
 
 - [ ] **PROC-01**: System classifies content by duration: short-form (<2 min) vs long-form (>2 min)
 - [ ] **PROC-02**: Short-form content produces 1 structured note (key insight, tools, actionable items, summary)
-- [ ] **PROC-03**: Long-form AI Tools content produces 5-7 entity memories via @youtube-transcript-analyzer
-- [ ] **PROC-04**: Long-form Sports content produces protocol + evidence + biomechanics analysis
+- [x] **PROC-03**: Long-form AI Tools content produces 5-7 entity memories via @youtube-transcript-analyzer
+- [x] **PROC-04**: Long-form Sports content produces protocol + evidence + biomechanics analysis
 - [ ] **PROC-05**: System generates clean .md summary for every processed piece of content
 - [ ] **PROC-06**: System auto-detects content domain (AI Tools vs Sports) based on channel + title keywords
-- [ ] **PROC-07**: Analysis agents classify each takeaway as actionable/reference/awareness
+- [x] **PROC-07**: Analysis agents classify each takeaway as actionable/reference/awareness
 
 ### Storage
 
-- [ ] **STORE-01**: Memories stored in unified-memory API with required tags (source, project, type, area, video, channel, content-type)
-- [ ] **STORE-02**: Notion note created per video via unified-memory note_create
+- [x] **STORE-01**: Memories stored in unified-memory API with required tags (source, project, type, area, video, channel, content-type)
+- [x] **STORE-02**: Notion note created per video via unified-memory note_create
 - [ ] **STORE-03**: .md summary written to workspace/summaries/ (Mutagen-synced to Mac)
-- [ ] **STORE-04**: Neo4j entity extraction triggered automatically via GraphExtractionPipeline
-- [ ] **STORE-05**: Embedded chunks stored in VPS pgvector via unified-memory API
-- [ ] **STORE-06**: Actionable items tagged with spaced-repetition metadata
+- [x] **STORE-04**: Neo4j entity extraction triggered automatically via GraphExtractionPipeline
+- [x] **STORE-05**: Embedded chunks stored in VPS pgvector via unified-memory API
+- [x] **STORE-06**: Actionable items tagged with spaced-repetition metadata
 
 ### Delivery
 
@@ -112,17 +112,17 @@
 | EXTRACT-06 | Phase 4 | Pending |
 | PROC-01 | Phase 1 | Pending |
 | PROC-02 | Phase 1 | Pending |
-| PROC-03 | Phase 1 | Pending |
-| PROC-04 | Phase 1 | Pending |
+| PROC-03 | Phase 1 | Complete |
+| PROC-04 | Phase 1 | Complete |
 | PROC-05 | Phase 1 | Pending |
 | PROC-06 | Phase 1 | Pending |
-| PROC-07 | Phase 1 | Pending |
-| STORE-01 | Phase 1 | Pending |
-| STORE-02 | Phase 1 | Pending |
+| PROC-07 | Phase 1 | Complete |
+| STORE-01 | Phase 1 | Complete |
+| STORE-02 | Phase 1 | Complete |
 | STORE-03 | Phase 1 | Pending |
-| STORE-04 | Phase 1 | Pending |
-| STORE-05 | Phase 1 | Pending |
-| STORE-06 | Phase 1 | Pending |
+| STORE-04 | Phase 1 | Complete |
+| STORE-05 | Phase 1 | Complete |
+| STORE-06 | Phase 1 | Complete |
 | DELIVER-01 | Phase 1 | Pending |
 | DELIVER-02 | Phase 2 | Pending |
 | DELIVER-03 | Phase 2 | Pending |
