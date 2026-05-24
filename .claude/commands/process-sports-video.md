@@ -52,28 +52,20 @@ The agent will extract:
 - Progression systems and criteria
 ```
 
-### Step 3: Generate Sports Summary
+### Step 3: Generate Sports Summary (LLM-written)
 
-```bash
-# Generate detailed markdown summary using sports template
-uv run python scripts/generate_detailed_summary.py {VIDEO_ID} --template sports
+The @media-ingestion-agent writes `summary.md` directly from `analysis_sports.json`. No Python script needed.
 
-# This creates:
-# workspace/summaries/{VIDEO_ID}_sports_summary.md
-#
-# Using template: src/templates/sports_summary_template.md
-#
-# Includes sections:
-# - Scientific Evidence & Research Citations
-# - Exercises & Protocols
-# - Biomechanical Principles
-# - WHY Reasoning
-# - Implementation Details
-# - Equipment Requirements & Alternatives
-# - Injury Considerations
-# - Training Context & Integration
-# - Neo4j Knowledge Graph Mapping
-```
+The summary adapts the standard structure for sports content:
+- Exercise Protocols (sets, reps, intensity, tempo, rest)
+- Scientific Evidence & Research Citations
+- Biomechanical Principles
+- WHY Reasoning
+- Programming Logic & Progression
+- Equipment Requirements & Alternatives
+- Injury Considerations
+
+Output: `workspace/videos/{folder}/summary.md`
 
 ### Step 4: Prepare for MCP KB Storage + Auto-Notify
 

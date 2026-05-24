@@ -66,26 +66,15 @@ Use @youtube-processing-orchestrator to analyze the enhanced transcript
 
 **Output**: High-quality JSON with tools, commands, concepts, workflows, takeaways
 
-### Phase 3: Summarize (Generate Detailed Summary)
+### Phase 3: Summarize (LLM-Written Summary)
 
-Generate a comprehensive human-readable markdown summary:
+The @media-ingestion-agent writes `summary.md` directly from `analysis.json` — no Python script needed. The agent reads the structured analysis data and produces a clean markdown summary with only the sections that have actual content.
 
-```bash
-# Extract video ID from URL
-# Example: 4nthc76rSl8 from https://youtube.com/watch?v=4nthc76rSl8
-uv run python scripts/generate_detailed_summary.py [VIDEO_ID]
-```
+**Summary structure**: Executive Summary, Key Takeaways (with actionability tags), Tools & Technologies, Implementation Details, Workflows, Commands Reference.
 
-**Summary includes**:
-- 📄 20+ detailed sections (Executive Summary, Technical Deep Dive, etc.)
-- 🔧 Technical implementation details (code snippets, configurations)
-- 📝 Step-by-step setup guides
-- 💡 Real-world examples and use cases
-- ✅ Action items and checklists
+**Output**: `workspace/videos/{folder}/summary.md`
 
-**Output**: `workspace/summaries/[VIDEO_ID]_detailed_summary.md`
-
-**Review**: User can review the detailed summary for accuracy and completeness
+**Review**: User can review the summary for accuracy and completeness
 
 ### Phase 4: Build (Store Knowledge + Auto-Notify)
 

@@ -26,28 +26,52 @@ from pathlib import Path
 class DetailedSummaryGenerator:
     """Generate detailed markdown summaries from video analysis and transcripts."""
 
-    def __init__(self, video_id: str):
+    def __init__(self, video_id: str, video_dir: str | None = None):
         self.video_id = video_id
         self.project_root = Path(__file__).parent.parent
         self.workspace = self.project_root / "workspace"
-        self.summaries_dir = self.workspace / "summaries"
-        self.summaries_dir.mkdir(exist_ok=True)
+        self.video_dir = Path(video_dir) if video_dir else self._find_video_dir()
+        # Fallback summaries dir for legacy compatibility
+        self.summaries_dir = self.video_dir if self.video_dir else self.workspace / "summaries"
+        self.summaries_dir.mkdir(parents=True, exist_ok=True)
+
+    def _find_video_dir(self) -> Path | None:
+        """Find the video directory by ID using the new convention."""
+        videos_dir = self.workspace / "videos"
+        if videos_dir.exists():
+            for d in videos_dir.iterdir():
+                if d.is_dir() and f"--{self.video_id}--" in d.name:
+                    return d
+        return None
 
     def find_analysis_file(self) -> Path | None:
         """Find the analysis JSON file for this video."""
+        # New convention: workspace/videos/{folder}/analysis.json
+        if self.video_dir:
+            for name in ["analysis.json", "analysis_sports.json"]:
+                f = self.video_dir / name
+                if f.exists():
+                    return f
+
+        # Legacy fallback
         analysis_dir = self.workspace / "analysis"
         analysis_file = analysis_dir / f"{self.video_id}_analysis.json"
-
         if analysis_file.exists():
             return analysis_file
         return None
 
     def find_enhanced_transcript(self) -> Path | None:
         """Find the enhanced transcript for this video."""
-        # Check workspace/transcripts/enhanced first
+        # New convention: workspace/videos/{folder}/transcript_enhanced.txt
+        if self.video_dir:
+            for name in ["transcript_enhanced.txt", "transcript_manual.txt", "transcript_raw.txt"]:
+                f = self.video_dir / name
+                if f.exists():
+                    return f
+
+        # Legacy fallback: workspace/transcripts/enhanced/
         enhanced_dir = self.workspace / "transcripts" / "enhanced"
         enhanced_file = enhanced_dir / f"raw_text_for_enhancement_{self.video_id}_auto_enhanced.txt"
-
         if enhanced_file.exists():
             return enhanced_file
 
@@ -383,8 +407,11 @@ class DetailedSummaryGenerator:
             analysis_data, technical_details, transcript_content
         )
 
-        # Save to file
-        output_file = self.summaries_dir / f"{self.video_id}_detailed_summary.md"
+        # Save to file — new convention: summary.md in video dir, legacy fallback
+        if self.video_dir:
+            output_file = self.video_dir / "summary.md"
+        else:
+            output_file = self.summaries_dir / f"{self.video_id}_detailed_summary.md"
         output_file.write_text(summary_md)
 
         print("\n✨ Detailed summary generated successfully!")
@@ -403,6 +430,10 @@ class DetailedSummaryGenerator:
         # Try to load the short-form analysis JSON
         analysis_dir = self.workspace / "analysis"
         short_form_file = analysis_dir / f"{self.video_id}_short_form.json"
+
+        # New convention: check video dir first
+        if self.video_dir:
+            short_form_file = self.video_dir / "analysis.json"
 
         if not short_form_file.exists():
             print(f"ERROR: Short-form analysis not found: {short_form_file}")
@@ -452,7 +483,10 @@ class DetailedSummaryGenerator:
 ***
 *Processed: {date_str} | Source: {url}*
 """
-        output_path = self.summaries_dir / f"{self.video_id}_short_form_summary.md"
+        if self.video_dir:
+            output_path = self.video_dir / "summary.md"
+        else:
+            output_path = self.summaries_dir / f"{self.video_id}_short_form_summary.md"
         output_path.write_text(md_content, encoding="utf-8")
         print(f"Short-form summary written to: {output_path}")
         return output_path
@@ -470,9 +504,14 @@ def main():
         default="long-form",
         help="Summary template to use (default: long-form)",
     )
+    parser.add_argument(
+        "--video-dir",
+        default=None,
+        help="Path to the video folder (e.g., workspace/videos/20260406--ID--yt--channel--title)",
+    )
     args = parser.parse_args()
 
-    generator = DetailedSummaryGenerator(args.video_id)
+    generator = DetailedSummaryGenerator(args.video_id, video_dir=args.video_dir)
 
     if args.template == "short-form":
         result = generator.generate_short_form_summary()

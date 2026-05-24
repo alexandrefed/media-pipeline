@@ -52,52 +52,39 @@ Use @youtube-transcript-analyzer to analyze raw_text_for_enhancement_VIDEO_ID_au
 - ✅ No fragments or incomplete data
 - ✅ Implementation details included
 
-### 3. Generate Detailed Summary (10 seconds)
+### 3. Generate Summary (LLM-written)
 
-Generate a comprehensive human-readable markdown summary:
+The agent reads `analysis.json` and writes `summary.md` directly — no Python script.
 
-```bash
-uv run python scripts/generate_detailed_summary.py VIDEO_ID
-```
+**What it produces:**
+- Executive Summary (rewritten from analysis, 2-3 paragraphs)
+- Key Takeaways with actionability tags (actionable/reference/awareness)
+- Tools & Technologies with context
+- Implementation Details (setup steps, config, code snippets)
+- Workflows & Patterns
+- Commands Reference with syntax blocks
+- Only sections with actual content are included
 
-**What this generates:**
-- Detailed markdown with 20+ sections
-- Technical implementation details (code snippets, configurations)
-- Step-by-step setup guides
-- Real-world examples and use cases
-- Action items and checklists
-
-**Output:** `workspace/summaries/VIDEO_ID_detailed_summary.md`
+**Output:** `workspace/videos/{folder}/summary.md`
 
 **Quality Standards:**
 
-**✅ MUST INCLUDE:**
-- Full code blocks with inline comments explaining WHY, not just WHAT
-- Actual configuration files with real values (not placeholders)
-- Complete command sequences with all flags and options
-- File paths and directory structures with descriptions
-- Environment variables and their purposes
-- Before/after examples for comparisons
-- Error handling patterns and troubleshooting
-- Performance metrics and benchmarks where mentioned
-- Security considerations and best practices
-- Step-by-step instructions numbered and clear
+**MUST INCLUDE:**
+- Data sourced from analysis.json fields, not regex extraction from transcript
+- Actionability classification on every takeaway
+- Complete code snippets with language tags
+- Specific setup steps, config values, and file paths from implementation_details
 
-**❌ MUST AVOID:**
-- High-level descriptions without implementation ("You can configure X")
-- Partial code snippets missing context
-- Generic advice without specific examples
-- "See documentation" references without actual content
-- Vague statements like "set up the tool" without HOW
+**MUST AVOID:**
+- Unfilled placeholder text (e.g., "*[Extract architectural patterns]*")
+- Regex-extracted "tools" that are actually common English words
+- Empty sections — omit them entirely if no content exists
 
 **Quality Check:**
-- ✅ Summary file created in workspace/summaries/
-- ✅ Contains 20+ detailed sections
-- ✅ Technical implementation details present
-- ✅ Code snippets have inline explanatory comments
-- ✅ Step-by-step guides are clear and numbered
-- ✅ Real examples from video included
-- ✅ Action items extracted and listed
+- Summary file created in workspace/videos/{folder}/
+- All included sections have real content (no placeholders)
+- Tools listed match analysis.json.tools_mentioned exactly
+- Takeaways have actionability tags
 
 ### 4. Store in unified-memory (instant)
 
