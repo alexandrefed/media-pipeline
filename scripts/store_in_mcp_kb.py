@@ -34,14 +34,6 @@ except ImportError:
     print("⚠️  Warning: Unified memory client not available. API storage disabled.")
     API_AVAILABLE = False
 
-# Import webhook notifier for automatic n8n sync
-try:
-    from notifications.src.core.webhook_notifier import notify_video_processed
-
-    WEBHOOK_AVAILABLE = True
-except ImportError:
-    print("⚠️  Warning: Webhook notifier not available. Notifications disabled.")
-    WEBHOOK_AVAILABLE = False
 
 
 class EnhancedKBStorage:
@@ -158,7 +150,7 @@ class EnhancedKBStorage:
             channel_tag = "unknown-channel"
 
         base_tags = [
-            "source:openclaw-main",
+            "source:claude-main",
             "project:youtube-kb",
             "type:video-knowledge",
             "area:vecia",
@@ -784,18 +776,6 @@ def main():
                 print(f"⚠️  Memory storage failed: {e}")
 
         print(f"\n✅ Generated {len(memories)} sections for video {storage.video_id}")
-
-        # Automatically sync to n8n webhook for notifications
-        if WEBHOOK_AVAILABLE:
-            print("\n🔔 Syncing to n8n for automated notifications...")
-            try:
-                webhook_success = notify_video_processed(analysis_file)
-                if webhook_success:
-                    print("✅ Successfully synced to n8n - notifications enabled")
-                else:
-                    print("⚠️  Webhook sync failed - see error messages above")
-            except Exception as webhook_error:
-                print(f"⚠️  Webhook sync error: {webhook_error}")
 
     except Exception as e:
         print(f"❌ Error: {e}")

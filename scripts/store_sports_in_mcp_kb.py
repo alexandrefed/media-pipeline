@@ -29,14 +29,6 @@ except ImportError:
     print("⚠️  Warning: Unified memory client not available. API storage disabled.")
     API_AVAILABLE = False
 
-# Import webhook notifier for automatic n8n sync
-try:
-    from notifications.src.core.webhook_notifier import notify_video_processed
-
-    WEBHOOK_AVAILABLE = True
-except ImportError:
-    print("⚠️  Warning: Webhook notifier not available. Notifications disabled.")
-    WEBHOOK_AVAILABLE = False
 
 
 def load_sports_analysis(json_path: str) -> dict[str, Any]:
@@ -342,7 +334,7 @@ def generate_mcp_storage_instructions(
 
     all_tags = (
         [
-            "source:openclaw-main",
+            "source:claude-main",
             "project:youtube-kb",
             "type:video-knowledge",
             f"video:{video_id}",
@@ -454,7 +446,7 @@ def main():
     all_tags = list(
         set(
             [
-                "source:openclaw-main",
+                "source:claude-main",
                 "project:youtube-kb",
                 "type:video-knowledge",
                 "area:mutora",
@@ -591,18 +583,6 @@ def main():
     print(f"- Scientific citations: {len(analysis.get('scientific_citations', []))}")
     print(f"- Evidence tier: {evidence_tag}")
     print(f"- Sport tags: {', '.join(sport_tags)}")
-
-    # Automatically sync to n8n webhook for notifications
-    if WEBHOOK_AVAILABLE:
-        print("\n🔔 Syncing to n8n for automated notifications...")
-        try:
-            webhook_success = notify_video_processed(analysis_path)
-            if webhook_success:
-                print("✅ Successfully synced to n8n - notifications enabled")
-            else:
-                print("⚠️  Webhook sync failed - see error messages above")
-        except Exception as webhook_error:
-            print(f"⚠️  Webhook sync error: {webhook_error}")
 
 
 if __name__ == "__main__":
