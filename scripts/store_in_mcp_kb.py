@@ -46,19 +46,21 @@ class EnhancedKBStorage:
         self.memories_created = []
 
     def _extract_video_id(self) -> str:
-        """Extract video ID from filename."""
+        """Extract video ID from JSON content or folder name."""
+        try:
+            data = json.loads(self.analysis_file.read_text())
+            vid = data.get("video_metadata", {}).get("video_id", "")
+            if vid:
+                return vid
+        except Exception:
+            pass
+        folder_name = self.analysis_file.parent.name
+        parts = folder_name.split("--")
+        if len(parts) >= 2:
+            return parts[1]
         filename = self.analysis_file.stem
-        # Handle various naming patterns
         if "_analysis" in filename:
-            video_id = filename.replace("_analysis", "")
-            # Remove common prefixes
-            for prefix in ["raw_text_for_enhancement_", "video_", ""]:
-                if video_id.startswith(prefix):
-                    video_id = video_id[len(prefix) :]
-            # Remove _auto_enhanced suffix if present
-            if "_auto_enhanced" in video_id:
-                video_id = video_id.replace("_auto_enhanced", "")
-            return video_id
+            return filename.replace("_analysis", "").replace("raw_text_for_enhancement_", "").replace("_auto_enhanced", "")
         return "unknown"
 
     def _load_analysis(self) -> dict:

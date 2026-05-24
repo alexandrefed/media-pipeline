@@ -63,12 +63,13 @@ class AutoEnhancer:
         enhanced_text = text
         corrections_list = []
 
-        # Apply common error corrections
+        # Apply common error corrections (word-boundary matching to avoid substring corruption)
         for error, correction in self.common_errors.items():
-            if error in enhanced_text:
-                # Count occurrences
-                count = enhanced_text.count(error)
-                enhanced_text = enhanced_text.replace(error, correction)
+            pattern = re.compile(r'\b' + re.escape(error) + r'\b')
+            matches = pattern.findall(enhanced_text)
+            if matches:
+                count = len(matches)
+                enhanced_text = pattern.sub(correction, enhanced_text)
                 corrections_list.append(
                     {
                         "original": error,

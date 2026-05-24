@@ -16,19 +16,20 @@ class TextReconstructor:
         self.segmenter = pysbd.Segmenter(language="en", clean=False)
 
     def extract_clean_segments(self, raw_segments: list[dict]) -> list[dict]:
-        """Extract clean segments (short duration ones with clean text)."""
+        """Extract clean, deduplicated segments from raw VTT data."""
         clean_segments = []
+        seen_texts = set()
 
         for segment in raw_segments:
-            # Filter segments with very short duration (these contain clean text)
-            if segment["duration"] < 0.1:  # Less than 0.1 seconds
-                clean_segment = {
+            cleaned = self._clean_text(segment["raw_text"])
+            if cleaned and cleaned not in seen_texts:
+                seen_texts.add(cleaned)
+                clean_segments.append({
                     "segment_index": segment["segment_index"],
                     "start_time": segment["start_time"],
                     "end_time": segment["end_time"],
-                    "text": self._clean_text(segment["raw_text"]),
-                }
-                clean_segments.append(clean_segment)
+                    "text": cleaned,
+                })
 
         print(
             f"✅ Extracted {len(clean_segments)} clean segments from {len(raw_segments)} raw segments"
@@ -147,7 +148,7 @@ class TextReconstructor:
         return {
             "raw_segments_count": len(raw_segments),
             "clean_segments_count": len(clean_segments),
-            "clean_segments_percentage": (len(clean_segments) / len(raw_segments)) * 100,
+            "clean_segments_percentage": (len(clean_segments) / max(len(raw_segments), 1)) * 100,
             "full_text_length": len(full_text),
             "sentences_count": len(sentences),
             "avg_sentence_length": len(full_text) / len(sentences) if sentences else 0,

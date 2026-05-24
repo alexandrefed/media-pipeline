@@ -49,28 +49,87 @@ def main():
     print("=" * 80)
     print(f"\nVideo URL: {youtube_url}")
     print("\nThis workflow will:")
+    print("  ✓ Create video folder with metadata")
     print("  ✓ Extract raw transcript")
     print("  ✓ Auto-enhance with 174+ mapped corrections")
     print("  ✓ Analyze using specialized @youtube-transcript-analyzer agent")
     print("  ✓ Generate MCP KB Memory-ready content")
     print("\n" + "=" * 80)
 
-    # Step 1: Extract
+    video_id = youtube_url.split("v=")[-1].split("&")[0]
+
+    # Step 1: Extract transcript
     success, output = run_command(
         f'uv run python main.py extract "{youtube_url}"', "Step 1/4: Extracting raw transcript"
     )
-    if not success:
+
+    # Find the video folder (may have been created by extractor)
+    video_dirs = list(Path("workspace/videos").glob(f"*--{video_id}--*"))
+
+    if not video_dirs or not success:
+        # Fallback: create folder manually and extract via yt-dlp captions
+        print("   Trying fallback: direct yt-dlp caption extraction...")
+        import re
+
+        Path("workspace/videos").mkdir(parents=True, exist_ok=True)
+
+        # Get metadata via yt-dlp
+        meta_cmd = f'yt-dlp --skip-download --print "%(upload_date)s|||%(channel)s|||%(title)s" "{youtube_url}"'
+        meta_ok, meta_out = run_command(meta_cmd, "Fetching video metadata")
+        if not meta_ok:
+            print(f"❌ Cannot fetch metadata for {youtube_url}")
+            return
+
+        parts = meta_out.strip().split("|||")
+        upload_date = parts[0] if len(parts) > 0 else "00000000"
+        channel = parts[1] if len(parts) > 1 else "unknown"
+        title = parts[2] if len(parts) > 2 else "unknown"
+
+        channel_slug = re.sub(r"[^a-z0-9-]", "-", channel.lower())[:25]
+        title_slug = re.sub(r"[^a-z0-9 -]", "", title.lower()).replace(" ", "-")
+        title_slug = "-".join(re.sub(r"-+", "-", title_slug).strip("-").split("-")[:8])
+
+        folder_name = f"{upload_date}--{video_id}--yt--{channel_slug}--{title_slug}"
+        video_dir = Path("workspace/videos") / folder_name
+        video_dir.mkdir(parents=True, exist_ok=True)
+
+        # Write metadata.json
+        import json
+        from datetime import datetime, timezone
+        metadata = {
+            "video_id": video_id, "title": title, "channel": channel,
+            "platform": "yt", "upload_date": upload_date, "url": youtube_url,
+            "processed_at": datetime.now(timezone.utc).isoformat(),
+        }
+        (video_dir / "metadata.json").write_text(json.dumps(metadata, indent=2))
+
+        # Download captions via yt-dlp
+        vtt_file = video_dir / "subs.en.vtt"
+        cap_ok, _ = run_command(
+            f'yt-dlp --write-auto-sub --sub-lang en --skip-download --sub-format vtt -o "{video_dir}/subs" "{youtube_url}"',
+            "Downloading captions",
+        )
+        if not cap_ok or not vtt_file.exists():
+            print(f"❌ No captions available for {youtube_url}")
+            return
+
+        # Convert VTT to text
+        vtt_ok, _ = run_command(
+            f'uv run python scripts/vtt_to_text.py "{vtt_file}" -o "{video_dir}/transcript_raw.txt"',
+            "Converting VTT to text",
+        )
+        if not vtt_ok:
+            print(f"❌ VTT conversion failed")
+            return
+    else:
+        video_dir = video_dirs[0]
+
+    raw_file = video_dir / "transcript_raw.txt"
+    if not raw_file.exists():
+        print(f"❌ transcript_raw.txt not found in {video_dir}")
         return
 
-    # Find the generated raw transcript file
-    # Pattern: raw_text_for_enhancement_VIDEO_ID.txt
-    video_id = youtube_url.split("v=")[-1].split("&")[0]
-    raw_file = f"raw_text_for_enhancement_{video_id}.txt"
-
-    if not Path(raw_file).exists():
-        print(f"❌ Could not find extracted file: {raw_file}")
-        return
-
+    print(f"   📁 Video folder: {video_dir}")
     print(f"   📄 Raw transcript: {raw_file}")
 
     # Step 2: Auto-enhance
@@ -81,24 +140,28 @@ def main():
     if not success:
         return
 
-    enhanced_file = raw_file.replace(".txt", "_auto_enhanced.txt")
+    # auto_enhancer writes transcript_raw_auto_enhanced.txt next to input — rename it
+    enhanced_legacy = video_dir / "transcript_raw_auto_enhanced.txt"
+    enhanced_file = video_dir / "transcript_enhanced.txt"
+    if enhanced_legacy.exists():
+        enhanced_legacy.rename(enhanced_file)
     print(f"   📄 Enhanced transcript: {enhanced_file}")
 
     # Step 3: Intelligent analysis with agent
     print("\n🔄 Step 3/4: Analyzing with @youtube-transcript-analyzer agent...")
     print("   (Using specialized agent for high-quality extraction)")
 
+    analysis_file = video_dir / "analysis.json"
+
     # Use Claude Code to invoke the specialized agent
-    agent_cmd = f'claude "Use @youtube-transcript-analyzer to analyze {enhanced_file} and save the JSON output to {enhanced_file.replace(".txt", "_analysis.json")}"'
+    agent_cmd = f'claude "Use @youtube-transcript-analyzer to analyze {enhanced_file} and save the JSON output to {analysis_file}"'
 
     print("\n   💡 Run this command to use the specialized agent:")
     print(f"   {agent_cmd}")
     print("\n   Or manually invoke the agent in Claude Code")
 
-    analysis_file = enhanced_file.replace(".txt", "_analysis.json")
-
     # Check if analysis exists (user may have run it)
-    if Path(analysis_file).exists():
+    if analysis_file.exists():
         print("✅ Step 3/4: Analysis complete")
         print(f"   📄 Analysis JSON: {analysis_file}")
 
@@ -109,20 +172,16 @@ def main():
         )
 
         if success:
-            mcp_ready_file = analysis_file.replace("_analysis.json", "_mcp_kb_ready.txt")
-            print(f"   📄 MCP KB ready: {mcp_ready_file}")
-
             print("\n" + "=" * 80)
             print("✅ WORKFLOW COMPLETE!")
             print("=" * 80)
+            print(f"\n📁 Video folder: {video_dir}")
             print("\n📋 Generated Files:")
             print(f"   1. Raw: {raw_file}")
             print(f"   2. Enhanced: {enhanced_file}")
             print(f"   3. Analysis: {analysis_file}")
-            print(f"   4. MCP KB Ready: {mcp_ready_file}")
             print("\n💡 Next Step:")
-            print(f"   Store in MCP KB Memory using the content in: {mcp_ready_file}")
-            print("\n   Use: mcp__unified-memory__memory_store")
+            print("   Store in MCP KB Memory using: mcp__unified-memory__memory_store")
             print("=" * 80 + "\n")
     else:
         print("\n⏸️  Workflow paused at Step 3")

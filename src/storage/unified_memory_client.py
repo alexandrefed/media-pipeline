@@ -88,7 +88,7 @@ def store_note(
     note_metadata["title"] = title
 
     tags = [
-        "source:openclaw-main",
+        "source:claude-main",
         "project:ai-knowledge-base",
         "type:note",
         f"area:{note_metadata.get('area', 'vecia')}",
