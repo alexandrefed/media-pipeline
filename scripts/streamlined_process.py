@@ -85,13 +85,19 @@ def main():
         channel = parts[1] if len(parts) > 1 else "unknown"
         title = parts[2] if len(parts) > 2 else "unknown"
 
-        channel_slug = re.sub(r"[^a-z0-9-]", "-", channel.lower())[:25]
-        title_slug = re.sub(r"[^a-z0-9 -]", "", title.lower()).replace(" ", "-")
-        title_slug = "-".join(re.sub(r"-+", "-", title_slug).strip("-").split("-")[:8])
+        # Reuse existing folder if video was already processed
+        existing = list(Path("workspace/videos").glob(f"*--{video_id}--*"))
+        if existing:
+            video_dir = existing[0]
+            print(f"   Reusing existing folder: {video_dir}")
+        else:
+            channel_slug = re.sub(r"[^a-z0-9-]", "-", channel.lower())[:25]
+            title_slug = re.sub(r"[^a-z0-9 -]", "", title.lower()).replace(" ", "-")
+            title_slug = "-".join(re.sub(r"-+", "-", title_slug).strip("-").split("-")[:8])
 
-        folder_name = f"{upload_date}--{video_id}--yt--{channel_slug}--{title_slug}"
-        video_dir = Path("workspace/videos") / folder_name
-        video_dir.mkdir(parents=True, exist_ok=True)
+            folder_name = f"{upload_date}--{video_id}--yt--{channel_slug}--{title_slug}"
+            video_dir = Path("workspace/videos") / folder_name
+            video_dir.mkdir(parents=True, exist_ok=True)
 
         # Write metadata.json
         import json

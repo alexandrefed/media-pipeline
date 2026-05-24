@@ -226,25 +226,63 @@ class YouTubeProcessor:
 
     def process_for_manual_enhancement(self, url: str) -> str:
         """Process video and return clean text for manual Claude Code enhancement."""
+        import re as _re
+        from pathlib import Path as _Path
+
         print("\n📝 Extracting clean text for manual enhancement...")
 
-        # Extract and reconstruct text
         raw_data = self._extract_raw_transcript(url)
         text_data = self._reconstruct_text(raw_data)
 
-        # Save full text for manual processing
         video_id = raw_data["metadata"]["id"]
-        text_filename = f"raw_text_for_enhancement_{video_id}.txt"
+        title = raw_data["metadata"].get("title", "unknown")
+        channel = raw_data["metadata"].get("channel_name", "unknown")
+        published = raw_data["metadata"].get("published_date", "")
+        if published and published != "":
+            upload_date = published[:10].replace("-", "")
+        else:
+            upload_date = raw_data["metadata"].get("upload_date", "00000000")
+
+        channel_slug = _re.sub(r"[^a-z0-9-]", "-", channel.lower())
+        channel_slug = _re.sub(r"-+", "-", channel_slug).strip("-")[:25]
+        title_slug = _re.sub(r"[^a-z0-9 -]", "", title.lower())
+        title_slug = _re.sub(r"\s+", "-", title_slug)
+        title_slug = "-".join(_re.sub(r"-+", "-", title_slug).strip("-").split("-")[:8])
+
+        videos_dir = _Path("workspace") / "videos"
+        existing = list(videos_dir.glob(f"*--{video_id}--*"))
+        if existing:
+            video_dir = existing[0]
+        else:
+            folder_name = f"{upload_date}--{video_id}--yt--{channel_slug}--{title_slug}"
+            video_dir = videos_dir / folder_name
+            video_dir.mkdir(parents=True, exist_ok=True)
+
+        text_filename = str(video_dir / "transcript_raw.txt")
 
         with open(text_filename, "w", encoding="utf-8") as f:
-            f.write(f"Video: {raw_data['metadata']['title']}\n")
-            f.write(f"Channel: {raw_data['metadata']['channel_name']}\n")
+            f.write(f"Video: {title}\n")
+            f.write(f"Channel: {channel}\n")
             f.write(f"Duration: {raw_data['metadata']['duration_seconds']} seconds\n")
             f.write(f"Description: {raw_data['metadata']['description'][:200]}...\n")
             f.write("=" * 80 + "\n\n")
             f.write(text_data["full_text"])
 
+        import json
+        from datetime import datetime, timezone
+        metadata = {
+            "video_id": video_id,
+            "title": title,
+            "channel": channel,
+            "platform": "yt",
+            "upload_date": upload_date,
+            "url": url,
+            "processed_at": datetime.now(timezone.utc).isoformat(),
+        }
+        (video_dir / "metadata.json").write_text(json.dumps(metadata, indent=2))
+
         print(f"✅ Raw text saved to: {text_filename}")
+        print(f"📁 Video folder: {video_dir}")
         print(f"📄 Text length: {len(text_data['full_text'])} characters")
         print(f"📝 Sentences: {len(text_data['sentences'])}")
 
