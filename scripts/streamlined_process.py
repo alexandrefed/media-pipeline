@@ -14,6 +14,34 @@ Usage:
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
+
+
+def extract_youtube_video_id(url: str) -> str:
+    """Extract the video ID from any common YouTube URL form.
+
+    Handles youtube.com/watch?v=ID, youtu.be/ID, youtube.com/shorts/ID,
+    youtube.com/embed/ID, and youtube.com/live/ID (all with optional query
+    strings). The old `url.split("v=")` approach broke on youtu.be links,
+    producing malformed folder names like `YYYYMMDD--https:/youtu.be/...`.
+    """
+    parsed = urlparse(url)
+    host = parsed.netloc.lower()
+
+    if "youtu.be" in host:
+        return parsed.path.lstrip("/").split("/")[0]
+
+    if "youtube.com" in host:
+        qs = parse_qs(parsed.query)
+        if "v" in qs and qs["v"]:
+            return qs["v"][0]
+        # /shorts/ID, /embed/ID, /live/ID
+        parts = [p for p in parsed.path.split("/") if p]
+        if len(parts) >= 2 and parts[0] in ("shorts", "embed", "live"):
+            return parts[1]
+
+    # Fallback: last path segment or raw string, minus any query
+    return parsed.path.rstrip("/").split("/")[-1].split("?")[0] or url
 
 
 def run_command(cmd: str, description: str) -> tuple[bool, str]:
@@ -56,7 +84,7 @@ def main():
     print("  ✓ Generate MCP KB Memory-ready content")
     print("\n" + "=" * 80)
 
-    video_id = youtube_url.split("v=")[-1].split("&")[0]
+    video_id = extract_youtube_video_id(youtube_url)
 
     # Step 1: Extract transcript
     success, output = run_command(
@@ -78,7 +106,7 @@ def main():
         meta_ok, meta_out = run_command(meta_cmd, "Fetching video metadata")
         if not meta_ok:
             print(f"❌ Cannot fetch metadata for {youtube_url}")
-            return
+            sys.exit(1)
 
         parts = meta_out.strip().split("|||")
         upload_date = parts[0] if len(parts) > 0 else "00000000"
@@ -117,7 +145,9 @@ def main():
         )
         if not cap_ok or not vtt_file.exists():
             print(f"❌ No captions available for {youtube_url}")
-            return
+            print("   → If this is Instagram/X/Loom, use the browser/CDN fallback:")
+            print("     .claude/agents/references/*-fallback.md")
+            sys.exit(1)
 
         # Convert VTT to text
         vtt_ok, _ = run_command(
@@ -126,14 +156,15 @@ def main():
         )
         if not vtt_ok:
             print(f"❌ VTT conversion failed")
-            return
+            sys.exit(1)
     else:
         video_dir = video_dirs[0]
 
     raw_file = video_dir / "transcript_raw.txt"
     if not raw_file.exists():
         print(f"❌ transcript_raw.txt not found in {video_dir}")
-        return
+        print("   Extraction produced no transcript — exiting non-zero (do not trust a 0 exit).")
+        sys.exit(1)
 
     print(f"   📁 Video folder: {video_dir}")
     print(f"   📄 Raw transcript: {raw_file}")
@@ -144,7 +175,7 @@ def main():
         "Step 2/4: Auto-enhancing transcript (174+ corrections)",
     )
     if not success:
-        return
+        sys.exit(1)
 
     # auto_enhancer writes transcript_raw_auto_enhanced.txt next to input — rename it
     enhanced_legacy = video_dir / "transcript_raw_auto_enhanced.txt"

@@ -293,6 +293,28 @@ If Firefox cookies fail, try Chrome:
 yt-dlp --cookies-from-browser chrome -x --audio-format mp3 -o "workspace/audio/%(id)s.%(ext)s" "{URL}"
 ```
 
+#### ⚠️ Verify success — do NOT trust exit code alone
+
+yt-dlp (and `main.py streamlined`) can **exit `0` while printing an error and producing no audio/folder**. Instagram in particular returns "empty media" behind its auth wall. Always verify before proceeding:
+
+```bash
+# After extraction, confirm the audio file actually exists and is non-trivial
+AUDIO="workspace/audio/${VIDEO_ID}.mp3"
+if [ ! -s "$AUDIO" ] || [ "$(stat -c%s "$AUDIO" 2>/dev/null || echo 0)" -lt 10000 ]; then
+  echo "Extraction produced no usable audio — falling back."
+fi
+```
+
+If extraction failed (empty media, auth error, or no audio), **switch to the platform's browser/CDN fallback** — these are proven, crystallized paths:
+
+| Platform | Failure signal | Fallback doc |
+|----------|---------------|--------------|
+| Instagram | "Instagram sent an empty media response", "No csrf token" | `references/instagram-browser-cdn-fallback.md` |
+| X/Twitter | exits 0 but no spoken transcript (header only) | `references/x-twitter-audio-transcription-fallback.md` |
+| Loom | `loom.com/share/<id>` (not first-class) | `references/loom-manual-fallback.md` |
+
+Read the matching reference doc in `.claude/agents/references/` and follow it. The Instagram fallback: open the reel in a browser, scrape `og:` metadata + caption, probe `performance.getEntriesByType('resource')` for `.mp4` CDN URLs, strip range params (`bytestart`/`byteend`/`efg`), download candidates, `ffprobe` to find the AAC audio-only stream, then transcribe that with faster-whisper. Then resume at Phase 3.
+
 ### Phase 2: Transcribe with faster-whisper
 
 ```bash
@@ -581,7 +603,7 @@ cp .env.example .env
 # 4. Set persistent env vars (add to ~/.bashrc or ~/.zshrc)
 echo 'export AI_KB_PROJECT_DIR=~/projects/workflows/media-pipeline/' >> ~/.bashrc
 echo 'export MEMORY_TOKEN=<your-unified-memory-token>' >> ~/.bashrc
-echo 'export MEMORY_BASE_URL=http://85.25.172.47:8085' >> ~/.bashrc
+echo 'export MEMORY_BASE_URL=http://127.0.0.1:8085' >> ~/.bashrc  # unified-memory runs locally on gaming-PC
 source ~/.bashrc
 ```
 
@@ -595,4 +617,20 @@ For Hermes integration, see `docs/HERMES_SETUP.md`.
 - **Instagram auth**: yt-dlp reads Firefox cookies from the local Firefox profile (`~/.mozilla/firefox/` on Linux). Firefox must be installed and logged in to Instagram on the gaming-PC
 - **faster-whisper**: GPU-accelerated Whisper transcription. Uses `large-v3-turbo` with INT8 quantization and Silero VAD. Requires `faster-whisper` pip package and NVIDIA GPU with CUDA.
 - **Model**: This agent runs on claude-sonnet-4-6 (Claude Code path). Hermes path uses the model configured in `~/.hermes/config.yaml`.
-- **VPS pgvector**: Auto-embedded via unified-memory API on memory_store. 768-dim embeddings via nomic-embed-text (Ollama), schema `ai_kb`
+- **pgvector**: Auto-embedded via unified-memory API on memory_store. 768-dim embeddings via nomic-embed-text (Ollama), schema `ai_kb`
+
+---
+
+## §7 — Fallback & Pitfall References
+
+When the standard path fails, consult these proven fallback docs in `.claude/agents/references/`. They were crystallized by the Hermes self-improvement Curator on gaming-PC through repeated real-world processing, then ported into the repo (2026-08-02) so the Claude Code path benefits too.
+
+| Doc | Use when |
+|-----|----------|
+| `instagram-browser-cdn-fallback.md` | yt-dlp returns "empty media"/"No csrf token" on an Instagram reel |
+| `x-twitter-audio-transcription-fallback.md` | X/Twitter extraction exits 0 but yields no spoken transcript |
+| `loom-manual-fallback.md` | Processing a `loom.com/share/<id>` URL (not first-class) |
+| `youtube-duplicate-caption-cleanup.md` | Enhanced transcript has repeated 2-3x phrase artifacts |
+| `youtube-streamlined-pipeline-pitfalls.md` | Step-3 pause, youtu.be ID parsing, malformed duplicate folders |
+
+**Universal rule (learned the hard way)**: extraction commands can exit `0` while producing nothing. Never trust exit code alone — always verify the video folder and a non-trivial `transcript_raw.txt`/audio file exist before proceeding.

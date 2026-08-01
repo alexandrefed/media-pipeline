@@ -4,20 +4,23 @@
 A personal knowledge ingestion pipeline. URLs (YouTube, Instagram) are sent via Telegram or CLI, processed through LLM analysis, and stored across 5 targets for retrieval by any agent.
 
 ## Current state
-- **66+ videos processed** in `workspace/videos/` with human-readable folder names
-- **Telegram pipeline**: Hermes gateway on gaming-PC (v0.14.0), needs config (Telegram disabled, bot token commented out, SOUL.md dispatch rules reference dead OpenClaw tools)
-- **Mac CLI working**: `uv run python main.py streamlined "URL"` + Sonnet agent analysis
-- **Summary generation**: Now LLM-written by the agent from analysis.json (replaced broken regex script `generate_detailed_summary.py`, archived 2026-05-24)
-- **Unified-memory**: 40+ video memories stored, searchable via `memory_search`
-- **QMD**: Full-text search over transcripts on gaming-PC (`media-pipeline` collection)
-- **Neo4j graph extraction**: Disabled per V2 vision (will use neo4j-brain deterministic indexer)
-- **Dead code cleanup done**: 5 deprecated scripts + 7 unused modules archived, n8n/OpenClaw refs removed
+- **70+ videos processed** in `workspace/videos/` with human-readable folder names
+- **Hermes gateway running** on gaming-PC (v0.14.0): Telegram enabled, SOUL.md with media dispatch, unified-memory plugin built, media-pipeline SKILL.md seeded for self-improvement
+- **Hermes self-improvement CONFIRMED in production**: Curator auto-crystallized fallback skills at `~/.hermes/skills/media/media-pipeline/references/` (now 8 files incl. per-case ones). The 5 general ones are now ALSO ported into the repo at `.claude/agents/references/` (2026-08-02) so the Mac/Claude Code path benefits.
+- **yt-dlp updated** 2026.3.17 → 2026.7.4 on gaming-PC (uv tool + venv library); pyproject floor bumped to `>=2026.7.4`
+- **Hermes CLI (`hermes -z`) verified E2E**: extract → enhance → analyze → summarize → store (5 videos processed successfully)
+- **Mac CLI working**: `uv run python main.py streamlined "URL"` with fallback to yt-dlp+vtt_to_text.py
+- **Summary generation**: LLM-written by agent from analysis.json (no regex script)
+- **Auto-enhancer fixed**: word-boundary regex matching, 4 bad corrections removed (file→FAL, etc.)
+- **Extraction fixed**: text_reconstructor.py duration filter removed (YouTube VTT format change), div-by-zero guarded
+- **Video folder dedup**: reuses existing folder by video ID instead of creating duplicates
+- **Unified-memory**: 45+ video memories stored. API runs locally on gaming-PC at `http://127.0.0.1:8085` (not VPS)
+- **QMD**: Vector + full-text search over transcripts, 150 collections, embeddings via embeddinggemma (Ollama)
+- **Neo4j graph extraction**: Disabled per V2 vision
 
 ## What's blocked
-- **Hermes media agent not configured** — Telegram disabled, no unified-memory plugin, SOUL.md needs media pipeline instructions (see plan Phase 3)
-- Python scripts (`youtube_processor.py`, `auto_enhancer.py`) still write to project root instead of `workspace/videos/{folder}/` — agent moves files after extraction
-- Instagram image posts (no audio) not supported yet
-- faster-whisper upgrade pending: large-v3 → large-v3-turbo with VAD (see plan Phase 4)
+- **Telegram E2E not yet tested** — Hermes gateway running, CLI path verified, awaiting first Telegram message test
+- Instagram image posts (no audio) not supported yet — but Instagram *reels* now work via the browser/CDN audio fallback (documented in `.claude/agents/references/instagram-browser-cdn-fallback.md`; yt-dlp fails on IG auth wall, agent scrapes CDN .mp4 + Whisper)
 - Phase 2 (spaced repetition) and Phase 3 (channel watching) not started
 
 ## What to read first
@@ -41,9 +44,17 @@ A personal knowledge ingestion pipeline. URLs (YouTube, Instagram) are sent via 
 8. Output: `workspace/videos/{YYYYMMDD}--{ID}--{platform}--{channel}--{title}/`
 
 ## Key decisions (recent)
+- 2026-08-02: Ported Hermes' 5 learned fallback skills into repo `.claude/agents/references/`; added exit-0 verification guard + browser/CDN fallback pointers to `media-ingestion-agent.md` §3b + new §7; fixed `streamlined_process.py` youtu.be ID parsing (urlparse-based `extract_youtube_video_id`) + made failure paths exit non-zero; updated yt-dlp 2026.3.17→2026.7.4
+- 2026-07-14: Confirmed Hermes self-improvement working — Instagram reel (DavtYgRReBW) recovered from yt-dlp empty-media/auth failure via crystallized browser/CDN audio fallback skill (learned from prior reel DYz5-rtovGj on 2026-05-26). 5 fallback skills now exist in Hermes skill library. Curator refusal-guard also observed working (won't blind-patch skills).
+- 2026-06-01: CONTEXT.md updated — unified-memory on gaming-PC localhost:8085, all 5 videos stored, blocked items cleared
+- 2026-05-25: Unified-memory API confirmed on gaming-PC localhost:8085 (not VPS) — fixed Hermes .env, pushed all 5 pending videos
+- 2026-05-24: Auto-enhancer fixed — word-boundary regex, removed file→FAL/cat→Cat bad corrections
+- 2026-05-24: VTT extraction fixed — removed broken `duration < 0.1` filter in text_reconstructor.py, added `vtt_to_text.py` utility, streamlined_process.py fallback path
+- 2026-05-24: Video folder dedup — both youtube_processor.py and streamlined_process.py check `*--{VIDEO_ID}--*` before creating folders
+- 2026-05-24: Hermes media agent configured — SOUL.md, AGENTS.md, unified-memory plugin, media-pipeline SKILL.md, Telegram enabled, gateway running
 - 2026-05-24: Summary generation switched from regex script to LLM-written — `generate_detailed_summary.py` archived
 - 2026-05-24: Dead code cleanup — 5 deprecated scripts, 7 unused modules archived, n8n/OpenClaw refs removed
-- 2026-05-16: OpenClaw → Hermes migration on gaming-PC (Hermes v0.14.0, media agent config pending)
+- 2026-05-16: OpenClaw → Hermes migration on gaming-PC (Hermes v0.14.0)
 - 2026-04-14: Neo4j graph extraction OFF — V2 uses deterministic neo4j-brain indexer
 - 2026-04-12: Workspace reorganized to per-video folders with human-readable names
 - 2026-03-29: n8n removed
