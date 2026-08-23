@@ -4,7 +4,15 @@
 A personal knowledge ingestion pipeline. URLs (YouTube, Instagram) are sent via Telegram or CLI, processed through LLM analysis, and stored across 5 targets for retrieval by any agent.
 
 ## Current state
-- **127 videos processed** in `workspace/videos/` with human-readable folder names
+- **128 videos on the gaming-PC corpus** (`~/projects/workflows/media-pipeline/workspace/videos/`
+  — the LIVE one; the Mac repo's `workspace/videos/` is a stale fork, do not read a count from it).
+  Reconciled 2026-08-23: **102 retrievable from the memory store** — the only number that answers
+  what the pipeline is for — 108 with analysis, 98 with a summary, 84 complete on every stage.
+  Regenerate with `python3 scripts/reconcile_ledger.py` (add `--write` to rewrite the ledger).
+- **`processed_at` means every stage finished**, and is written LAST by
+  `src/pipeline/completion.py`. It used to be stamped by step 1 of 4, which is how videos with a
+  transcript and nothing else looked processed. The early stamp is now `transcript_extracted_at`;
+  incomplete videos carry `incomplete_stages` instead of silence.
 - **Hermes gateway running** on gaming-PC (v0.14.0): Telegram enabled, SOUL.md with media dispatch, unified-memory plugin built, media-pipeline SKILL.md seeded for self-improvement
 - **Hermes self-improvement CONFIRMED in production**: Curator auto-crystallized fallback skills at `~/.hermes/skills/media/media-pipeline/references/` (now 8 files incl. per-case ones). The 5 general ones are now ALSO ported into the repo at `.claude/agents/references/` (2026-08-02) so the Mac/Claude Code path benefits.
 - **yt-dlp updated** 2026.3.17 → 2026.7.4 on gaming-PC (uv tool + venv library); pyproject floor bumped to `>=2026.7.4`
@@ -60,3 +68,14 @@ A personal knowledge ingestion pipeline. URLs (YouTube, Instagram) are sent via 
 - 2026-04-12: Workspace reorganized to per-video folders with human-readable names
 - 2026-03-29: n8n removed
 - 2026-03-29: Telegram chosen over WhatsApp for bidirectional intake + delivery
+
+---
+
+## Direction (Alexandre, 2026-08-22)
+
+Part of agentic-platform, per his own read — not a separate cockpit tab.
+
+- **Cadence:** folded into agentic-platform
+- **Next concrete step:** fold; no standalone session
+
+_Captured from Alexandre's own per-project review. Full portfolio view:_ `dev/platform/unified-memory/docs/SESSION-DISPOSITION.md`
