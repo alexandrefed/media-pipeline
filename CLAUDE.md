@@ -20,14 +20,13 @@ uv run python main.py extract "URL"        # Extract transcript only
 | Task | Go to | Read first |
 |------|-------|-----------|
 | Process a video (Mac) | Use @media-ingestion-agent | `.claude/agents/media-ingestion-agent.md` |
-| Process via Telegram | Send URL to @vecia_media_pipeline_bot | Gaming-PC handles automatically |
+| Process via Telegram | Send URL to @vecia_media_pipeline_bot | Gaming-PC Hermes handles automatically |
 | Pipeline architecture | `.claude/agents/` | `media-ingestion-agent.md` (the spec) |
+| Extraction fallbacks (IG/X/Loom) | `.claude/agents/references/` | `*-fallback.md` |
 | Dual pipeline routing | `docs/` | `DUAL_PIPELINE_GUIDE.md` |
+| Research + decisions | `docs/research/` + `docs/decisions/` | `INDEX.md` first |
 | Planning / roadmap | `.planning/` | `ROADMAP.md`, `PROJECT.md` |
-| BMAD artifacts | `_bmad-output/planning-artifacts/` | `prd.md`, `epics.md` |
-| Legacy / old workflows | `archive/` | Don't read unless investigating history |
-| Source code | `src/` | `pipeline/`, `processing/` |
-| Scripts | `scripts/` | `streamlined_process.py`, `store_in_mcp_kb.py` |
+| Source code / scripts | `src/`, `scripts/` | `streamlined_process.py`, `store_in_mcp_kb.py` |
 
 ## Video Folder Convention
 
@@ -42,14 +41,8 @@ All processed content lives in `workspace/videos/` with this naming:
 - Index: `workspace/index.json`
 
 ## Storage Targets (per video)
-1. **Filesystem**: `workspace/videos/{folder}/` (Mac + gaming-PC via Mutagen)
-2. **Unified-memory**: pgvector semantic search (`/shared/projects/youtube-kb/`)
-3. **QMD**: Full-text search on gaming-PC (`media-pipeline` collection)
-4. **Notion**: Notes synced via unified-memory heartbeat
-5. **Neo4j**: Graph extraction (currently disabled per V2 vision)
+Filesystem (`workspace/videos/`, Mutagen-synced) · unified-memory pgvector (gaming-PC `100.112.33.86:8085`) · QMD full-text (`media-pipeline` collection) · Notion (via unified-memory) · Neo4j (disabled per V2).
 
 ## Conventions
-- Package manager: uv (never pip)
-- No n8n — Hermes gateway on gaming-PC handles Telegram intake
-- `.claude/` not synced via Mutagen — push agent updates via `scp` to gaming-PC
-- Gaming-PC SSH: `ssh gaming-pc`
+- Package manager: uv (never pip). No n8n — Hermes gateway handles Telegram intake.
+- `.claude/` not synced via Mutagen — push agent updates via `scp` to gaming-PC (`ssh gaming-pc`).

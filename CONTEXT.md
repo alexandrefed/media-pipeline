@@ -4,7 +4,7 @@
 A personal knowledge ingestion pipeline. URLs (YouTube, Instagram) are sent via Telegram or CLI, processed through LLM analysis, and stored across 5 targets for retrieval by any agent.
 
 ## Current state
-- **70+ videos processed** in `workspace/videos/` with human-readable folder names
+- **127 videos processed** in `workspace/videos/` with human-readable folder names
 - **Hermes gateway running** on gaming-PC (v0.14.0): Telegram enabled, SOUL.md with media dispatch, unified-memory plugin built, media-pipeline SKILL.md seeded for self-improvement
 - **Hermes self-improvement CONFIRMED in production**: Curator auto-crystallized fallback skills at `~/.hermes/skills/media/media-pipeline/references/` (now 8 files incl. per-case ones). The 5 general ones are now ALSO ported into the repo at `.claude/agents/references/` (2026-08-02) so the Mac/Claude Code path benefits.
 - **yt-dlp updated** 2026.3.17 → 2026.7.4 on gaming-PC (uv tool + venv library); pyproject floor bumped to `>=2026.7.4`
@@ -14,7 +14,7 @@ A personal knowledge ingestion pipeline. URLs (YouTube, Instagram) are sent via 
 - **Auto-enhancer fixed**: word-boundary regex matching, 4 bad corrections removed (file→FAL, etc.)
 - **Extraction fixed**: text_reconstructor.py duration filter removed (YouTube VTT format change), div-by-zero guarded
 - **Video folder dedup**: reuses existing folder by video ID instead of creating duplicates
-- **Unified-memory**: 45+ video memories stored. API runs locally on gaming-PC at `http://127.0.0.1:8085` (not VPS)
+- **Unified-memory**: video memories stored. API runs on gaming-PC — tailnet `http://100.112.33.86:8085` or `http://127.0.0.1:8085` (NOT the old VPS `85.25.172.47`). `unified_memory_client.py` default is now the tailnet address.
 - **QMD**: Vector + full-text search over transcripts, 150 collections, embeddings via embeddinggemma (Ollama)
 - **Neo4j graph extraction**: Disabled per V2 vision
 
@@ -44,6 +44,7 @@ A personal knowledge ingestion pipeline. URLs (YouTube, Instagram) are sent via 
 8. Output: `workspace/videos/{YYYYMMDD}--{ID}--{platform}--{channel}--{title}/`
 
 ## Key decisions (recent)
+- 2026-08-23: `/clief update` — refreshed CLAUDE.md (added Research+decisions + Extraction-fallbacks routing rows, trimmed to 48 lines), created `docs/research/` + `docs/decisions/` with INDEX stubs, refreshed video count (127), noted unified-memory tailnet default, flagged stale `/alex/openclaw/videos/` namespace (kept as-is to avoid fragmentation)
 - 2026-08-02: Ported Hermes' 5 learned fallback skills into repo `.claude/agents/references/`; added exit-0 verification guard + browser/CDN fallback pointers to `media-ingestion-agent.md` §3b + new §7; fixed `streamlined_process.py` youtu.be ID parsing (urlparse-based `extract_youtube_video_id`) + made failure paths exit non-zero; updated yt-dlp 2026.3.17→2026.7.4
 - 2026-07-14: Confirmed Hermes self-improvement working — Instagram reel (DavtYgRReBW) recovered from yt-dlp empty-media/auth failure via crystallized browser/CDN audio fallback skill (learned from prior reel DYz5-rtovGj on 2026-05-26). 5 fallback skills now exist in Hermes skill library. Curator refusal-guard also observed working (won't blind-patch skills).
 - 2026-06-01: CONTEXT.md updated — unified-memory on gaming-PC localhost:8085, all 5 videos stored, blocked items cleared

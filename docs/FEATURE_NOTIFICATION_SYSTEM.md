@@ -1,7 +1,14 @@
 # Feature: Knowledge Delivery & Notification System
 
-**Status**: Archived implementation, needs BMAD discussion for v2
+**Status**: SUPERSEDED — historical reference only.
 **Previous implementation**: `archive/notifications-v1/`
+
+> ⚠️ **Stale as of 2026-03-29**: the n8n webhook layer described below was removed. The
+> `n8n.vecia.fr/webhook/video-processed` endpoint no longer exists. Telegram delivery is
+> now handled by the Hermes gateway on gaming-PC, not n8n or a standalone notifier. Read
+> this only for the v1 formatter design (AI-Tools / Sports); ignore the n8n integration
+> points. Delivery reminders (spaced repetition, weekly digest) are Phase 2/3 roadmap work,
+> not yet built.
 
 ## What Worked (v1)
 
