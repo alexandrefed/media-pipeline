@@ -712,10 +712,23 @@ def main():
         memories = storage.generate_all_memories()
         metadata = storage._extract_metadata()
 
-        if dry_run or not API_AVAILABLE:
-            # Old behavior: print for manual storage
-            if not API_AVAILABLE and not dry_run:
-                print("⚠️  API client unavailable, falling back to dry-run mode")
+        if not API_AVAILABLE and not dry_run:
+            # NOT a friendly fallback. The caller asked to STORE; printing
+            # instead and exiting 0 is how `SEI_qIW4o2c` reported success while
+            # writing nothing to memory — the missing dependency was httpx, and
+            # the only symptom was a ⚠️ in output nobody reads. A store that
+            # cannot store must fail loudly.
+            print(
+                "❌ Storage client unavailable (unified_memory_client did not "
+                "import — usually a missing httpx in the interpreter you ran "
+                "this with). NOTHING WAS STORED. Re-run with the project venv "
+                "(.venv/bin/python) or pass --dry-run if printing is what you "
+                "actually wanted."
+            )
+            storage.print_memories_for_manual_storage(memories)
+            sys.exit(2)
+
+        if dry_run:
             storage.print_memories_for_manual_storage(memories)
         else:
             # NEW: Store via unified-memory API
@@ -727,8 +740,9 @@ def main():
 
             # 1. Store one NOTE (syncs to Notion) — STORE-02
             note_content = _build_note_content(storage, memories)
+            area = storage.analysis_data.get("area", "vecia")
             note_metadata = {
-                "area": "vecia",
+                "area": area,
                 "video_id": storage.video_id,
                 "source": "youtube",
                 "url": metadata["video_url"],
@@ -758,24 +772,42 @@ def main():
             except Exception as e:
                 print(f"⚠️  Note storage failed: {e}")
 
-            # 2. Store one MEMORY (for agent retrieval)
-            memory_content = _build_memory_content(memories)
-            memory_tags = memories[0]["tags"] if memories else []
-            memory_metadata = {
-                "video_id": storage.video_id,
-                "area": "vecia",
-                "type": "video-knowledge",
-            }
-            try:
-                mem_result = store_memory(
-                    content=memory_content,
-                    tags=memory_tags,
-                    namespace="/alex/openclaw/videos/",
-                    metadata=memory_metadata,
-                )
-                print(f"✅ Memory stored (agent retrieval): {mem_result.get('id', 'ok')}")
-            except Exception as e:
-                print(f"⚠️  Memory storage failed: {e}")
+            # 2. Store EACH SECTION as its own memory (for agent retrieval).
+            #
+            # This used to concatenate every section into one blob via
+            # _build_memory_content(), which contradicted this script's own
+            # docstring ("creates 5-7 specialized memories per video instead of
+            # 1") and measurably destroyed retrieval: SEI_qIW4o2c's single blob
+            # did not surface for "three-tier orchestration / blast radius is
+            # the box", while an older video's atoms did. One dense memory
+            # competes badly against focused ones in a semantic ranking, so the
+            # blob is present-but-unfindable — ingested into nothing, with a
+            # row in the ledger saying otherwise.
+            stored, failed = 0, []
+            for section in memories:
+                try:
+                    store_memory(
+                        content=section["content"],
+                        tags=section.get("tags", []),
+                        namespace="/alex/openclaw/videos/",
+                        metadata={
+                            "video_id": storage.video_id,
+                            "area": area,
+                            "type": section.get("type", "video-knowledge"),
+                        },
+                    )
+                    stored += 1
+                except Exception as exc:  # noqa: BLE001
+                    failed.append(f"{section.get('type', '?')}: {exc}")
+            print(f"✅ {stored}/{len(memories)} memories stored (agent retrieval)")
+            if failed:
+                # A partial write is the worst outcome to report as success: the
+                # ledger would say retrievable and half the material would be
+                # missing.
+                print(f"❌ {len(failed)} section(s) FAILED to store:")
+                for line in failed[:10]:
+                    print(f"   - {line}")
+                sys.exit(4)
 
         print(f"\n✅ Generated {len(memories)} sections for video {storage.video_id}")
 

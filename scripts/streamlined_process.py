@@ -133,7 +133,9 @@ def main():
         metadata = {
             "video_id": video_id, "title": title, "channel": channel,
             "platform": "yt", "upload_date": upload_date, "url": youtube_url,
-            "processed_at": datetime.now(timezone.utc).isoformat(),
+            # See src/pipeline/completion.py: this is step 1 of 4, so the only
+            # honest thing to record here is that the transcript was extracted.
+            "transcript_extracted_at": datetime.now(timezone.utc).isoformat(),
         }
         (video_dir / "metadata.json").write_text(json.dumps(metadata, indent=2))
 
@@ -221,8 +223,15 @@ def main():
             print("   Store in MCP KB Memory using: mcp__unified-memory__memory_store")
             print("=" * 80 + "\n")
     else:
-        print("\n⏸️  Workflow paused at Step 3")
-        print("   Run the command above to continue with agent analysis")
+        # NON-ZERO. This branch used to print a friendly pause and exit 0, which
+        # is why half-processed videos were indistinguishable from finished ones
+        # to every caller, log and cron wrapper. A run that stopped at step 3 did
+        # not succeed; the absence of an error was the whole bug.
+        print("\n⏸️  Workflow STOPPED at Step 3 — no analysis.json was produced.")
+        print("   Run the command above to continue with agent analysis.")
+        print(f"   Until then {video_dir.name} has a transcript and nothing else,")
+        print("   and it will NOT be stamped processed_at.")
+        sys.exit(3)
 
 
 if __name__ == "__main__":

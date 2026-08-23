@@ -235,6 +235,16 @@ class YouTubeProcessor:
         text_data = self._reconstruct_text(raw_data)
 
         video_id = raw_data["metadata"]["id"]
+        # yt-dlp can return a full URL as the "id" for non-YouTube sources
+        # (X/Twitter, Instagram). Used raw in a folder name it breaks the path:
+        # `Path(...) / folder_name` turns its "/" into nested dirs and keeps ":"
+        # verbatim, which is how `workspace/videos/20260708--https:/` got created
+        # four separate times and then persisted across every later run. Sanitize
+        # to one filesystem-safe segment for the folder; the raw id still goes
+        # into metadata below. Clean YouTube ids are unaffected.
+        safe_id = (
+            _re.sub(r"[^A-Za-z0-9._-]", "-", str(video_id)).strip("-")[:64] or "unknown"
+        )
         title = raw_data["metadata"].get("title", "unknown")
         channel = raw_data["metadata"].get("channel_name", "unknown")
         published = raw_data["metadata"].get("published_date", "")
@@ -250,11 +260,11 @@ class YouTubeProcessor:
         title_slug = "-".join(_re.sub(r"-+", "-", title_slug).strip("-").split("-")[:8])
 
         videos_dir = _Path("workspace") / "videos"
-        existing = list(videos_dir.glob(f"*--{video_id}--*"))
+        existing = list(videos_dir.glob(f"*--{safe_id}--*"))
         if existing:
             video_dir = existing[0]
         else:
-            folder_name = f"{upload_date}--{video_id}--yt--{channel_slug}--{title_slug}"
+            folder_name = f"{upload_date}--{safe_id}--yt--{channel_slug}--{title_slug}"
             video_dir = videos_dir / folder_name
             video_dir.mkdir(parents=True, exist_ok=True)
 
@@ -277,7 +287,16 @@ class YouTubeProcessor:
             "platform": "yt",
             "upload_date": upload_date,
             "url": url,
-            "processed_at": datetime.now(timezone.utc).isoformat(),
+            # NOT `processed_at`. This runs at step 1 of 4, the instant the raw
+            # transcript lands — enhancement, analysis, summary, indexing and
+            # the memory write have not happened and may never happen (step 3
+            # is not automated; the workflow prints a command and exits 0). A
+            # stamp called "processed" written here is simply false, and it is
+            # what made SEI_qIW4o2c look ingested while reaching nothing.
+            # `processed_at` is written LAST, by
+            # src.pipeline.completion.stamp_if_complete, after the artifacts are
+            # verified to exist and the material is retrievable from memory.
+            "transcript_extracted_at": datetime.now(timezone.utc).isoformat(),
         }
         (video_dir / "metadata.json").write_text(json.dumps(metadata, indent=2))
 
