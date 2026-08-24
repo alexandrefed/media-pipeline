@@ -6,10 +6,13 @@ which contains 174+ mapped transcription errors and channel-specific patterns.
 """
 
 import json
+import logging
 import re
 from pathlib import Path
 
 from pydantic import BaseModel
+
+logger = logging.getLogger(__name__)
 
 
 class EnhancementResult(BaseModel):
@@ -34,8 +37,75 @@ class AutoEnhancer:
         self.kb_path = Path(knowledge_base_path)
         self.knowledge_base = self._load_knowledge_base()
         self.corrections = self.knowledge_base.get("transcription_corrections", {})
-        self.common_errors = self.corrections.get("common_errors", {})
         self.contextual_corrections = self.corrections.get("contextual_corrections", {})
+        self.common_errors, self.skipped_common_words = self._guard_common_words(
+            self.corrections.get("common_errors", {}),
+            self.corrections.get("allow_common_words", []),
+        )
+
+    # Words the ASR genuinely mangles are nonsense tokens ("aents", "clawed.md").
+    # A rule whose left-hand side is an ORDINARY ENGLISH WORD does not fix a
+    # mis-transcription — it destroys correct prose everywhere that word appears.
+    # That is exactly how "file"/"value" -> "FAL" silently corrupted 39 of 100
+    # enhanced transcripts before it was caught in May 2026, and how "zero" -> "v0"
+    # went on doing the same thing for three more months (58 legitimate uses of
+    # "zero" in the raw corpus; 67 manufactured "v0" where the raw had none).
+    #
+    # Removing the bad rules does not stop the next one being added, so the rule
+    # shape itself is now refused: a single-token correction whose LHS is in the
+    # system dictionary is SKIPPED unless it is explicitly listed under
+    # `transcription_corrections.allow_common_words`. Adding one is then a
+    # deliberate, reviewable act instead of an unnoticed line in a data file.
+    _DICT_PATHS = ("/usr/share/dict/words", "/usr/share/dict/american-english")
+
+    @classmethod
+    def _english_words(cls) -> set[str]:
+        for path in cls._DICT_PATHS:
+            try:
+                with open(path, encoding="utf-8", errors="ignore") as f:
+                    return {w.strip().lower() for w in f if w.strip()}
+            except OSError:
+                continue
+        return set()
+
+    @classmethod
+    def _guard_common_words(
+        cls, common_errors: dict, allow: list
+    ) -> tuple[dict, list[str]]:
+        """Drop single-word corrections that would rewrite ordinary English."""
+        words = cls._english_words()
+        if not words:
+            # Fail open, but say so — a silent no-op guard is worse than none.
+            logger.warning(
+                "auto-enhancer: no system dictionary found at %s — the common-word "
+                "guard is INACTIVE; corrections are applied unchecked.",
+                " or ".join(cls._DICT_PATHS),
+            )
+            return dict(common_errors), []
+
+        allowed = {a.lower() for a in allow}
+        kept, skipped = {}, []
+        for error, correction in common_errors.items():
+            is_single_token = " " not in error.strip()
+            rewrites_word = error.lower() != str(correction).lower()
+            if (
+                is_single_token
+                and rewrites_word
+                and error.lower() in words
+                and error.lower() not in allowed
+            ):
+                skipped.append(error)
+                continue
+            kept[error] = correction
+        if skipped:
+            logger.warning(
+                "auto-enhancer: skipped %d correction(s) whose left-hand side is an "
+                "ordinary English word (%s). Add to "
+                "transcription_corrections.allow_common_words to apply them anyway.",
+                len(skipped),
+                ", ".join(repr(s) for s in sorted(skipped)),
+            )
+        return kept, skipped
 
     def _load_knowledge_base(self) -> dict:
         """Load the processing knowledge base."""
