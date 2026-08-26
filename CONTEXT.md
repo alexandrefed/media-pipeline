@@ -24,11 +24,11 @@ A personal knowledge ingestion pipeline. URLs (YouTube, Instagram) are sent via 
 - **Video folder dedup**: reuses existing folder by video ID instead of creating duplicates
 - **Unified-memory**: video memories stored. API runs on gaming-PC — tailnet `http://100.112.33.86:8085` or `http://127.0.0.1:8085` (NOT the old VPS `85.25.172.47`). `unified_memory_client.py` default is now the tailnet address.
 - **QMD**: Vector + full-text search over transcripts, 150 collections, embeddings via embeddinggemma (Ollama)
+- **Instagram image carousels supported** (2026-08-26): pictures-with-text posts. Slide text comes from each `<img alt>` via a browser JS probe (no login, no download, no OCR); vision is the fallback only for auto-generated alts. Assembled by `scripts/ig_carousel_to_transcript.py` (`content_type: image-carousel`, no auto_enhancer — clean typed text). Doc: `.claude/agents/references/instagram-image-carousel.md`. Verified E2E on `Db6qLt_CJdq` (stored + retrievable).
 - **Neo4j graph extraction**: Disabled per V2 vision
 
 ## What's blocked
 - **Telegram E2E not yet tested** — Hermes gateway running, CLI path verified, awaiting first Telegram message test
-- Instagram image posts (no audio) not supported yet — but Instagram *reels* now work via the browser/CDN audio fallback (documented in `.claude/agents/references/instagram-browser-cdn-fallback.md`; yt-dlp fails on IG auth wall, agent scrapes CDN .mp4 + Whisper)
 - Phase 2 (spaced repetition) and Phase 3 (channel watching) not started
 
 ## What to read first
@@ -52,6 +52,7 @@ A personal knowledge ingestion pipeline. URLs (YouTube, Instagram) are sent via 
 8. Output: `workspace/videos/{YYYYMMDD}--{ID}--{platform}--{channel}--{title}/`
 
 ## Key decisions (recent)
+- 2026-08-26: Added Instagram image-carousel capability. Extraction via `<img alt>` browser probe (validated: IG surfaces full per-slide text as accessibility alt; no OCR/download needed), vision fallback for auto-alts. New `scripts/ig_carousel_to_transcript.py` + `references/instagram-image-carousel.md`; agent §3b gained a carousel detection gate. Carousels skip auto_enhancer (typed text, not ASR). Demoed on markbuildsbrands `Db6qLt_CJdq` → stored + retrievable, index 131.
 - 2026-08-23: `/clief update` — refreshed CLAUDE.md (added Research+decisions + Extraction-fallbacks routing rows, trimmed to 48 lines), created `docs/research/` + `docs/decisions/` with INDEX stubs, refreshed video count (127), noted unified-memory tailnet default, flagged stale `/alex/openclaw/videos/` namespace (kept as-is to avoid fragmentation)
 - 2026-08-02: Ported Hermes' 5 learned fallback skills into repo `.claude/agents/references/`; added exit-0 verification guard + browser/CDN fallback pointers to `media-ingestion-agent.md` §3b + new §7; fixed `streamlined_process.py` youtu.be ID parsing (urlparse-based `extract_youtube_video_id`) + made failure paths exit non-zero; updated yt-dlp 2026.3.17→2026.7.4
 - 2026-07-14: Confirmed Hermes self-improvement working — Instagram reel (DavtYgRReBW) recovered from yt-dlp empty-media/auth failure via crystallized browser/CDN audio fallback skill (learned from prior reel DYz5-rtovGj on 2026-05-26). 5 fallback skills now exist in Hermes skill library. Curator refusal-guard also observed working (won't blind-patch skills).

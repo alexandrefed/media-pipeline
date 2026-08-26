@@ -88,7 +88,8 @@ Parse the URL or input to determine the pipeline. Use these rules in order:
 | `youtube.com` or `youtu.be` + sports keywords* | SPORTS | `mutora` |
 | `youtube.com` or `youtu.be` (default) | AI TOOLS | `vecia` |
 | `vimeo.com` | VIMEO | `vecia` |
-| `instagram.com`, `fb.watch`, `tiktok.com`, `x.com/*/video` | INSTAGRAM | `vecia` (or `mutora` if sports) |
+| `instagram.com/p/<code>` that is an **image/carousel** (no video) | IG IMAGE CAROUSEL — see §3b "Image carousels" | `vecia` (or `mutora` if sports) |
+| `instagram.com`, `fb.watch`, `tiktok.com`, `x.com/*/video` (video) | INSTAGRAM | `vecia` (or `mutora` if sports) |
 | Local file path (`.mp3`, `.mp4`, `.wav`, `.m4a`) | WHISPER | `vecia` |
 | Ambiguous | Ask user | — |
 
@@ -259,6 +260,20 @@ After the script completes, proceed to **§4 — Unified Storage Fan-out**.
 ## §3b — Instagram / Non-YouTube Pipeline
 
 Use this path for Instagram, TikTok, Twitter/X videos, and other social media URLs.
+
+### First: is it an image carousel or a video?
+
+An `instagram.com/p/<code>` URL may be a **video** OR an **image carousel (pictures with text)**.
+Before the audio pipeline, check: open the URL in the browser — if the page has a `<video>`
+element or `.mp4` resources, it's a video (continue with the phases below). If it's picture
+slides with no video, it's an **image carousel** — do NOT try to transcribe audio. Follow
+`references/instagram-image-carousel.md`:
+
+- The slide text is in each `<img alt>` attribute (no OCR, no download for text graphics).
+- Assemble with `uv run python scripts/ig_carousel_to_transcript.py --input carousel.json`
+  (writes the folder + `transcript_raw.txt`; `content_type: image-carousel`).
+- **Skip `auto_enhancer`** — carousel text is clean typed text, not an ASR transcription.
+- Then resume at Phase 3 (Analyze) → summary → store, exactly like any other content.
 
 ### Phase 0: Create Video Folder
 
@@ -627,6 +642,7 @@ When the standard path fails, consult these proven fallback docs in `.claude/age
 
 | Doc | Use when |
 |-----|----------|
+| `instagram-image-carousel.md` | Instagram `/p/` post is picture slides with text (no video to transcribe) |
 | `instagram-browser-cdn-fallback.md` | yt-dlp returns "empty media"/"No csrf token" on an Instagram reel |
 | `x-twitter-audio-transcription-fallback.md` | X/Twitter extraction exits 0 but yields no spoken transcript |
 | `loom-manual-fallback.md` | Processing a `loom.com/share/<id>` URL (not first-class) |
