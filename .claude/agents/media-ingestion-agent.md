@@ -269,11 +269,15 @@ element or `.mp4` resources, it's a video (continue with the phases below). If i
 slides with no video, it's an **image carousel** — do NOT try to transcribe audio. Follow
 `references/instagram-image-carousel.md`:
 
-- The slide text is in each `<img alt>` attribute (no OCR, no download for text graphics).
+- **Read each slide with VISION**, navigating `?img_index=N` and screenshotting every slide.
+  Do NOT scrape `<img alt>` — Instagram's alt is auto-OCR that belongs to *other* images on the
+  page and will silently store the wrong post (this failed on `Db6qLt_CJdq`; see the doc).
+- Take the caption/creator/date from `og:description`; count slides from the dot indicator bar.
 - Assemble with `uv run python scripts/ig_carousel_to_transcript.py --input carousel.json`
   (writes the folder + `transcript_raw.txt`; `content_type: image-carousel`).
 - **Skip `auto_enhancer`** — carousel text is clean typed text, not an ASR transcription.
-- Then resume at Phase 3 (Analyze) → summary → store, exactly like any other content.
+- **Verify** the extracted slides match the rendered images before storing, then resume at
+  Phase 3 (Analyze) → summary → store.
 
 ### Phase 0: Create Video Folder
 

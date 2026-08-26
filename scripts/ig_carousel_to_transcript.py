@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Assemble an Instagram image-carousel into the standard video-folder layout.
 
-Instagram text carousels (pictures with text) carry each slide's text in the
-`<img alt>` accessibility attribute, retrievable via a browser JS probe with no
-login and no image download (see
-`.claude/agents/references/instagram-image-carousel.md`). This script takes the
-extracted slides + caption + metadata as JSON and writes the standard
-`workspace/videos/{folder}/` with `metadata.json` and `transcript_raw.txt`, so
-the rest of the pipeline (analyze → summarize → store) is unchanged.
+Instagram image carousels (pictures with text) are read slide-by-slide with the
+VISION model — navigate `?img_index=N` and screenshot each rendered slide (see
+`.claude/agents/references/instagram-image-carousel.md`). Do NOT scrape `<img alt>`:
+Instagram's alt is auto-OCR that belongs to other images on the page and silently
+ingests the wrong post. This script takes the vision-extracted slides + caption +
+metadata as JSON and writes the standard `workspace/videos/{folder}/` with
+`metadata.json` and `transcript_raw.txt`, so the rest of the pipeline
+(analyze → summarize → store) is unchanged.
 
 Unlike audio/video, carousel slide text is clean typed text, NOT an ASR
 transcription — so it is deliberately NOT run through `auto_enhancer` (whose
@@ -105,7 +106,7 @@ def main() -> int:
         "likes": data.get("likes", ""),
         "comments": data.get("comments", ""),
         "slide_count": len(slides),
-        "source": "instagram browser alt-text carousel extraction",
+        "source": "instagram browser vision carousel extraction (per-slide screenshot read)",
         "processed_at": datetime.now(timezone.utc).isoformat(),
     }
     (vdir / "metadata.json").write_text(json.dumps(metadata, indent=2, ensure_ascii=False))
