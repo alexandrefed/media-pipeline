@@ -10,7 +10,7 @@ Research notes and prior-art investigations for media-pipeline. One file per top
 ## Candidate material to migrate here
 
 These already exist as reference docs and could graduate into dated research notes
-via `/clief docs`:
+via `/icm docs`:
 
 - `docs/DUAL_PIPELINE_GUIDE.md` — AI-Tools vs Sports pipeline routing
 - `docs/PIPELINE_ENHANCEMENT_SUMMARY.md` — technical implementation-detail capture design

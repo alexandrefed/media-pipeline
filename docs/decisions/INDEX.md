@@ -20,5 +20,5 @@ graduate from.
 
 - **unified-memory namespace**: store scripts write to `/alex/openclaw/videos/` (legacy name from the OpenClaw era). Kept as-is to avoid fragmenting the ~127 existing videos across namespaces; retrieval works fine. Revisit only if consolidating namespaces project-wide.
 
-> To formalize any row above into a full ADR, run `/clief docs` — it migrates decisions
+> To formalize any row above into a full ADR, run `/icm docs` — it migrates decisions
 > into `NNNN-slug.md` files with frontmatter and pgvector indexing.
