@@ -5,7 +5,7 @@ Research notes and prior-art investigations for media-pipeline. One file per top
 
 | Date | Topic | File |
 |------|-------|------|
-| — | (no research docs migrated yet) | — |
+| 2026-10-02 | Stiles Dichter's "saved reels → skills" method vs our pipeline: we win on intake and search, he wins on turning content into skills | [2026-10-stiles-dichter-saved-to-skills.md](2026-10-stiles-dichter-saved-to-skills.md) |
 
 ## Candidate material to migrate here
 
