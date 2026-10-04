@@ -4,7 +4,7 @@ Date: 2026-10-04 · Task: 4f74d683 · Data: [2026-10-video-triage.json](2026-10-
 
 ## Bottom line
 
-The pipeline has processed 224 items, and **148 are substantive**: most are agent and Claude Code tutorials, plus a usable slice of training, business and job-search material. Nothing triaged them before today: Neo4j extraction is switched off and the wiki holds only 42 of the 148. Four skills were built from the clearest clusters (see below). 48 items failed, and 40 of those come from one pipeline bug.
+The pipeline has processed 224 items, and **148 are substantive**: most are agent and Claude Code tutorials, plus a usable slice of training, business and job-search material. Nothing triaged them before today: the wiki holds only 42 of the 148, and the graph, although extraction into it has run since 2026-07-13, splits every entity per writing agent and duplicates it across types, so it cannot group videos by topic (fix: task 46b4c5d8). *(Corrected the same day: the first version said Neo4j extraction was switched off; the docs I relied on were stale.)* Four skills were built from the clearest clusters (see below). 48 items failed, and 40 of those come from one pipeline bug.
 
 ## How it was done
 

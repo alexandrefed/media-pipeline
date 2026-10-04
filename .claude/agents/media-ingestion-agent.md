@@ -512,7 +512,7 @@ curl -s -X POST "${MEMORY_BASE_URL}/v1/notes/" \
 
 ### 4c — Neo4j + pgvector (automatic)
 
-Neo4j graph extraction is currently disabled per V2 architecture. pgvector embeddings are auto-generated on `memory_store` API calls via nomic-embed-text (768-dim).
+Neo4j graph extraction is ON (since 2026-07-13): every `memory_store` call extracts entities into the brain graph (neo4j-brain, gaming-PC :7688), automatically. Tag each video memory `video-<id>` so the graph can link the video to what it mentions. Until the fix in task 46b4c5d8 lands, the graph splits entities per writing agent and duplicates them across types, so `graph_search` from a main session does not see what this agent extracted. pgvector embeddings are auto-generated on `memory_store` via nomic-embed-text (768-dim). *(Corrected 2026-10-04: this section used to say extraction was disabled.)*
 
 ### 4d — VPS pgvector (automatic)
 
@@ -539,7 +539,7 @@ Storage Targets:
                              {VDIR}/summary.md
   -- Unified memory          {N} memories stored (namespace: /shared/projects/youtube-kb/)
   -- Notion                  Note created: {NOTE_TITLE}
-  -- Neo4j (VPS)             Auto-populated via GraphExtractionPipeline
+  -- Neo4j brain (gaming-PC) Auto-populated via GraphExtractionPipeline
   -- VPS pgvector            Auto-embedded on memory_store
 
 Search your knowledge base:
