@@ -5,6 +5,7 @@ Research notes and prior-art investigations for media-pipeline. One file per top
 
 | Date | Topic | File |
 |------|-------|------|
+| 2026-10-04 | Triage of all 224 processed videos: domains, wiki coverage, clusters, the four skills built from them, candidates | [2026-10-video-triage.md](2026-10-video-triage.md) |
 | 2026-10-02 | Stiles Dichter's "saved reels → skills" method vs our pipeline: we win on intake and search, he wins on turning content into skills | [2026-10-stiles-dichter-saved-to-skills.md](2026-10-stiles-dichter-saved-to-skills.md) |
 
 ## Candidate material to migrate here

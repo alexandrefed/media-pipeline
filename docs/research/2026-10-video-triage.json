@@ -1,0 +1,3107 @@
+{
+ "generated": "2026-10-04",
+ "source": "gaming-PC /home/alexandre/projects/workflows/media-pipeline/workspace/videos/ (summary.md, analysis.json, transcript openings)",
+ "rows": [
+  {
+   "folder": "20240404--782vQCDsCWU--yt--the-exponential-athlete-s--the-goal-setting-method-that-made-shohei-ohtani",
+   "id": "782vQCDsCWU",
+   "platform": "yt",
+   "domain": "softskills",
+   "subtopic": "Harada goal-setting chart",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "build a 64-square goal chart with lead measures and 30-90 day review cycles",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20240524--AlI6BrU3Zn0--yt--rise-above-gym--master-the-single-leg-rdl-using-these-tips",
+   "id": "AlI6BrU3Zn0",
+   "platform": "yt",
+   "domain": "sports",
+   "subtopic": "single-leg RDL technique",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "coach single-leg RDL form and cues",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20241218--3174d5510432484b95aba70f35f0111b--loom--jonathan-maxim--scaling-to-1000000-users-training",
+   "id": "3174d5510432484b95aba70f35f0111b",
+   "platform": "loom",
+   "domain": "business",
+   "subtopic": "mobile app growth roadmap",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "plan an app launch through 10k/100k/1M users",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250202--6pkcO8mN5FE--yt--judd-lienhard--45-minute-full-body-workout-using-just-one",
+   "id": "6pkcO8mN5FE",
+   "platform": "yt",
+   "domain": "sports",
+   "subtopic": "single-kettlebell full-body session",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "program a one-kettlebell strength-conditioning session",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20250520--_RTqbo5ZZ2k--yt--jeff-su--how-i-organize-my-life-notion-tour-2026",
+   "id": "_RTqbo5ZZ2k",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Notion command center",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "design a Notion life/work dashboard with quick-capture buttons",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/notion-productivity-systems"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250529--D93lUj5Mj0U--yt--christian-lempa--tech-project-management-and-documentation-in-notion",
+   "id": "D93lUj5Mj0U",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Notion project documentation",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "structure tech projects and docs in linked Notion databases",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250623--lIojfAWU9FA--yt--physionic--what-weighted-vests-do-to-your-body-new",
+   "id": "lIojfAWU9FA",
+   "platform": "yt",
+   "domain": "sports",
+   "subtopic": "weighted vest evidence",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "decide whether and how to use a weighted vest",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20250719--QJSE1yXoDxQ--yt--productive-dude--n8n-automation-generate-and-post-ai-shorts-n8n",
+   "id": "QJSE1yXoDxQ",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "n8n AI shorts autoposting",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "build an n8n flow that generates and posts short videos",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250720--c4-vri5nHCo--yt--respire-health--strength-coach-train-your-muscles-to-go-forever",
+   "id": "c4-vri5nHCo",
+   "platform": "yt",
+   "domain": "sports",
+   "subtopic": "steady-state aerobic base",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "program steady-state cardio plus intervals for endurance",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20250728--7B2HJr0Y68g--yt--indydevdan--my-claude-code-sub-agents-build-themselves",
+   "id": "7B2HJr0Y68g",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "claude code sub-agents",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "write sub-agent definitions and a meta-agent that builds them",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/claude-code"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250804--SSbqXzRsC6s--yt--indydevdan--im-addicted-to-claude-code-rate-limits-agent",
+   "id": "SSbqXzRsC6s",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "sub-agent model tiers and limits",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "assign Haiku/Sonnet/Opus per sub-agent to manage rate limits",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250805--PdPPR6co7nY--yt--data-science-with-onur--python-dashboard-tutorial-interactive-data-visualization-with-dash",
+   "id": "PdPPR6co7nY",
+   "platform": "yt",
+   "domain": "other",
+   "subtopic": "Python Dash dashboards",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "build an interactive Dash/Plotly dashboard with callbacks",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250811--tcZ3W8QYirQ--yt--indydevdan--gpt-5-agentic-coding-with-claude-code",
+   "id": "tcZ3W8QYirQ",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "multi-model agentic coding",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "run several models side by side as sub-agents",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250916--d3bWvva6ucw--yt--chase-ai--n8n-mcp-claude-code-prompt-to-workflow-insanity",
+   "id": "d3bWvva6ucw",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "n8n MCP with Claude Code",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "generate n8n workflows from prompts using plan mode and the n8n MCP",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250926--z4AbijUCoKU--yt--linking-your-thinking-with-nick-milo--give-me-15-minutes-ill-teach-you-80-of-obsidian",
+   "id": "z4AbijUCoKU",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Obsidian core features",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "set up an Obsidian vault with safe links and attachments",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/local-first-knowledge-systems",
+    "tech/obsidian"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250930--G3cgGwWuT0I--yt--the-ai-advantage--this-unbeliavable-ai-controls-your-computer",
+   "id": "G3cgGwWuT0I",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Sonnet 4.5 and computer use",
+   "type": "news",
+   "quality": "substantive",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20250930--VZkm1jSs8Lg--yt--sean-kochel--master-vibe-coding-the-5-step-product-manager",
+   "id": "VZkm1jSs8Lg",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "vibe-coding planning framework",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "plan a product with a 5-step PM process before prompting a coding agent",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251003--iQI4-ayPlYY--yt--steve-magness--how-to-build-a-monster-aerobic-system-your",
+   "id": "iQI4-ayPlYY",
+   "platform": "yt",
+   "domain": "sports",
+   "subtopic": "aerobic development",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "program aerobic base building from the physiology",
+   "in_wiki": false,
+   "wiki_pages": [
+    "mutora/aerobic-training"
+   ],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20251004--4nthc76rSl8--yt--aakash-gupta--i-should-be-charging-999-for-this-claude",
+   "id": "4nthc76rSl8",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "claude code context engineering",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "structure context, commands and multi-agent runs in Claude Code",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251006--MW3t6jP9AOs--yt--ai-jason--agent-folder-is-making-claude-code-10x-better",
+   "id": "MW3t6jP9AOs",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": ".agent folder context engineering",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "keep project docs in an .agent folder so Claude Code stays on track",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251006--nGhsgdQplHw--yt--indydevdan--claude-code-20-agentic-coding-no-other-agents",
+   "id": "nGhsgdQplHw",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Claude Code 2.0 vs other agents",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "choose and configure a coding-agent harness",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251007--2wYO6sdQ9xc--yt--sean-kochel--9-mcp-servers-thatll-make-vibe-coders-cry",
+   "id": "2wYO6sdQ9xc",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "MCP servers for vibe coders",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "pick MCP servers for coding workflows",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251008--eLqveVYFWc4--yt--nick-saraev--its-dumb-but-makes-getting-clients-so-easy",
+   "id": "eLqveVYFWc4",
+   "platform": "yt",
+   "domain": "business",
+   "subtopic": "AI agency client acquisition",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "sell-first offer design and cold-email targets",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251010--2VauS2awvMw--yt--brian-casel--3-new-features-in-claude-code-20-i",
+   "id": "2VauS2awvMw",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Claude Code 2.0 features",
+   "type": "news",
+   "quality": "substantive",
+   "job": "none",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251011--sPQL7x_I9Bw--yt--evolve-build--this-soviet-workout-builds-unreal-muscle",
+   "id": "sPQL7x_I9Bw",
+   "platform": "yt",
+   "domain": "sports",
+   "subtopic": "Soviet strength programming",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "program submaximal, non-failure strength blocks",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20251017--KhkIsNDYbcI--yt--mark-kashef--claude-codes-new-skills-are-a-cheat-code",
+   "id": "KhkIsNDYbcI",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "claude skills basics",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "write deterministic reusable skills and generate them with AI",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "skill-authoring"
+   ]
+  },
+  {
+   "folder": "20251017--PEMfIFuPsIw--yt--ai-unleashed--from-idea-to-production-building-n8n-automation-with",
+   "id": "PEMfIFuPsIw",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "n8n with Claude Code",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "set up Claude Code for n8n",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251018--1WImBwiA7RA--yt--ai-jason--claude-skills-the-sop-for-your-agent-that",
+   "id": "1WImBwiA7RA",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "skills vs MCP token cost",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "turn codebase conventions into skills and build a skill-creator skill",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "skill-authoring"
+   ]
+  },
+  {
+   "folder": "20251020--7_SL0FaY8MM--yt--mark-kashef--how-to-instantly-generate-claude-skills-at-scale",
+   "id": "7_SL0FaY8MM",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "skills factory",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "generate many skills in batch with Claude Code",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "skill-authoring"
+   ]
+  },
+  {
+   "folder": "20251020--aA9KP7QIQvM--yt--indydevdan--claude-haiku-45-is-light-speed-agentic-coding",
+   "id": "aA9KP7QIQvM",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Haiku vs Sonnet benchmark",
+   "type": "news",
+   "quality": "substantive",
+   "job": "choose Haiku vs Sonnet for sub-agents by speed and cost",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251021--901VMcZq8X4--yt--sean-kochel--these-5-claude-code-skills-are-your-new",
+   "id": "901VMcZq8X4",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "claude code skills for vibe coders",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "install and use practical Claude Code skills",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/ai-coding-workflows",
+    "tech/claude-code"
+   ],
+   "feeds_skill": [
+    "skill-authoring"
+   ]
+  },
+  {
+   "folder": "20251024--BQhpEL2JKkE--yt--runlab--how-to-run-downhill-like-the-elites",
+   "id": "BQhpEL2JKkE",
+   "platform": "yt",
+   "domain": "sports",
+   "subtopic": "downhill running technique",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "coach downhill running form and descent drills",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20251027--kFpLzCVLA20--yt--indydevdan--i-finally-cracked-claude-agent-skills-breakdown-for",
+   "id": "kFpLzCVLA20",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "skills vs MCP vs sub-agents vs commands",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "choose the right Claude Code extension primitive for a job",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "skill-authoring"
+   ]
+  },
+  {
+   "folder": "20251103--p0mrXfwAbCg--yt--indydevdan--the-one-agent-to-rule-them-all-advanced",
+   "id": "p0mrXfwAbCg",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "orchestrator agent",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "design an orchestrator agent that manages a fleet of agents",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251118--Kjvvj2cwdWE--yt--jeredblu--stop-vibe-coding-the-ai-development-framework-that",
+   "id": "Kjvvj2cwdWE",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "structured AI dev framework",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "run a plan-first development process with AI coding tools",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/ai-coding-workflows"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251120--E5Bo_38WtPw--yt--neo4j--neo4j-live-build-smarter-graph-visualizations-with-ai",
+   "id": "E5Bo_38WtPw",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "AI-built graph visualization",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "have a coding agent build graph visualizations using docs as context",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/graph-rag"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251124--eiBkzx78L2g--yt--neo4j--neo4j-graphrag-virtual-workshop-emea",
+   "id": "eiBkzx78L2g",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "GraphRAG with Neo4j",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "build a GraphRAG pipeline on Neo4j",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/graph-rag"
+   ],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20251125--bA-WmidVSGo--yt--nick-saraev--the-n8n-killer-agentic-workflows-full-beginners-guide",
+   "id": "bA-WmidVSGo",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "agentic workflows in Antigravity",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "build directive-plus-script agentic workflows instead of n8n flows",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/ai-document-separation-of-concerns"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251203--VEiumna7MTM--yt--sean-kochel--7-antigravity-features-that-give-vibe-coders-an",
+   "id": "VEiumna7MTM",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Google Antigravity multi-agent",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "run parallel agents in Antigravity with inline feedback",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/claude-code-control-planes",
+    "tech/google-antigravity"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251211--carl-vellotti--local--unknown--masterclass",
+   "id": "carl-vellotti",
+   "platform": "local",
+   "domain": "failed",
+   "subtopic": "none (metadata only)",
+   "type": "tutorial",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251211--entrepreneurs-jour1--local--alegria-group--challenge-ia-event",
+   "id": "entrepreneurs-jour1",
+   "platform": "local",
+   "domain": "failed",
+   "subtopic": "none (metadata only)",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251211--jean-michel-caram--local--alegria-group--speech",
+   "id": "jean-michel-caram",
+   "platform": "local",
+   "domain": "failed",
+   "subtopic": "none (metadata only)",
+   "type": "opinion",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251211--laurent-tapie--local--alegria-group--speech",
+   "id": "laurent-tapie",
+   "platform": "local",
+   "domain": "failed",
+   "subtopic": "none (metadata only)",
+   "type": "opinion",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20251211--P222hHpEOlQ--yt--alegria-group--challenge-ia-no-code-jour-bonus",
+   "id": "P222hHpEOlQ",
+   "platform": "yt",
+   "domain": "business",
+   "subtopic": "AI and no-code business models (FR)",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "choose between AI consulting, no-code and similar business models",
+   "in_wiki": true,
+   "wiki_pages": [
+    "vecia/ai-service-business"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260116--0teZqotpqT8--yt--ai-news-strategy-daily-na--stop-competing-with-400-applicants-build-this-in",
+   "id": "0teZqotpqT8",
+   "platform": "yt",
+   "domain": "business",
+   "subtopic": "AI portfolio for job hunting",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "build a proof-of-work project to bypass ATS hiring",
+   "in_wiki": true,
+   "wiki_pages": [
+    "vecia/ai-candidate-interface"
+   ],
+   "feeds_skill": [
+    "job-search-tactics"
+   ]
+  },
+  {
+   "folder": "20260203--RX-fQTW2To8--yt--matt-ganzak--i-cut-my-openclaw-costs-by-97",
+   "id": "RX-fQTW2To8",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "OpenClaw cost reduction",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "route heartbeats to a local model and set multi-model routing",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/openclaw"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260205--40SnEd1RWUU--yt--kai-lentit--interview-with-just-use-a-vps-bro-openclaw",
+   "id": "40SnEd1RWUU",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "VPS hardening for agents",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "secure a VPS before running an agent",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/openclaw"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260205--DUW4eS_gkYu--ig--tjrobertsondigital--should-you-have-a-second-website-for-your",
+   "id": "DUW4eS_gkYu",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "second non-branded site for AI visibility",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": true,
+   "wiki_pages": [
+    "vecia/ai-marketing-system"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260216--efctPj6bjCY--yt--indydevdan--my-4-layer-claude-code-playwright-cli-skill",
+   "id": "efctPj6bjCY",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "CLI browser automation skills",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "build skill, sub-agent, command and file layers around a Playwright CLI",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/agent-orchestration",
+    "tech/claude-code"
+   ],
+   "feeds_skill": [
+    "skill-authoring"
+   ]
+  },
+  {
+   "folder": "20260223--f8cfH5XX-XU--yt--indydevdan--the-pi-coding-agent-the-only-real-claude",
+   "id": "f8cfH5XX-XU",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Pi coding agent",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "evaluate a customizable alternative to Claude Code",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260303--u60DgTZbUXk--yt--matt-ganzak--i-used-ai-to-get-250000-leads-in",
+   "id": "u60DgTZbUXk",
+   "platform": "yt",
+   "domain": "business",
+   "subtopic": "AI lead generation",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "set up comment-triggered DM lead capture with AI conversations",
+   "in_wiki": true,
+   "wiki_pages": [
+    "vecia/ai-marketing-system",
+    "vecia/matt-ganzak"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260311--DVwoNgkAFJ--ig--claysumner--video-by-claysumner",
+   "id": "DVwoNgkAFJ",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "ranking sales YouTube channels",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260315--CSp-em8HPxM--yt--pamz-therapy--entrainement-course-sante-lexperte-mondiale-de-la-vo2",
+   "id": "CSp-em8HPxM",
+   "platform": "yt",
+   "domain": "sports",
+   "subtopic": "VO2max and interval design (Billat)",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "choose interval types by the limiting VO2max bottleneck",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20260319--dEL9tKwvejo--yt--futurminds--nvidia-nemoclaw-cloud-setup-in-under-15-minutes",
+   "id": "dEL9tKwvejo",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "OpenClaw in NemoClaw sandbox",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "deploy a sandboxed agent on a VPS with Telegram",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/agent-sandboxing"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260321--0fCQ-4J_jzk--yt--jake-van-clief--why-i-stopped-building-ai-agents-and-started",
+   "id": "0fCQ-4J_jzk",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Claude Cowork workspaces",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "build a described workspace instead of a custom agent",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/ai-document-separation-of-concerns",
+    "tech/ai-workspace-architecture",
+    "tech/context-ordering-and-vector-space-prompting"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260324--wdLev_SXLNg--yt--futurminds--nemoclaw-set-up-policies-connect-channels-install-skills",
+   "id": "wdLev_SXLNg",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "NemoClaw policies and channels",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "set sandbox policies, connect channels and install skills",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260324--YwZR6tc7qYg--yt--mlops-community--everything-we-got-wrong-about-research-plan-implement",
+   "id": "YwZR6tc7qYg",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "research-plan-implement lessons",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "run research, plan and implement phases with human code review",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/ai-coding-workflows"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260329--DWflHkJEwUI--ig--agenticjames--this-will-change-the-way-you-use-claude",
+   "id": "DWflHkJEwUI",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "OpenClaw plus Claude Code (speculative)",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260402--5ztI_dbj6ek--yt--ai-news-strategy-daily-na--your-claude-limit-burns-in-90-minutes-because",
+   "id": "5ztI_dbj6ek",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "token efficiency",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "cut token waste in Claude sessions",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/token-efficiency"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260406--RairMJflUSA--yt--indydevdan--my-pi-agent-teams-claude-code-leak-signal",
+   "id": "RairMJflUSA",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "agent harness design",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "design an agent harness as the product",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/agent-orchestration"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260413--DW3R6tBEYyR--ig--unknown--second-brain-ai-clod-code-knowledge-base",
+   "id": "DW3R6tBEYyR",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "Claude Code wiki second brain",
+   "type": "tutorial",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260413--DXE-BIbDsGk--ig--masonnewberry--comment-podium-for-the-full-guide",
+   "id": "DXE-BIbDsGk",
+   "platform": "ig",
+   "domain": "sports",
+   "subtopic": "mountain-running muscular endurance circuit",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "program a weekly lower-body endurance circuit for mountain running",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20260416--TdondBmyNXc--yt--the-coding-gopher--i-replaced-my-entire-stack-with-postgres",
+   "id": "TdondBmyNXc",
+   "platform": "yt",
+   "domain": "other",
+   "subtopic": "Postgres replaces app stack",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "use JSONB/GIN and Postgres extensions in place of extra services",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/postgres-as-application-stack"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260417--3LqntdbOWts--yt--liam-ottley--constantly-keeping-up-with-ai-is-keeping-you",
+   "id": "3LqntdbOWts",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "agentic workflows (DOE framework)",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "split directives, orchestration and execution with validation loops",
+   "in_wiki": true,
+   "wiki_pages": [
+    "vecia/operator-leverage"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260418--DW9Q_YrDVZH--ig--evolving-ai--post-by-evolvingai",
+   "id": "DW9Q_YrDVZH",
+   "platform": "ig",
+   "domain": "softskills",
+   "subtopic": "first-principles thinking prompt",
+   "type": "tutorial",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/context-ordering-and-vector-space-prompting"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260418--DXR2JFOI_zS--ig--le-gouverneur-ia--trois-chemins-pour-piloter-claude-code",
+   "id": "DXR2JFOI_zS",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "managing many Claude Code projects",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "choose a dashboard, SDK hub or hooks to run several projects",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/claude-code",
+    "tech/claude-code-control-planes",
+    "tech/software-factory"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260420--DXW4aElE18r--ig--agentic-james--video-by-agenticjames",
+   "id": "DXW4aElE18r",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "layered memory for 24/7 agents",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/agent-memory"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260422--DXaOUSziU_0--ig--edward-s-honour--video-by-edhonour",
+   "id": "DXaOUSziU_0",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "shared memory for multi-agent systems",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/agent-memory"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260427--DXplhnDk_tM--ig--sabrisuby--my-number-one-principle-when-creating-ads",
+   "id": "DXplhnDk_tM",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "paid social ad creative",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "write ads as valuable content first",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260502--DX1oh6XSSaD--ig--realrobertpotter--video-by-realrobertpotter",
+   "id": "DX1oh6XSSaD",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "lead-gen automation offer",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": true,
+   "wiki_pages": [
+    "vecia/ai-marketing-system"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260502--UyiKBkUZ2xc--yt--justin-sung--if-you-have-a-bad-memory-ill",
+   "id": "UyiKBkUZ2xc",
+   "platform": "yt",
+   "domain": "softskills",
+   "subtopic": "memory encoding strategies",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "study with analogies and connections to remember better",
+   "in_wiki": true,
+   "wiki_pages": [
+    "flectora/memory-handling"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260503--sqtX2OmgOF0--yt--david-ondrej--tokens-can-make-you-rich-just-do-this",
+   "id": "sqtX2OmgOF0",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Pi agent and token economics",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "own the harness and keep agent workflows minimal",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/claude-code",
+    "vecia/operator-leverage"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260504--EnXKysJNz_8--yt--indydevdan--gpt-55-verified-opus-47-a-pi-coding",
+   "id": "EnXKysJNz_8",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "builder plus verifier agents",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "add an automatic verifier agent after every build",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/verifier-agents"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260509--VWEe-AUp_0E--yt--noah-vincent--give-me-38-min-ill-show-you-how",
+   "id": "VWEe-AUp_0E",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Obsidian properties and Bases",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "organize a vault with properties, Bases and templates",
+   "in_wiki": true,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260511--DYOnBXdMf9u--ig--waris-run--explication-un-peu-plus-simplifiee",
+   "id": "DYOnBXdMf9u",
+   "platform": "ig",
+   "domain": "sports",
+   "subtopic": "pyramid interval sessions",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "program a 5-minute pyramid interval session",
+   "in_wiki": false,
+   "wiki_pages": [
+    "mutora/aerobic-training"
+   ],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20260517--QbjAQFJJyt0--yt--wanderloots--how-to-build-llm-wiki-in-obsidian",
+   "id": "QbjAQFJJyt0",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "LLM wiki in Obsidian",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "build a raw/wiki/schema vault as shared agent memory",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/ai-workspace-architecture",
+    "tech/local-first-knowledge-systems",
+    "tech/obsidian"
+   ],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260518--PIdETjcXNIk--yt--indydevdan--pi-to-pi-two-way-agent-orchestration-with",
+   "id": "PIdETjcXNIk",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "two-way agent orchestration",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "set up peer-to-peer agent communication",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/agent-orchestration",
+    "tech/ai-workspace-architecture"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260520--QQEgIo4Juxg--yt--networkchuck--you-need-to-use-hermes-right-now-goodbye",
+   "id": "QQEgIo4Juxg",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Hermes self-improving agent",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "set up Hermes with auto-generated skills and bounded memory",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/hermes"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260521--lLHUvIt1mBc--yt--pixel-prophets--this-free-extension-to-notebooklm-changed-everything",
+   "id": "lLHUvIt1mBc",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "NotebookLM organization",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "bulk-import and organize sources in NotebookLM",
+   "in_wiki": true,
+   "wiki_pages": [
+    "tech/notebooklm"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260526--19HDQ9HppOA--yt--claude--ship-your-first-managed-agent",
+   "id": "19HDQ9HppOA",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Claude Managed Agents",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "build a managed agent app",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260526--DYz5-rtovGj--ig--le-gouverneur-ia--commente-index-et-je-tenvoie",
+   "id": "DYz5-rtovGj",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "indexed agent memory registers",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "add an index with line numbers to each memory file",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260526--DYz5-rtovGj--ig--le-gouverneur-ia--commente-index-et-je-tenvoie-la-ressource",
+   "id": "DYz5-rtovGj",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "indexed agent memory registers (duplicate)",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "add an index with line numbers to each memory file",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/agent-memory",
+    "tech/context-ordering-and-vector-space-prompting"
+   ],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260529--HLu98ZO7L_o--yt--na--2026-ils-ont-vot-votre-servitude-et-personne",
+   "id": "HLu98ZO7L_o",
+   "platform": "yt",
+   "domain": "other",
+   "subtopic": "EU surveillance regulation",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260603--U_sA6S_jBxE--yt--neo4j--road-to-nodes-ai-graph-based-long-term",
+   "id": "U_sA6S_jBxE",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "agent learning from traces",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "distill execution traces into playbooks",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260614--DZk8XKWM5IM--ig--keshavsuki--video-by-keshavsuki",
+   "id": "DZk8XKWM5IM",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "model distillation to small local model",
+   "type": "tutorial",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260624--2ZacwCbiLjg--yt--peter-yang--hermes-full-course-build-your-247-ai-chief",
+   "id": "2ZacwCbiLjg",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Hermes 24/7 chief of staff",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "deploy Hermes with Google Workspace and proactive routines",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/hermes"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260630--DaN12RMDCOu--ig--agentic-james--nobody-talks-about-this",
+   "id": "DaN12RMDCOu",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "agent transcripts for debugging",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/agent-memory"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260701--1CwpJVDAo1Qjc5tawOSRaGcSyl4GNlBBv--gdrive--max-johnson--run-claude-code-chatgpt-gemini-as-one-ai-team",
+   "id": "1CwpJVDAo1Qjc5tawOSRaGcSyl4GNlBBv",
+   "platform": "gdrive",
+   "domain": "agents",
+   "subtopic": "multi-model team via PAL MCP",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "connect Claude Code, Codex and Gemini through PAL MCP",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260701--DaP6PUZCGMD--ig--theartificialintelligens--agents-a1-ai-scaling-by-reasoning-tools",
+   "id": "DaP6PUZCGMD",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "agent scaling paper",
+   "type": "news",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/agent-orchestration"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260706--2074208949205881033--x--claudedevs--getting-started-with-loops",
+   "id": "2074208949205881033",
+   "platform": "x",
+   "domain": "agents",
+   "subtopic": "Claude Code loops (/goal, /loop)",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "pick turn, goal or time loops with stop criteria",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260706--DaeGMx7kY2N--ig--agentic-james--infinite-fable-5-nope-but-heres",
+   "id": "DaeGMx7kY2N",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "skill self-optimization loop",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "improve a skill by reviewing run transcripts with cheap sub-agents",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/agent-memory"
+   ],
+   "feeds_skill": [
+    "skill-authoring"
+   ]
+  },
+  {
+   "folder": "20260706--WAFUMBLOjHo--yt--indydevdan--see-cmux-solve-multi-agent-orchestration-claude-code",
+   "id": "WAFUMBLOjHo",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "cmux multi-agent orchestration",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "drive many visible agent panes programmatically",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260707---CUsfao6m7E--yt--jake-van-clief--your-second-brain-is-not-a-notes-app",
+   "id": "-CUsfao6m7E",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "second brain as structured AI context",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "structure a vault as an AI context layer",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260707--CUsfao6m7E--yt--jake-van-clief--your-second-brain-is-not-a-notes-app",
+   "id": "CUsfao6m7E",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "duplicate, raw transcript only",
+   "type": "opinion",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260708--2074728181924524032--x--nainsi-dwivedi--anthropic-engineer-youre-not-supposed-to-prompt-claude",
+   "id": "2074728181924524032",
+   "platform": "x",
+   "domain": "agents",
+   "subtopic": "agent memory and dreaming",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "design shared memory and out-of-band memory curation",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/agent-memory",
+    "tech/agent-orchestration",
+    "tech/ai-workspace-architecture",
+    "tech/software-factory"
+   ],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260708--2074728500414574782--x--na--nainsi-dwivedi-anthropic-engineer-youre-not-supposed-to",
+   "id": "2074728500414574782",
+   "platform": "x",
+   "domain": "failed",
+   "subtopic": "duplicate, metadata only",
+   "type": "opinion",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260708--JGFoTQt4GA0--yt--neo4j--going-meta-s03e10-actionable-knowledge-for-agents-with",
+   "id": "JGFoTQt4GA0",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "context graphs for agent memory",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "combine vector and graph memory with an ontology",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260709--DamEcWuPvX0--ig--raycfu--how-to-build-an-agentic-os",
+   "id": "DamEcWuPvX0",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "scheduled agentic OS with graded autonomy",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "run a cheap-model daily check and grade autonomy per task type",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/software-factory"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260710--DamCJMKMray--ig--brookesheltonofficial--video-by-brookesheltonofficial",
+   "id": "DamCJMKMray",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "Meta ads optimization",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "simplify Meta campaign structure and ship more creatives",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260713--DavtYgRReBW--ig--qasimbiz--how-much-it-costs-to-run-my-app",
+   "id": "DavtYgRReBW",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "cheap app hosting costs",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260713--DaxcO3HuMEG--ig--max-tanevskiy--europe-is-handing-out-over-2-billion",
+   "id": "DaxcO3HuMEG",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "EU startup grants",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260713--VQy50fuxI34--yt--indydevdan--forget-loop-engineering-agentic-engineering-is-about-this",
+   "id": "VQy50fuxI34",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "AI developer workflows",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "map an AI developer workflow and split agents from code",
+   "in_wiki": false,
+   "wiki_pages": [
+    "tech/software-factory"
+   ],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260714--8rVQuZlRaqo--yt--nick-saraev--steal-my-actual-ai-agent-workflow-2027",
+   "id": "8rVQuZlRaqo",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "shared human/AI task board with evals",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "run agents from a task board with eval checklists",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260715--Da1rvRICqRW--ig--agentic-james--top-5-tips-and-tricks-for-vibe",
+   "id": "Da1rvRICqRW",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "vibe-coding an iOS app",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "choose Expo, RevenueCat and Superwall for a Claude Code app",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260715--mAPj_FhZVMQ--yt--le-ma-tre-du-jeu--la-stratgie-sale-de-nicolas-machiavel-sur-comment",
+   "id": "mAPj_FhZVMQ",
+   "platform": "yt",
+   "domain": "softskills",
+   "subtopic": "manipulative seduction tactics",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260715--PDJfciNhyHU--yt--ai-news-strategy-daily-na--fable-5-and-gpt-56-dont-need-better",
+   "id": "PDJfciNhyHU",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "harness audit for new models",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "audit instructions, memories and tools before adding rules",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260717--Da5XfPttWG8--ig--agenticengineering--video-by-agenticengineering",
+   "id": "Da5XfPttWG8",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "strong model as architect, cheap builders",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "split planning/review to the strong model and building to cheaper ones",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260717--Da5XfPttWG8--yt--agenticengineering--video-by-agenticengineering",
+   "id": "Da5XfPttWG8",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "duplicate, metadata only",
+   "type": "opinion",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260717--lK5y39yDX0s--yt--neo4j--neo4j-augmented-ai-building-contextual-intelligence-with-knowledge",
+   "id": "lK5y39yDX0s",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "enterprise knowledge graphs",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260717--RoDO0dAmXaQ--yt--neo4j--neo4j-technical-deep-dive-preparing-your-context-graph",
+   "id": "RoDO0dAmXaQ",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "context graphs and document GraphRAG",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "start GraphRAG with a small schema and question set",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260718--Da9GsyRj_DB--ig--agentic-james--your-coding-agent-should-be-doing-end-to",
+   "id": "Da9GsyRj_DB",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "end-to-end testing by coding agents",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "validate apps through real user flows",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260720--AQl5Q-0l7FQ--yt--indydevdan--engineers-stop-picking-gpt-56-sol-or-claude",
+   "id": "AQl5Q-0l7FQ",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "multi-model fusion harness",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "combine complementary models on high-leverage decisions",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260722--DbHHTWChH0X--ig--britttegeler--this-is-the-10-year-growth-of-my-multimillion-dollars-compan",
+   "id": "DbHHTWChH0X",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "early-founder operating principles",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "run an early-stage startup lean",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260722--DbHYPkblR6l--ig--agenticjames--using-goal-with-a-task-management-system",
+   "id": "DbHYPkblR6l",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "/goal plus external task list",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "keep a long-running coding agent on rails with a task file",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260725--DbMyJLaz9o5--ig--sinagrowthtech--video-by-sinagrowthtech",
+   "id": "DbMyJLaz9o5",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "autonomous marketing agent on VPS",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "build a cron-driven agent that posts content and learns from analytics",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260725--DbMyJLaz9o5--yt--sina-growthtech--video-by-sinagrowthtech",
+   "id": "DbMyJLaz9o5",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260725--DbOXAJNkdCx--ig--agentic-james--openai-just-killed-jarvis-bros",
+   "id": "DbOXAJNkdCx",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "Codex desktop voice orchestration",
+   "type": "news",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260729--DbZEv32JwSk--ig--edhonour--if-your-mcp-tools-are-not",
+   "id": "DbZEv32JwSk",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "MCP tool descriptions",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "write tool descriptions so the model calls the right tool",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260803--DbmlGMhCAGZ--ig--theartificialintelligens--a-new-iclr-paper-found-that-the-standard",
+   "id": "DbmlGMhCAGZ",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "multi-agent routing (Graph-of-Agents)",
+   "type": "news",
+   "quality": "substantive",
+   "job": "route queries to relevant agents instead of fanning out to all",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260803--haUfb1ievTE--yt--indydevdan--my-super-simple-software-factory-for-agentic-engineers",
+   "id": "haUfb1ievTE",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "software factory, observability",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "design an observable, reusable agent workflow factory",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260806--DbtoaG1jMR1--ig--agentic-james--gsd-framework-agent-self-awareness",
+   "id": "DbtoaG1jMR1",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "GSD planning, agent roadblocks",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "have the agent list needed credentials, MCPs and accounts at planning time",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260806--DbtoaG1jMR1--yt--agentic-james--video-by-agenticjames",
+   "id": "DbtoaG1jMR1",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260806--qzVXfVvXbXU--yt--jake-van-clief--multiplayer-ai",
+   "id": "qzVXfVvXbXU",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "cloud ICM workspaces",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260808--DbyrEgtD_Ou--ig--agenticjames--video-by-agenticjames",
+   "id": "DbyrEgtD_Ou",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "PTY control of coding agents",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "run agents in a PTY for restart, resume and handoff",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260808--DbyrEgtD_Ou--yt--agentic-james--video-by-agenticjames",
+   "id": "DbyrEgtD_Ou",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260808--XIk-Ru85xmA--yt--jake-van-clief--your-start-up-is-going-to-be-replaced",
+   "id": "XIk-Ru85xmA",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "folder-based context systems",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "structure markdown knowledge folders as portable context",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260810--SEI_qIW4o2c--yt--indydevdan--engineers-your-software-factory-needs-agent-sandboxes-to",
+   "id": "SEI_qIW4o2c",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "agent sandboxes, best-of-N",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "run agents in disposable VMs with capped keys",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260811--Db4hjeIzYzJ--ig--sina-growthtech--video-by-sinagrowthtech",
+   "id": "Db4hjeIzYzJ",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "LangGraph for long video agents",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260811--Db4hjeIzYzJ--yt--sina-growthtech--video-by-sinagrowthtech",
+   "id": "Db4hjeIzYzJ",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260811--Db59ytmkwXN--ig--agenticjames--video-by-agenticjames",
+   "id": "Db59ytmkwXN",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "Claude Code cross-session messaging",
+   "type": "news",
+   "quality": "substantive",
+   "job": "coordinate several Claude sessions with list-agents and send-message",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260811--Db59ytmkwXN--yt--agentic-james--video-by-agenticjames",
+   "id": "Db59ytmkwXN",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260811--Db6qLt_CJdq--ig--markbuildsbrands--read-this-post-to-get-bet",
+   "id": "Db6qLt_CJdq",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "Meta ads split testing",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "run Meta ad tests and analyze why an ad won",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260813--Db9lvHRkQ6j--ig--agentic-james--video-by-agenticjames",
+   "id": "Db9lvHRkQ6j",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "model, harness and context layers",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "diagnose agent failures by layer",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260813--Db9lvHRkQ6j--yt--agentic-james--video-by-agenticjames",
+   "id": "Db9lvHRkQ6j",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260817--S_QdQ1G4GlU--yt--indydevdan--fixing-opus-5-proof-that-prompt-engineering-is",
+   "id": "S_QdQ1G4GlU",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "system prompt design for Opus 5",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "write a senior-engineer system prompt that cuts verbosity and sycophancy",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260818--DcMXqu3FIQm--ig--nate-pacyga--video-by-natepacyga",
+   "id": "DcMXqu3FIQm",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "Gauntlet Loop quality iteration",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "make Claude iterate against a defined quality bar with sub-agents",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260821--DcTIPKyt7Am--ig--kem-glitch--video-by-kemglitch",
+   "id": "DcTIPKyt7Am",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "graph memory ontology design",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "define entities and dedupe rules before building a memory graph",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260822--DcWqT_egQaS--ig--agenticjames--video-by-agenticjames",
+   "id": "DcWqT_egQaS",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "PTY persistent agents (repeat)",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "run agents in a PTY with a 24/7 supervisor",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260822--DcWqT_egQaS--yt--agentic-james--video-by-agenticjames",
+   "id": "DcWqT_egQaS",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260823--DcXaxzwFect--ig--agentic-james--video-by-agenticjames",
+   "id": "DcXaxzwFect",
+   "platform": "ig",
+   "domain": "failed",
+   "subtopic": "empty folder",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260824--Dca716Ptw4Y--ig--kemglitch--video-by-kemglitch",
+   "id": "Dca716Ptw4Y",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "deterministic loops with gates",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "build agent loops with lint/test gates enforced by hooks",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260825--Dccgqr2iRS_--ig--agenticjames--video-by-agenticjames",
+   "id": "Dccgqr2iRS_",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "task sizing by context budget",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "split work into chunks that fit one context window",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260825--Dccgqr2iRS_--yt--agentic-james--video-by-agenticjames",
+   "id": "Dccgqr2iRS_",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260826--DcfI47kAa8R--ig--agentic-james--video-by-agenticjames",
+   "id": "DcfI47kAa8R",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "agentic workflow anatomy",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "design a skill-driven automated workflow",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260826--DcfI47kAa8R--yt--agentic-james--video-by-agenticjames",
+   "id": "DcfI47kAa8R",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260826--Dcg_AnLxi00--ig--markbuildsbrands--meta-ads-algorithm-explained",
+   "id": "Dcg_AnLxi00",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "Meta ads auction mechanics",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "explain and tune Meta ad delivery",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260827--DciNc_Yh2gE--ig--jasontangen--a-42-year-old-founder-interviews-for-an",
+   "id": "DciNc_Yh2gE",
+   "platform": "ig",
+   "domain": "content",
+   "subtopic": "Instagram 0 to 10K growth plan",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "run a 30-day new-account Instagram growth plan",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260827--DciNc_Yh2gE--yt--jasontang-en--video-by-jasontangen",
+   "id": "DciNc_Yh2gE",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260828--Dcm-lAqBOfx--ig--jasontangen--how-a-42-year-old-founder-grew-a-new-instagram",
+   "id": "Dcm-lAqBOfx",
+   "platform": "ig",
+   "domain": "content",
+   "subtopic": "Instagram growth, positioning and tagging",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "position, tag and benchmark a new IG account",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260829--Dcm-lAqBOfx--yt--jasontang-en--video-by-jasontangen",
+   "id": "Dcm-lAqBOfx",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260829--Dco6lbzKbii--ig--josephkimchoi--video-by-josephkimchoi",
+   "id": "Dco6lbzKbii",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "content-market fit, customer language",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "mine customer phrasing for positioning and copy",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260829--Dco6lbzKbii--yt--josephkimchoi--video-by-josephkimchoi",
+   "id": "Dco6lbzKbii",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260830--Dcq8lOwt_Wy--ig--svengirlando--video-by-svengirlando",
+   "id": "Dcq8lOwt_Wy",
+   "platform": "ig",
+   "domain": "sports",
+   "subtopic": "French contrast power session",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "program an explosive power day",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20260830--Dcq8lOwt_Wy--yt--svengirlando--video-by-svengirlando",
+   "id": "Dcq8lOwt_Wy",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260831--rPWCYB62wvI--yt--indydevdan--agentic-engineering-operating-level-where-to-focus-your",
+   "id": "rPWCYB62wvI",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "agentic operating levels",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "choose the right abstraction level for agent work",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260904--Dc4UEkoAbj0--ig--agenticjames--video-by-agenticjames",
+   "id": "Dc4UEkoAbj0",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "context engineering, progressive disclosure",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "lay out CLAUDE.md, skills and tools as a progressive-disclosure tree",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260905--Dc6XGUyqYrK--ig--coachedbygregs--video-by-coachedbygregs",
+   "id": "Dc6XGUyqYrK",
+   "platform": "ig",
+   "domain": "sports",
+   "subtopic": "motivational quote prompt",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260905--Dc7LyUAuS6l--ig--bryson-bowman--video-by-brysonbowman",
+   "id": "Dc7LyUAuS6l",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "paid-marketing metric glossary",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260905--Dc7LyUAuS6l--yt--bryson-bowman--video-by-brysonbowman",
+   "id": "Dc7LyUAuS6l",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260910--DdG9xuGEuli--ig--wealthivora--validate-any-business-ide",
+   "id": "DdG9xuGEuli",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "one-afternoon idea validation",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "test demand with Marketplace listings before building",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260911--DdJrejojEzh--ig--jtperformance--best-split-for-athletes-h",
+   "id": "DdJrejojEzh",
+   "platform": "ig",
+   "domain": "sports",
+   "subtopic": "high-low training split",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "structure a week for hybrid and contact athletes",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "endurance-strength-programming"
+   ]
+  },
+  {
+   "folder": "20260913--DdNmCoBpqSm--ig--edhonour--video-by-edhonour",
+   "id": "DdNmCoBpqSm",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "tracing production AI",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "set up run tracing and eval history for agents",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260913--DdNmCoBpqSm--yt--edhonour--video-by-edhonour",
+   "id": "DdNmCoBpqSm",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260913--DdPh7SektfY--ig--wealthivora--entrepreneur-six-stage-cy",
+   "id": "DdPh7SektfY",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "Hormozi entrepreneur cycle",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "get through the founder crisis-of-meaning stage",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260914--DdSK5RgS5s1--ig--freeparehq--video-by-freeparehq",
+   "id": "DdSK5RgS5s1",
+   "platform": "ig",
+   "domain": "career",
+   "subtopic": "remote job sourcing on Reddit and X",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "run a daily remote-job search on Reddit and X",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "job-search-tactics"
+   ]
+  },
+  {
+   "folder": "20260914--DdSK5RgS5s1--yt--freeparehq--video-by-freeparehq",
+   "id": "DdSK5RgS5s1",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260915--DdUC2hJFHXp--ig--agentic-james--video-by-agenticjames",
+   "id": "DdUC2hJFHXp",
+   "platform": "ig",
+   "domain": "content",
+   "subtopic": "16-posts-a-day skill pipeline",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "build coordinator, research, asset and publish skills for daily content",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260916--DdWzymMD2KT--ig--agentic-james--video-by-agenticjames",
+   "id": "DdWzymMD2KT",
+   "platform": "ig",
+   "domain": "content",
+   "subtopic": "capture saved media into research DB",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "forward saved posts to an agent for enrichment and scripting",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260916--DdXE3fah5Ut--ig--ducktate--out-of-the-box-grokbot-isnt-the-greatest",
+   "id": "DdXE3fah5Ut",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "company-brain wiki with index.md",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "structure a wiki with index and breadcrumbs for agents",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260916--DdXE3fah5Ut--yt--duck-tate--video-by-ducktate",
+   "id": "DdXE3fah5Ut",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260917--DdaDE4ZEguB--ig--agentic-james--video-by-agenticjames",
+   "id": "DdaDE4ZEguB",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "code-mode MCP gateway",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "cut context cost of many MCP calls with a code-execution gateway",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260917--DdaDE4ZEguB--yt--agentic-james--video-by-agenticjames",
+   "id": "DdaDE4ZEguB",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260917--DdZHdUENhZw--ig--kemglitch--make-art-with-code-using-opus",
+   "id": "DdZHdUENhZw",
+   "platform": "ig",
+   "domain": "other",
+   "subtopic": "generative art with Opus",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "get animation code from references and a storyboard",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260917--DdZHdUENhZw--yt--kem-glitch--video-by-kemglitch",
+   "id": "DdZHdUENhZw",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260917--DdZkUs_j8y3--ig--agenticjames--video-by-agenticjames",
+   "id": "DdZkUs_j8y3",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "Executor MCP gateway, toolkits",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "centralize MCP servers and credentials across agents and machines",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260917--DdZkUs_j8y3--yt--agentic-james--video-by-agenticjames",
+   "id": "DdZkUs_j8y3",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260918--DdaXCGIzKVb--ig--sinagrowthtech--video-by-sinagrowthtech",
+   "id": "DdaXCGIzKVb",
+   "platform": "ig",
+   "domain": "content",
+   "subtopic": "multi-account persona posting",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "run persona accounts with per-account skills and schedules",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260918--DdaXCGIzKVb--yt--sina-growthtech--video-by-sinagrowthtech",
+   "id": "DdaXCGIzKVb",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260918--DdbcXOJOwjE--ig--duck-tate--video-by-ducktate",
+   "id": "DdbcXOJOwjE",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "ticket-triage business idea",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260918--DdbcXOJOwjE--yt--duck-tate--video-by-ducktate",
+   "id": "DdbcXOJOwjE",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260919--Ddd9FmBNCMl--ig--kemglitch--jev-is-everywhere-so-what",
+   "id": "Ddd9FmBNCMl",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "cheap classifier as decision and rerank layer",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "add a cheap classifier step for triage and RAG reranking",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260919--Ddd9FmBNCMl--yt--kem-glitch--video-by-kemglitch",
+   "id": "Ddd9FmBNCMl",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260920--DdhdOIxRXoL--ig--markbuildsbrands--dm-me-lander-and-ill-send-you-all",
+   "id": "DdhdOIxRXoL",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "Lander page generator",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260920--DdhoX1zBJHj--ig--thedispensableceo--video-by-thedispensableceo",
+   "id": "DdhoX1zBJHj",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "seven leadership laws",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260920--DdhoX1zBJHj--yt--thedispensableceo--video-by-thedispensableceo",
+   "id": "DdhoX1zBJHj",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260921--Ddj0z3UgNL9--ig--ollirasmussen--ai-tools-hype-vs-reality",
+   "id": "Ddj0z3UgNL9",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "AI tool hype ratings",
+   "type": "opinion",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260921--DdjOqRYNZZi--ig--kem-glitch--video-by-kemglitch",
+   "id": "DdjOqRYNZZi",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "memory corpus cleaning, context poisoning",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "find superseded claims in a memory store",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "agent-memory-design"
+   ]
+  },
+  {
+   "folder": "20260922--Ddm2na9Eo3o--ig--artificialintelligenceupd--anthropic-opus-55-playboo",
+   "id": "Ddm2na9Eo3o",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "Opus 5.5 prompting playbook",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "prompt Opus 5.5 and set CLAUDE.md rules for long runs",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260922--Ddm6if9RbJT--ig--matthgray--video-by-matthgray",
+   "id": "Ddm6if9RbJT",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "systems grid",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "document business systems",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260922--Ddm6if9RbJT--yt--matthgray--video-by-matthgray",
+   "id": "Ddm6if9RbJT",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260922--DdmtTJjuXQT--ig--lostandlucky--video-by-lostandlucky",
+   "id": "DdmtTJjuXQT",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "cheap zero-shot classifier",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "choose a classifier over an LLM for labeling jobs",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260922--DdmtTJjuXQT--yt--lostandlucky--video-by-lostandlucky",
+   "id": "DdmtTJjuXQT",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260924--7RVf25Rg0Mc--yt--networkchuck--you-need-to-try-paperclip-right-now",
+   "id": "7RVf25Rg0Mc",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "Paperclip agent org chart",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "set up a multi-agent org with roles and task routing",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260924--DdrDDY6Rf4h--ig--youraveragetechbro--video-by-youraveragetechbro",
+   "id": "DdrDDY6Rf4h",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "agent autonomous merge with verification",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "let agents merge small changes after reproducing and verifying",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260924--DdrDDY6Rf4h--yt--youraveragetechbro--video-by-youraveragetechbro",
+   "id": "DdrDDY6Rf4h",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260924--Ddrg6d9haPN--ig--ducktate--video-by-ducktate",
+   "id": "Ddrg6d9haPN",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "task decomposition and frequent commits",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "keep AI-built apps on small tracked tasks with commit notes",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260924--Ddrg6d9haPN--yt--duck-tate--video-by-ducktate",
+   "id": "Ddrg6d9haPN",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260925--Ddt4Mp8Om9C--ig--ducktate--video-by-ducktate",
+   "id": "Ddt4Mp8Om9C",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "ICP and viral-topic research",
+   "type": "tutorial",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260925--Ddt4Mp8Om9C--yt--duck-tate--video-by-ducktate",
+   "id": "Ddt4Mp8Om9C",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260925--Ddt7qfgNFh8--ig--kem-glitch--video-by-kemglitch",
+   "id": "Ddt7qfgNFh8",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "custom UI skins for headless coding tools",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260925--Ddt7qfgNFh8--yt--kem-glitch--video-by-kemglitch",
+   "id": "Ddt7qfgNFh8",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260926--DdxcfHKEuKY--ig--rickgetsjobs--bro-lowkey-upgraded-the-tech",
+   "id": "DdxcfHKEuKY",
+   "platform": "ig",
+   "domain": "career",
+   "subtopic": "post-application outreach",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "contact the right people inside a company after applying",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "job-search-tactics"
+   ]
+  },
+  {
+   "folder": "20260926--doc_27cc22cb1242--local--mark-builds-brands--creating-lander-sop",
+   "id": "doc_27cc22cb1242",
+   "platform": "local",
+   "domain": "business",
+   "subtopic": "advertorial lander with Claude",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "write a pre-sales listicle with Claude",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260927--DdxcfHKEuKY--yt--rickgetsjobs--video-by-rickgetsjobs",
+   "id": "DdxcfHKEuKY",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260928--_U-O5lYhJ7Q--yt--indydevdan--10-levels-of-jev-for-agentic-engineers",
+   "id": "_U-O5lYhJ7Q",
+   "platform": "yt",
+   "domain": "agents",
+   "subtopic": "cheap classifier usage levels",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "add cheap decision primitives next to agents",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260929--Dd3ssviNEvm--ig--kem-glitch--sonnet-55-is-out-and-its-cracked-at-design",
+   "id": "Dd3ssviNEvm",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "Sonnet 5.5 design and generative art",
+   "type": "news",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260929--Dd3ssviNEvm--yt--kem-glitch--video-by-kemglitch",
+   "id": "Dd3ssviNEvm",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260929--Dd4WvZrSB7v--ig--freeparehq--the-most-underrated-way-to-find-real-remote",
+   "id": "Dd4WvZrSB7v",
+   "platform": "ig",
+   "domain": "career",
+   "subtopic": "ATS site: search for fresh remote jobs",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "find day-one remote postings via Google site: queries",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "job-search-tactics"
+   ]
+  },
+  {
+   "folder": "20260929--Dd4WvZrSB7v--ig--freeparehq--the-most-underrated-way-to-find-real-remote-jobs",
+   "id": "Dd4WvZrSB7v",
+   "platform": "ig",
+   "domain": "other",
+   "subtopic": "ATS site: search (duplicate)",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "find day-one remote postings via Google site: queries",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "job-search-tactics"
+   ]
+  },
+  {
+   "folder": "20260929--Dd4WvZrSB7v--yt--freeparehq--video-by-freeparehq",
+   "id": "Dd4WvZrSB7v",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260930--Dd6Zb9Vj6xA--ig--lostandlucky--sixteen-bit-hand-drawn-clean-and-modern-a",
+   "id": "Dd6Zb9Vj6xA",
+   "platform": "ig",
+   "domain": "content",
+   "subtopic": "stage-gated AI animation pipeline",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "build a script-voice-storyboard-code video pipeline with review gates",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260930--Dd6Zb9Vj6xA--yt--lostandlucky--video-by-lostandlucky",
+   "id": "Dd6Zb9Vj6xA",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260930--Dd6Zhg-tdP0--ig--kem_glitch--how-to-create-generative-art-style-systems",
+   "id": "Dd6Zhg-tdP0",
+   "platform": "ig",
+   "domain": "other",
+   "subtopic": "generative art style systems",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "prompt AI with named generative systems",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260930--Dd6Zhg-tdP0--yt--kem-glitch--video-by-kemglitch",
+   "id": "Dd6Zhg-tdP0",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20260930--Dd9DCEZh3In--ig--stilesai--let-your-ai-doomscroll-just-dont-stop",
+   "id": "Dd9DCEZh3In",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "saved reels into a knowledge base",
+   "type": "framework",
+   "quality": "substantive",
+   "job": "turn saved reels, DMs and freebies into one topic knowledge base",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20261001--Dd9DCEZh3In--yt--stilesai--video-by-stilesai",
+   "id": "Dd9DCEZh3In",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20261001--Dd9jvT1BzY5--ig--duck-tate--if-you-are-building-an-app-prioritize-this",
+   "id": "Dd9jvT1BzY5",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "MCP or CLI connector for your app",
+   "type": "opinion",
+   "quality": "substantive",
+   "job": "expose app data to external agents via MCP or CLI",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20261001--Dd9jvT1BzY5--yt--duck-tate--video-by-ducktate",
+   "id": "Dd9jvT1BzY5",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20261002--Dd_tRbkP0qO--ig--nick_saraev--this-free-ai-tool-turns-your-claude-code",
+   "id": "Dd_tRbkP0qO",
+   "platform": "ig",
+   "domain": "agents",
+   "subtopic": "Open Montage video studio",
+   "type": "promo",
+   "quality": "thin",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20261002--Dd_tRbkP0qO--yt--nick-saraev--video-by-nicksaraev",
+   "id": "Dd_tRbkP0qO",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20261002--Dd_-Y6QIv8Y--ig--techtalkuk--want-recruiters-to-actually-reply-to-your-messages",
+   "id": "Dd_-Y6QIv8Y",
+   "platform": "ig",
+   "domain": "career",
+   "subtopic": "recruiter LinkedIn outreach",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "message recruiters with a personalized request and follow-up",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": [
+    "job-search-tactics"
+   ]
+  },
+  {
+   "folder": "20261002--Dd_-Y6QIv8Y--yt--techtalkuk--video-by-techtalkuk",
+   "id": "Dd_-Y6QIv8Y",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20261002--DeALTpvPFBT--ig--bossbaesteph--video-by-bossbaesteph",
+   "id": "DeALTpvPFBT",
+   "platform": "ig",
+   "domain": "business",
+   "subtopic": "digital product validation with Claude",
+   "type": "tutorial",
+   "quality": "substantive",
+   "job": "validate and outline a digital product with Claude",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  },
+  {
+   "folder": "20261002--DeALTpvPFBT--yt--boss-bae-steph--video-by-bossbaesteph",
+   "id": "DeALTpvPFBT",
+   "platform": "yt",
+   "domain": "failed",
+   "subtopic": "metadata-only stub",
+   "type": "promo",
+   "quality": "failed",
+   "job": "none",
+   "in_wiki": false,
+   "wiki_pages": [],
+   "feeds_skill": []
+  }
+ ]
+}
