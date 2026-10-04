@@ -35,6 +35,40 @@ except ImportError:
     API_AVAILABLE = False
 
 
+TAKEAWAY_TEXT_KEYS = ("takeaway", "insight", "point", "item", "text")
+TAKEAWAY_KIND_KEYS = ("classification", "actionability", "type")
+TAKEAWAY_LIST_KEYS = ("key_takeaways", "takeaways", "detailed_takeaways", "actionable_takeaways")
+
+
+def normalize_takeaway(raw) -> dict | None:
+    """Map any takeaway shape found in analysis.json to {"text", "kind"}.
+
+    Shapes seen across the corpus: a bare string, or a dict whose text lives under
+    takeaway | insight | point | item | text and whose kind lives under
+    classification | actionability | type (either may be absent). Returns None when
+    there is no text, so callers never emit an empty line.
+    """
+    if isinstance(raw, str):
+        text, kind = raw.strip(), ""
+    elif isinstance(raw, dict):
+        text = next((str(raw[k]).strip() for k in TAKEAWAY_TEXT_KEYS if raw.get(k)), "")
+        kind = next((str(raw[k]).strip() for k in TAKEAWAY_KIND_KEYS if raw.get(k)), "")
+    else:
+        text, kind = "", ""
+    if not text:
+        print(f"  skipped takeaway with no text: {str(raw)[:80]!r}")
+        return None
+    return {"text": text, "kind": kind}
+
+
+def get_takeaways(analysis: dict) -> list[dict]:
+    """All takeaways of an analysis, normalised; first non-empty list key wins."""
+    for key in TAKEAWAY_LIST_KEYS:
+        raw = analysis.get(key)
+        if isinstance(raw, list) and raw:
+            return [n for n in map(normalize_takeaway, raw) if n]
+    return []
+
 
 class EnhancedKBStorage:
     """Enhanced storage with entity-based multi-memory approach."""
@@ -151,11 +185,12 @@ class EnhancedKBStorage:
         else:
             channel_tag = "unknown-channel"
 
+        area = self.analysis_data.get("area", "vecia")
         base_tags = [
             "source:claude-main",
             "project:youtube-kb",
             "type:video-knowledge",
-            "area:vecia",
+            f"area:{area}",
             f"video:{self.video_id}",
             f"channel:{channel_tag}",
             f"content-type:{content_type}",
@@ -170,7 +205,7 @@ class EnhancedKBStorage:
         """Memory 1: Overview (summary + takeaways)."""
         metadata = self._extract_metadata()
         summary = self.analysis_data.get("summary", "")
-        takeaways = self.analysis_data.get("key_takeaways", [])
+        takeaways = get_takeaways(self.analysis_data)
 
         content_parts = [
             f"**Video**: {metadata['video_title']}",
@@ -186,14 +221,9 @@ class EnhancedKBStorage:
         if takeaways:
             content_parts.append("## Key Takeaways")
             for i, takeaway in enumerate(takeaways, 1):
-                # Handle both string and dict format
-                if isinstance(takeaway, dict):
-                    takeaway_text = takeaway.get("takeaway", "")
-                    actionability = takeaway.get("actionability", "")
-                    if actionability:
-                        takeaway_text += f" [{actionability}]"
-                else:
-                    takeaway_text = str(takeaway)
+                takeaway_text = takeaway["text"]
+                if takeaway["kind"]:
+                    takeaway_text += f" [{takeaway['kind']}]"
                 content_parts.append(f"{i}. {takeaway_text}")
             content_parts.append("")
 
@@ -202,7 +232,7 @@ class EnhancedKBStorage:
         # Build tags with actionability metadata
         tags = self._create_base_tags("overview")
         has_actionable = any(
-            t.get("actionability") == "actionable" for t in takeaways if isinstance(t, dict)
+            t["kind"] == "actionable" for t in takeaways
         )
         if has_actionable:
             tags.append("has-actionable:true")
@@ -524,18 +554,13 @@ class EnhancedKBStorage:
         }
 
     def create_takeaway_memories(self) -> list[dict]:
-        """Create individual memories for actionable takeaways with spaced-repetition tags."""
-        takeaways = self.analysis_data.get("key_takeaways", [])
+        """Create individual memories for classified takeaways with spaced-repetition tags."""
         memories = []
-        for takeaway in takeaways:
-            if not isinstance(takeaway, dict):
-                continue
-            actionability = takeaway.get("actionability", "")
+        for takeaway in get_takeaways(self.analysis_data):
+            actionability = takeaway["kind"]
             if not actionability:
                 continue
-            takeaway_text = takeaway.get("takeaway", "")
-            if not takeaway_text:
-                continue
+            takeaway_text = takeaway["text"]
 
             tags = self._create_base_tags("takeaway")
             tags.append(f"takeaway-type:{actionability}")
@@ -654,12 +679,11 @@ def _build_note_content(storage: EnhancedKBStorage, memories: list) -> str:
         parts.append("")
 
     # Add key takeaways
-    takeaways = storage.analysis_data.get("key_takeaways", [])
+    takeaways = get_takeaways(storage.analysis_data)
     if takeaways:
         parts.append("## Key Takeaways")
         for i, t in enumerate(takeaways, 1):
-            text = t.get("takeaway", str(t)) if isinstance(t, dict) else str(t)
-            parts.append(f"{i}. {text}")
+            parts.append(f"{i}. {t['text']}")
         parts.append("")
 
     # Add tools list (compact)
