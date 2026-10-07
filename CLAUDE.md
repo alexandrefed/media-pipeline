@@ -19,6 +19,7 @@ uv run python main.py extract "URL"        # Extract transcript only
 
 | Task | Go to | Read first |
 |------|-------|-----------|
+| **How code runs, lints and builds here** (uv, lint, .mjs, library docs) | `~/Desktop/ClaudeMCP/dev/platform/unified-memory/docs/code-housekeeping.md` | `uv run ruff check src/` (the CI scope; the whole tree has 2010 findings) |
 | Process a video (Mac) | Use @media-ingestion-agent | `.claude/agents/media-ingestion-agent.md` |
 | Process via Telegram | Send URL to @vecia_media_pipeline_bot | Gaming-PC Hermes handles automatically |
 | Pipeline architecture | `.claude/agents/` | `media-ingestion-agent.md` (the spec) |
