@@ -21,6 +21,7 @@ uv run python main.py extract "URL"        # Extract transcript only
 |------|-------|-----------|
 | **How code runs, lints and builds here** (uv, lint, .mjs, library docs) | `~/Desktop/ClaudeMCP/dev/platform/unified-memory/docs/code-housekeeping.md` | `uv run ruff check src/` (the CI scope; the whole tree has 2010 findings) |
 | Process a video (Mac) | Use @media-ingestion-agent | `.claude/agents/media-ingestion-agent.md` |
+| Going deeper on an already processed video (full transcript, check each claim against a primary source, one dated verdict note) | the `video-deeper` skill | ~/.claude/skills/video-deeper/SKILL.md |
 | Process via Telegram | Send URL to @vecia_media_pipeline_bot | Gaming-PC Hermes handles automatically |
 | Pipeline architecture | `.claude/agents/` | `media-ingestion-agent.md` (the spec) |
 | Extraction fallbacks (IG/X/Loom) | `.claude/agents/references/` | `*-fallback.md` |
