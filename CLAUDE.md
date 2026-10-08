@@ -29,6 +29,10 @@ uv run python main.py extract "URL"        # Extract transcript only
 | Research + decisions | `docs/research/` + `docs/decisions/` | `INDEX.md` first |
 | Planning / roadmap | `.planning/` | `ROADMAP.md`, `PROJECT.md` |
 | Source code / scripts | `src/`, `scripts/` | `streamlined_process.py`, `store_in_mcp_kb.py` |
+| Database setup SQL | `deployment/sql/` | the file you need |
+| Usage examples | `examples/` | `basic_usage.py` |
+| Enhancer corrections dictionary + processing history | `learning/` | `processing_knowledge_base.json` |
+| Old guides and session notes (parked) | `archive/` | the file you need |
 | Ledger truth / "is it actually retrievable?" | `scripts/reconcile_ledger.py` | run it — file presence is not ingestion |
 | What "processed" means (stage gate) | `src/pipeline/completion.py` | full docstring — the stamp is written LAST or it is a lie |
 

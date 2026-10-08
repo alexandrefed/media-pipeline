@@ -1,5 +1,9 @@
 # Roadmap: media-pipeline
 
+## Direction
+
+Folded into agentic-platform (Alexandre, 2026-08-22): no standalone milestone work. The live direction is turning processed videos into skills and fixing the graph so it can triage them (see CONTEXT.md).
+
 ## Overview
 
 Wire existing extraction, processing, and storage components to a Telegram-first intake flow via OpenClaw, then layer on scheduled delivery, automated watching, operations hardening, and template extraction. This is primarily a brownfield wiring project -- most components exist and work. The work is configuration, routing, verification, and filling gaps (short-form mode, actionability tagging, spaced repetition, creator polling).
