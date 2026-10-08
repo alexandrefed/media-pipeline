@@ -45,7 +45,7 @@ All processed content lives in `workspace/videos/` with this naming:
 - Index: `workspace/index.json`
 
 ## Storage Targets (per video)
-Filesystem (`workspace/videos/`, Mutagen-synced) · unified-memory pgvector (gaming-PC `100.112.33.86:8085`) · QMD full-text (`media-pipeline` collection) · Notion (via unified-memory) · Neo4j (disabled per V2).
+Filesystem (`workspace/videos/`: canonical copy on the gaming-PC at `/home/alexandre/projects/workflows/media-pipeline/workspace/videos/`, the ledger `workspace/index.json` lives there too; the Mac copy is partial and NOT synced, no Mutagen session covers it, so copy a Mac-built folder over with `rsync`) · unified-memory pgvector (gaming-PC `100.112.33.86:8085`) · QMD full-text (`media-pipeline` collection) · Notion (via unified-memory) · Neo4j brain graph (extraction ON since 2026-07-13; per-writer split and duplicates being fixed in unified-memory task 46b4c5d8).
 
 ## Conventions
 - Package manager: uv (never pip). No n8n — Hermes gateway handles Telegram intake.
