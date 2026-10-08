@@ -114,9 +114,7 @@ def inspect(
     vid = video_id_of(folder)
     c = Completion(folder=folder.name, video_id=vid)
 
-    c.transcript = _real(folder / "transcript_enhanced.txt") or _real(
-        folder / "transcript_raw.txt"
-    )
+    c.transcript = _real(folder / "transcript_enhanced.txt") or _real(folder / "transcript_raw.txt")
     c.analysis = has_analysis(folder)
     c.summary = _real(folder / "summary.md")
     c.indexed = folder.name in (indexed_folders or set())

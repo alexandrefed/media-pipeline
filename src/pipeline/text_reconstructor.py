@@ -24,12 +24,14 @@ class TextReconstructor:
             cleaned = self._clean_text(segment["raw_text"])
             if cleaned and cleaned not in seen_texts:
                 seen_texts.add(cleaned)
-                clean_segments.append({
-                    "segment_index": segment["segment_index"],
-                    "start_time": segment["start_time"],
-                    "end_time": segment["end_time"],
-                    "text": cleaned,
-                })
+                clean_segments.append(
+                    {
+                        "segment_index": segment["segment_index"],
+                        "start_time": segment["start_time"],
+                        "end_time": segment["end_time"],
+                        "text": cleaned,
+                    }
+                )
 
         print(
             f"✅ Extracted {len(clean_segments)} clean segments from {len(raw_segments)} raw segments"

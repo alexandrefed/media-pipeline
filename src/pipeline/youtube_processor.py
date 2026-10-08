@@ -242,9 +242,7 @@ class YouTubeProcessor:
         # four separate times and then persisted across every later run. Sanitize
         # to one filesystem-safe segment for the folder; the raw id still goes
         # into metadata below. Clean YouTube ids are unaffected.
-        safe_id = (
-            _re.sub(r"[^A-Za-z0-9._-]", "-", str(video_id)).strip("-")[:64] or "unknown"
-        )
+        safe_id = _re.sub(r"[^A-Za-z0-9._-]", "-", str(video_id)).strip("-")[:64] or "unknown"
         title = raw_data["metadata"].get("title", "unknown")
         channel = raw_data["metadata"].get("channel_name", "unknown")
         published = raw_data["metadata"].get("published_date", "")
@@ -279,7 +277,8 @@ class YouTubeProcessor:
             f.write(text_data["full_text"])
 
         import json
-        from datetime import datetime, timezone
+        from datetime import UTC, datetime
+
         metadata = {
             "video_id": video_id,
             "title": title,
@@ -296,7 +295,7 @@ class YouTubeProcessor:
             # `processed_at` is written LAST, by
             # src.pipeline.completion.stamp_if_complete, after the artifacts are
             # verified to exist and the material is retrievable from memory.
-            "transcript_extracted_at": datetime.now(timezone.utc).isoformat(),
+            "transcript_extracted_at": datetime.now(UTC).isoformat(),
         }
         (video_dir / "metadata.json").write_text(json.dumps(metadata, indent=2))
 

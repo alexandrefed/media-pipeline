@@ -69,9 +69,7 @@ class AutoEnhancer:
         return set()
 
     @classmethod
-    def _guard_common_words(
-        cls, common_errors: dict, allow: list
-    ) -> tuple[dict, list[str]]:
+    def _guard_common_words(cls, common_errors: dict, allow: list) -> tuple[dict, list[str]]:
         """Drop single-word corrections that would rewrite ordinary English."""
         words = cls._english_words()
         if not words:
@@ -135,7 +133,7 @@ class AutoEnhancer:
 
         # Apply common error corrections (word-boundary matching to avoid substring corruption)
         for error, correction in self.common_errors.items():
-            pattern = re.compile(r'\b' + re.escape(error) + r'\b')
+            pattern = re.compile(r"\b" + re.escape(error) + r"\b")
             matches = pattern.findall(enhanced_text)
             if matches:
                 count = len(matches)
