@@ -66,6 +66,14 @@ def _token() -> str:
 def memory_count(video_id: str, *, api: str, token: str, attempts: int = 6) -> int | None:
     """How many memories carry this video's tag. ``None`` = could not ask.
 
+    This is NOT the number of sections the store script wrote. The memory
+    service derives short facts from each stored section and gives them the
+    same ``video:<id>`` tag, so the count runs about 20 to 25 times the
+    sections: goldcast-6c25235e had 19 sections and 465 tagged memories, all
+    created within 30 s of the store (measured in the database, 2026-10-12,
+    task 7dec0486). The total IS filtered by the tag (it does not move with the
+    query; an unknown tag gives 0), so it is a true count, not search hits.
+
     ``None`` is deliberately distinct from ``0``: "the store did not answer" and
     "the store answered, nothing is there" must never collapse into the same
     value, or an API blip silently reports the whole corpus as unretrievable —

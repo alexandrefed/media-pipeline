@@ -107,7 +107,9 @@ def inspect(
 ) -> Completion:
     """Derive one video's stage truth from what is actually on disk and in the store.
 
-    ``memory_counts`` maps video_id -> number of memories carrying its tag. It is
+    ``memory_counts`` maps video_id -> number of memories carrying its tag (the
+    stored sections plus the facts the memory service derives from them, so
+    about 20 to 25 per section; see reconcile_ledger.memory_count). It is
     passed in rather than looked up here so this stays a pure function and the
     network round-trips happen once, in the caller.
     """
