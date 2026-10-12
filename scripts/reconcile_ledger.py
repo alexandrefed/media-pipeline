@@ -157,6 +157,9 @@ def main() -> int:
         vid = video_id_of(folder)
         if not vid or vid in counts:
             continue
+        # Paced: back to back, a 200-folder sweep exhausted one lookup's retries
+        # on the rate limit and the run refused to write (2026-10-12, ebdfe7a3).
+        time.sleep(0.3)
         n = memory_count(vid, api=args.api, token=token)
         if n is None:
             unknown_memory += 1
