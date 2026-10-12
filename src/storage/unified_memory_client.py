@@ -42,7 +42,15 @@ def _keychain_token() -> str:
         return ""
     try:
         out = subprocess.run(  # noqa: S603 — fixed argv, no shell
-            ["/usr/bin/security", "find-generic-password", "-s", _KEYCHAIN_SERVICE, "-a", "default", "-w"],
+            [
+                "/usr/bin/security",
+                "find-generic-password",
+                "-s",
+                _KEYCHAIN_SERVICE,
+                "-a",
+                "default",
+                "-w",
+            ],
             capture_output=True,
             text=True,
             timeout=10,
@@ -184,7 +192,9 @@ def split_for_store(text: str, limit: int = MEMORY_CHAR_LIMIT) -> list[str]:
     if current:
         chunks.append(current)
     n = len(chunks)
-    return [chunks[0]] + [f"{head} (part {i} of {n})\n\n{c}" for i, c in enumerate(chunks[1:], start=2)]
+    return [chunks[0]] + [
+        f"{head} (part {i} of {n})\n\n{c}" for i, c in enumerate(chunks[1:], start=2)
+    ]
 
 
 def store_memory(
