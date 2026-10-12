@@ -8,7 +8,7 @@ Folded into agentic-platform (Alexandre, 2026-08-22). Since 2026-10-04 the proce
 
 ## Where things are now
 - Canonical video folders and the ledger `workspace/index.json` are on the gaming-PC (`/home/alexandre/projects/workflows/media-pipeline/workspace/`); the Mac copy is partial and not synced.
-- Graph side (Neo4j brain): fix being landed by the unified-memory session (its task f0ee463b, war room `neo4j`); this repo owns the video side (tag forms, titles from the triage JSON). Pipeline faults found 2026-10-08: task 7dec0486.
+- Graph side (Neo4j brain): fix landed 8 Oct by the unified-memory session (f0ee463b); what is left on the video side (untitled Video nodes, graph_search not listing videos, stale links after edits) is with that session as its task abc5c245, report in `docs/reviews/2026-10-10-report-for-unified-memory.md`. Open here: empty YouTube twin folders for reels (ebdfe7a3).
 
 ## What to read first
 1. `.claude/agents/media-ingestion-agent.md` — the pipeline spec
