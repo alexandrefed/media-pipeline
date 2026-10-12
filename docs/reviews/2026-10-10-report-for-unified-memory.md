@@ -18,12 +18,16 @@ Context: today I processed a second Neo4j workshop, "Stop AI Agent Hallucination
 
 ## 3. Stale entities after a memory content correction
 
+- **Correction 2026-10-12 (measured in memory_system):** a content PUT DOES re-extract (the edited rows show graph_extracted_at 09:40 to 09:43 on 10 Oct, after the edit). The stale entities remain because re-extraction adds links without removing the memory's previous ones. PUT also leaves updated_at unchanged. The bullets below are kept as first written.
+
 - I rewrote 26 memories of `goldcast-6c25235e` with PUT /v1/memories/{id} (content) and retagged 129 (tool tag `tool-open-decision-/-decider-model-(name-uncertain)` → `tool-jev-(typesafe-ai)`, `tool-strands-decider-(strands-labs,-aws)`, `tool-openai-decision-api`). 0 failures.
 - The graph still links the video to the old extraction: entities "Decider Model" (Tool) and "Open decision / decider model" (Technology). A content PUT does not seem to re-extract.
 - Ask: re-extract those memories (`/v1/memories/{id}/reextract` exists) or drop the two stale entities, and decide whether a content PUT should trigger re-extraction. The 26 ids: 5ce54b74-4332-4dc3-a09e-285941941b19, 1cedcf1f-5d07-4da1-8f97-f370bd994e94, 27e74690-bea2-484c-84df-1f8da517d0d7, 2b18f56f-c449-46cb-92bc-e0bbf0df62a7, 1a529ae2-84dd-4dbf-8378-9309c5ebce36, 6f8be324-22be-49b2-8ff1-e12b4662cdcb, b8c2d7b1-28ca-47aa-85db-c5ca74a2df6b, 1b95513f-5d3b-4701-a0a0-4b987e444926, bc6cf4ac-ce2a-4eae-9e0c-7a5a2256c48a, 60ecb3c2-7967-4bd3-bd0f-a486c9df67ee, 11cc4cea-3395-45d1-acff-eb8fe87606e1, d0528410-a074-4d2a-844f-dc153cb76e4b, 7a9969cc-1411-4def-924e-a61bf9fff5fb, 5a0856db-e563-423c-a36e-22d86a1ede3a, 2a37f6e5-b4ef-4505-8c38-aceeae391777, de90d5a8-01c2-49a9-a5b6-5dd0c65bbfb5, cd3df702-c37a-42c3-a6ac-135a2288e148, 0fb30531-5522-4779-af03-b487b99473e0, 7ed57ada-32e1-4461-b37e-19cf5fb6e419, b76cc875-28a6-473c-b75b-c6e51245d636, eee49d9f-72dc-4c59-9fcc-39cdcc7252fd, 0b683979-92d0-429a-b8dd-57ea25b75f53, 75fe3aea-3dc1-4a35-a737-df2e07e99a0d, 3b59c738-0c03-4647-8e3d-4cd56977213a, 891e3082-31a5-4641-aa3e-700cbfe0555f, cb40b75b-681a-439b-aab8-a082a935ebf7.
 - Not corrected: the Notion-synced note `1bda57f6` (its stored text is cut before the passage, so nothing matched).
 
 ## 4. Rate limit hit while correcting one video (by design, but no bulk path)
+
+- **Correction 2026-10-12:** one stored video is 19 sections and 465 tagged memories, not 155 (453 distinct, all created within 30 s of the store); search only surfaced 155. The ledger's tag count is true. The remaining 310 were retagged on 2026-10-12.
 
 - One processed video = 155 memories (19 sections the store script reports + ~136 facts extracted from them), each carrying the video's ~26 tool tags. Correcting a name meant ~310 single GET/PUT calls; the first unpaced run got 429 on tier `primary-interactive` within seconds (120/min per `.env.example`, halved per worker) and would have starved other claude-main sessions on that tier. Paced at 0.6 s with backoff it completed.
 - Ask (your call): a bulk retag/rename endpoint (e.g. replace tag X with Y where tag video:… ), or a documented pacing helper in the SDK. Related: media-pipeline's ledger counts 19 memories per video where there are ~155 (its task 7dec0486).
