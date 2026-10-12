@@ -27,7 +27,12 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # Import unified memory client for direct API storage
 try:
-    from src.storage.unified_memory_client import health_check, store_memory, store_note
+    from src.storage.unified_memory_client import (
+        health_check,
+        split_for_store,
+        store_memory,
+        store_note,
+    )
 
     API_AVAILABLE = True
 except ImportError:
@@ -807,23 +812,30 @@ def main():
             # competes badly against focused ones in a semantic ranking, so the
             # blob is present-but-unfindable — ingested into nothing, with a
             # row in the ledger saying otherwise.
-            stored, failed = 0, []
+            # A section over the 5,000-character memory limit is stored in parts
+            # rather than cut off (task 7dec0486).
+            stored, failed, parts_written = 0, [], 0
             for section in memories:
                 try:
-                    store_memory(
-                        content=section["content"],
-                        tags=section.get("tags", []),
-                        namespace="/alex/openclaw/videos/",
-                        metadata={
-                            "video_id": storage.video_id,
-                            "area": area,
-                            "type": section.get("type", "video-knowledge"),
-                        },
-                    )
+                    for part in split_for_store(section["content"]):
+                        store_memory(
+                            content=part,
+                            tags=section.get("tags", []),
+                            namespace="/alex/openclaw/videos/",
+                            metadata={
+                                "video_id": storage.video_id,
+                                "area": area,
+                                "type": section.get("type", "video-knowledge"),
+                            },
+                        )
+                        parts_written += 1
                     stored += 1
                 except Exception as exc:  # noqa: BLE001
                     failed.append(f"{section.get('type', '?')}: {exc}")
-            print(f"✅ {stored}/{len(memories)} memories stored (agent retrieval)")
+            print(
+                f"✅ {stored}/{len(memories)} sections stored as {parts_written} memories (agent retrieval); "
+                "the memory service later adds facts it derives from them under the same video tag"
+            )
             if failed:
                 # A partial write is the worst outcome to report as success: the
                 # ledger would say retrievable and half the material would be

@@ -53,4 +53,5 @@ Filesystem (`workspace/videos/`: canonical copy on the gaming-PC at `/home/alexa
 
 ## Conventions
 - Package manager: uv (never pip). No n8n — Hermes gateway handles Telegram intake.
-- `.claude/` not synced via Mutagen — push agent updates via `scp` to gaming-PC (`ssh gaming-pc`).
+- Two copies on the gaming-PC, neither synced from the Mac: `~/projects/media-pipeline/` is a git clone of this repo (pull to update; it holds `.claude/agents/`), and `~/projects/workflows/media-pipeline/` is the NON-git working copy Hermes runs (code, `.env`, `workspace/`), so a code change reaches it only by copying the changed files over with `rsync`/`scp` after a `diff`. Hermes follows its own instructions in `~/.hermes/skills/media/media-pipeline/`, not `.claude/agents/`.
+- Memory writes on the Mac need no key by hand: the client reads the keychain item `mcp-api/gateway-token` and sends it as `claude-main`; the box uses `~/.config/unified-memory/token`. Sections over 5,000 characters are stored in parts, and the memory service then adds facts it derives from them under the same `video:<id>` tag, so a tag count is several times the sections written.
