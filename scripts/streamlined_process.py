@@ -16,6 +16,9 @@ import sys
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from src.pipeline.platform_code import platform_code  # noqa: E402
+
 
 def extract_youtube_video_id(url: str) -> str:
     """Extract the video ID from any common YouTube URL form.
@@ -115,6 +118,7 @@ def main():
 
         # Reuse existing folder if video was already processed
         existing = list(Path("workspace/videos").glob(f"*--{video_id}--*"))
+        created_here = not existing
         if existing:
             video_dir = existing[0]
             print(f"   Reusing existing folder: {video_dir}")
@@ -123,7 +127,7 @@ def main():
             title_slug = re.sub(r"[^a-z0-9 -]", "", title.lower()).replace(" ", "-")
             title_slug = "-".join(re.sub(r"-+", "-", title_slug).strip("-").split("-")[:8])
 
-            folder_name = f"{upload_date}--{video_id}--yt--{channel_slug}--{title_slug}"
+            folder_name = f"{upload_date}--{video_id}--{platform_code(youtube_url)}--{channel_slug}--{title_slug}"
             video_dir = Path("workspace/videos") / folder_name
             video_dir.mkdir(parents=True, exist_ok=True)
 
@@ -132,7 +136,7 @@ def main():
         from datetime import datetime, timezone
         metadata = {
             "video_id": video_id, "title": title, "channel": channel,
-            "platform": "yt", "upload_date": upload_date, "url": youtube_url,
+            "platform": platform_code(youtube_url), "upload_date": upload_date, "url": youtube_url,
             # See src/pipeline/completion.py: this is step 1 of 4, so the only
             # honest thing to record here is that the transcript was extracted.
             "transcript_extracted_at": datetime.now(timezone.utc).isoformat(),
@@ -146,6 +150,14 @@ def main():
             "Downloading captions",
         )
         if not cap_ok or not vtt_file.exists():
+            # Do not leave the folder this run just made with nothing but
+            # metadata.json in it: the Instagram path then builds the real one
+            # and this empty twin stays behind (task ebdfe7a3).
+            leftover = {p.name for p in video_dir.iterdir()}
+            if created_here and leftover <= {"metadata.json"}:
+                (video_dir / "metadata.json").unlink(missing_ok=True)
+                video_dir.rmdir()
+                print(f"   Removed the empty folder this run created: {video_dir.name}")
             print(f"❌ No captions available for {youtube_url}")
             print("   → If this is Instagram/X/Loom, use the browser/CDN fallback:")
             print("     .claude/agents/references/*-fallback.md")

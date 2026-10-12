@@ -8,6 +8,7 @@ from datetime import datetime
 
 from .chapter_extractor import ChapterExtractor
 from .hierarchical_chunker import HierarchicalChunker
+from .platform_code import platform_code
 from .raw_transcript_extractor import RawTranscriptExtractor
 from .text_reconstructor import TextReconstructor
 
@@ -262,7 +263,9 @@ class YouTubeProcessor:
         if existing:
             video_dir = existing[0]
         else:
-            folder_name = f"{upload_date}--{safe_id}--yt--{channel_slug}--{title_slug}"
+            folder_name = (
+                f"{upload_date}--{safe_id}--{platform_code(url)}--{channel_slug}--{title_slug}"
+            )
             video_dir = videos_dir / folder_name
             video_dir.mkdir(parents=True, exist_ok=True)
 
@@ -283,7 +286,7 @@ class YouTubeProcessor:
             "video_id": video_id,
             "title": title,
             "channel": channel,
-            "platform": "yt",
+            "platform": platform_code(url),
             "upload_date": upload_date,
             "url": url,
             # NOT `processed_at`. This runs at step 1 of 4, the instant the raw
