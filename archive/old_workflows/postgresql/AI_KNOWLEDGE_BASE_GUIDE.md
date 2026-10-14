@@ -88,7 +88,7 @@ docker exec -it -e PGPASSWORD='AIKnowledgeBase2025SecurePassword' vecia_aidb \
 
 #### Connection String
 ```
-postgresql://ai_admin:AIKnowledgeBase2025SecurePassword@85.25.172.47:5433/aidb
+postgresql://ai_admin:<in Infisical /media-pipeline as AIDB_ADMIN_PASSWORD>@85.25.172.47:5433/aidb
 ```
 
 ### 2. Python Connection
@@ -432,7 +432,7 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # Connect to database
 conn = psycopg2.connect(
-    "postgresql://ai_admin:AIKnowledgeBase2025SecurePassword@85.25.172.47:5433/aidb"
+    "postgresql://ai_admin:<in Infisical /media-pipeline as AIDB_ADMIN_PASSWORD>@85.25.172.47:5433/aidb"
 )
 register_vector(conn)
 cur = conn.cursor()
