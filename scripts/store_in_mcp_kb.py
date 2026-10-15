@@ -117,14 +117,35 @@ class EnhancedKBStorage:
             impl_details = self.analysis_data.get("implementation_details", {})
             metadata = impl_details.get("metadata", {})
 
+        # Then the analysis's own top-level fields, then the folder's metadata.json.
+        # Without these, both Goldcast workshops (goldcast-2191db0b, goldcast-6c25235e)
+        # were stored as "Video goldcast-…", channel:unknown-channel and a YouTube
+        # watch link, although their analysis.json carried title, channel and url.
+        folder_meta: dict = {}
+        meta_path = self.analysis_file.parent / "metadata.json"
+        if meta_path.is_file():
+            try:
+                folder_meta = json.loads(meta_path.read_text())
+            except ValueError:
+                folder_meta = {}
+
+        def pick(*keys: str) -> str:
+            for source in (metadata, self.analysis_data, folder_meta):
+                for key in keys:
+                    value = source.get(key)
+                    if isinstance(value, str) and value:
+                        return value
+            return ""
+
+        platform = pick("video_platform", "platform") or "youtube"
         return {
-            "video_title": metadata.get(
-                "video_title", metadata.get("title", f"Video {self.video_id}")
-            ),
-            "channel": metadata.get("channel", "Unknown Channel"),
-            "video_id": metadata.get("video_id", self.video_id),
-            "content_type": metadata.get("content_type", "Technical Tutorial"),
-            "video_url": metadata.get("video_url", f"https://youtube.com/watch?v={self.video_id}"),
+            "video_title": pick("video_title", "title") or f"Video {self.video_id}",
+            "channel": pick("channel") or "Unknown Channel",
+            "video_id": pick("video_id") or self.video_id,
+            "content_type": pick("content_type") or "Technical Tutorial",
+            "video_url": pick("video_url", "url") or f"https://youtube.com/watch?v={self.video_id}",
+            "video_creator": pick("video_creator", "creator", "channel"),
+            "video_platform": platform,
         }
 
     def _extract_entity_tags(self) -> list[str]:
@@ -203,6 +224,9 @@ class EnhancedKBStorage:
 
         # Add entity tags
         base_tags.extend(entity_tags)
+        # Tags the analysis asks for on every memory, e.g. a second project the
+        # video serves ("project:mutora-kg").
+        base_tags.extend(t for t in self.analysis_data.get("extra_tags", []) if t not in base_tags)
 
         return base_tags
 
@@ -773,7 +797,7 @@ def main():
             note_metadata = {
                 "area": area,
                 "video_id": storage.video_id,
-                "source": "youtube",
+                "source": metadata["video_platform"],
                 "url": metadata["video_url"],
                 "channel": metadata["channel"],
                 "format": "long",
@@ -826,6 +850,12 @@ def main():
                                 "video_id": storage.video_id,
                                 "area": area,
                                 "type": section.get("type", "video-knowledge"),
+                                # unified-memory's graph builder titles the Video node
+                                # from these four (graph_extraction._VIDEO_META_KEYS).
+                                "video_title": metadata["video_title"],
+                                "video_creator": metadata["video_creator"],
+                                "video_platform": metadata["video_platform"],
+                                "video_url": metadata["video_url"],
                             },
                         )
                         parts_written += 1

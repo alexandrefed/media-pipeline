@@ -19,7 +19,9 @@ def vtt_to_text(vtt_content: str) -> str:
         line = line.strip()
         if not line:
             continue
-        if line.startswith("WEBVTT") or line.startswith("Kind:") or line.startswith("Language:"):
+        # X-TIMESTAMP-MAP is the HLS header Goldcast tracks carry; it leaked into both
+        # earlier Goldcast transcripts as their first words.
+        if line.startswith(("WEBVTT", "Kind:", "Language:", "X-TIMESTAMP-MAP")):
             continue
         if re.match(r"^\d{2}:\d{2}:\d{2}\.\d{3}\s+-->\s+\d{2}:\d{2}:\d{2}\.\d{3}", line):
             continue
