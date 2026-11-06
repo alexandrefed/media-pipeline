@@ -16,6 +16,7 @@ class RawTranscriptExtractor:
 
     def __init__(self):
         """Initialize the extractor with yt-dlp options."""
+        self._info_cache: dict[str, dict] = {}
         self.ydl_opts = {
             "writesubtitles": True,
             "writeautomaticsub": True,
@@ -39,11 +40,17 @@ class RawTranscriptExtractor:
 
         raise ValueError(f"Could not extract video ID from URL: {url}")
 
+    def _get_info(self, ydl, url: str) -> dict:
+        """One YouTube request per URL, shared by metadata and subtitle steps."""
+        if url not in self._info_cache:
+            self._info_cache[url] = ydl.extract_info(url, download=False)
+        return self._info_cache[url]
+
     def extract_video_metadata(self, url: str) -> dict:
         """Extract basic video metadata."""
         with yt_dlp.YoutubeDL(self.ydl_opts) as ydl:
             try:
-                info = ydl.extract_info(url, download=False)
+                info = self._get_info(ydl, url)
 
                 # Parse the published date
                 upload_date_str = info.get("upload_date", "")
@@ -72,7 +79,7 @@ class RawTranscriptExtractor:
         """Extract raw VTT segments with absolutely no processing."""
         with yt_dlp.YoutubeDL(self.ydl_opts) as ydl:
             try:
-                info = ydl.extract_info(url, download=False)
+                info = self._get_info(ydl, url)
 
                 # Track order (2026-11-06): YouTube now rate limits (HTTP 429) or
                 # returns an empty HLS playlist for the machine-TRANSLATED
@@ -89,10 +96,7 @@ class RawTranscriptExtractor:
                         candidates.append((f"auto {lang}", auto[lang]))
                 if auto.get("en"):
                     candidates.append(("auto en", auto["en"]))
-                if not candidates:
-                    raise Exception("No usable subtitles available")
-
-                last_error = None
+                last_error = "no subtitle tracks"
                 for label, tracks in candidates:
                     # Prefer vtt, else the first available
                     track = next((t for t in tracks if t.get("ext") == "vtt"), tracks[0])
@@ -108,11 +112,19 @@ class RawTranscriptExtractor:
                     if segments:
                         return segments
                     last_error = f"{label}: no cues"
-                raise Exception(f"All subtitle tracks failed ({last_error})")
+                # No usable subtitles: transcribe the audio instead (same shape).
+                print(f"   No usable subtitles ({last_error}); transcribing the audio")
+                return self._transcribe_audio(url)
 
 
             except Exception as e:
                 raise Exception(f"Failed to extract transcript: {str(e)}") from e
+
+    def _transcribe_audio(self, url: str) -> list[dict]:
+        """Audio fallback (faster-whisper); a seam so tests need no network."""
+        from .audio_transcriber import transcribe_url
+
+        return transcribe_url(url)
 
     def _parse_raw_vtt(self, vtt_content: str) -> list[dict]:
         """Parse VTT content into raw segments with ZERO processing."""
