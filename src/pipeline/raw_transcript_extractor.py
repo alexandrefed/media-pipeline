@@ -74,28 +74,42 @@ class RawTranscriptExtractor:
             try:
                 info = ydl.extract_info(url, download=False)
 
-                # Get automatic subtitles first, fall back to manual
-                subtitles = info.get("automatic_captions", {}).get("en", [])
-                if not subtitles:
-                    subtitles = info.get("subtitles", {}).get("en", [])
+                # Track order (2026-11-06): YouTube now rate limits (HTTP 429) or
+                # returns an empty HLS playlist for the machine-TRANSLATED
+                # auto-caption "en". Use a human-made English track first, then the
+                # speech-recognition track in the video's own language ("en-orig",
+                # "fr-orig", ...), and only then plain "en".
+                manual = info.get("subtitles", {})
+                auto = info.get("automatic_captions", {})
+                candidates = []
+                if manual.get("en"):
+                    candidates.append(("manual en", manual["en"]))
+                for lang in sorted(auto):
+                    if lang.endswith("-orig"):
+                        candidates.append((f"auto {lang}", auto[lang]))
+                if auto.get("en"):
+                    candidates.append(("auto en", auto["en"]))
+                if not candidates:
+                    raise Exception("No usable subtitles available")
 
-                if not subtitles:
-                    raise Exception("No English subtitles available")
+                last_error = None
+                for label, tracks in candidates:
+                    # Prefer vtt, else the first available
+                    track = next((t for t in tracks if t.get("ext") == "vtt"), tracks[0])
+                    try:
+                        content = ydl.urlopen(track["url"]).read().decode("utf-8")
+                    except Exception as e:  # 429 etc.: try the next track
+                        last_error = f"{label}: {e}"
+                        continue
+                    if not content.lstrip().startswith("WEBVTT"):
+                        last_error = f"{label}: not a WEBVTT file"
+                        continue
+                    segments = self._parse_raw_vtt(content)
+                    if segments:
+                        return segments
+                    last_error = f"{label}: no cues"
+                raise Exception(f"All subtitle tracks failed ({last_error})")
 
-                # Find the best subtitle format (prefer vtt)
-                subtitle_info = None
-                for sub in subtitles:
-                    if sub.get("ext") == "vtt":
-                        subtitle_info = sub
-                        break
-                if not subtitle_info:
-                    subtitle_info = subtitles[0]  # Take the first available
-
-                # Download subtitle content
-                subtitle_url = subtitle_info["url"]
-                subtitle_content = ydl.urlopen(subtitle_url).read().decode("utf-8")
-
-                return self._parse_raw_vtt(subtitle_content)
 
             except Exception as e:
                 raise Exception(f"Failed to extract transcript: {str(e)}") from e

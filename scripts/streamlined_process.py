@@ -146,9 +146,15 @@ def main():
         # Download captions via yt-dlp
         vtt_file = video_dir / "subs.en.vtt"
         cap_ok, _ = run_command(
-            f'yt-dlp --write-auto-sub --sub-lang en --skip-download --sub-format vtt -o "{video_dir}/subs" "{youtube_url}"',
+            f'yt-dlp --write-subs --write-auto-subs --sub-langs "en,en-orig" --ignore-errors --sleep-subtitles 2 --skip-download --sub-format vtt -o "{video_dir}/subs" "{youtube_url}"',
             "Downloading captions",
         )
+        # YouTube rate limits (429) the machine-translated "en" track; the
+        # video's own-language track ("en-orig") or a human "en" still works.
+        if not vtt_file.exists():
+            alt = next(iter(sorted(video_dir.glob("subs.en*.vtt"))), None)
+            if alt is not None:
+                alt.rename(vtt_file)
         if not cap_ok or not vtt_file.exists():
             # Do not leave the folder this run just made with nothing but
             # metadata.json in it: the Instagram path then builds the real one
