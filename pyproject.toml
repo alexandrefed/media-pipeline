@@ -39,6 +39,7 @@ dependencies = [
     "assemblyai>=0.45.5",
     "reportlab>=4.4.4",
     "faster-whisper>=1.2.1",
+    "av>=14,<18",  # faster-whisper 1.2.1 calls av.open(metadata_errors=...), removed in av 19
 ]
 
 [project.urls]
