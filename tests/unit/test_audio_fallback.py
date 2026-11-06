@@ -71,3 +71,10 @@ def test_whisper_segments_have_subtitle_shape():
         "text_lines", "raw_text", "timestamp_line",
     }
     assert raw[0]["timestamp_line"] == "00:00:01.000 --> 00:00:02.500"
+
+
+def test_force_audio_env_skips_good_subtitles(monkeypatch):
+    monkeypatch.setenv("MEDIA_PIPELINE_FORCE_AUDIO", "1")
+    info = {"subtitles": {"en": [{"ext": "vtt", "url": "u"}]}, "automatic_captions": {}}
+    _, calls = _run(monkeypatch, info)
+    assert calls

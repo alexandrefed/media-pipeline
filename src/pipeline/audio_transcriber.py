@@ -99,5 +99,5 @@ def transcribe_url(url: str, workspace: Path | None = None) -> list[dict]:
     audio = download_audio(url, audio_dir)
     segments = transcribe_audio_file(audio)
     if not segments:
-        raise Exception("Audio transcription produced no text")
+        raise Exception("Audio transcription found no speech in the audio")
     return segments

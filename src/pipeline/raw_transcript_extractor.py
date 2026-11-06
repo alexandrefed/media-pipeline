@@ -4,6 +4,7 @@ Extracts raw VTT segments exactly as YouTube provides them
 """
 
 import json
+import os
 import re
 from datetime import datetime
 from urllib.parse import parse_qs, urlparse
@@ -89,6 +90,11 @@ class RawTranscriptExtractor:
                 manual = info.get("subtitles", {})
                 auto = info.get("automatic_captions", {})
                 candidates = []
+                # MEDIA_PIPELINE_FORCE_AUDIO=1 skips subtitles and transcribes the
+                # audio (for captions known to be wrong, and for testing the fallback).
+                force_audio = os.environ.get("MEDIA_PIPELINE_FORCE_AUDIO") == "1"
+                if force_audio:
+                    manual, auto = {}, {}
                 if manual.get("en"):
                     candidates.append(("manual en", manual["en"]))
                 for lang in sorted(auto):
