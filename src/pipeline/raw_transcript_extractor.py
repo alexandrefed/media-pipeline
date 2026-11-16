@@ -122,7 +122,6 @@ class RawTranscriptExtractor:
                 print(f"   No usable subtitles ({last_error}); transcribing the audio")
                 return self._transcribe_audio(url)
 
-
             except Exception as e:
                 raise Exception(f"Failed to extract transcript: {str(e)}") from e
 
