@@ -97,9 +97,17 @@ class RawTranscriptExtractor:
                     manual, auto = {}, {}
                 if manual.get("en"):
                     candidates.append(("manual en", manual["en"]))
-                for lang in sorted(auto):
-                    if lang.endswith("-orig"):
-                        candidates.append((f"auto {lang}", auto[lang]))
+                # A video with dubbed audio gets one "-orig" track per audio track
+                # ("ar-orig", "en-orig", ...); alphabetical order picked a dub
+                # (2026-11-17). Order: the video's own language, then "en-orig",
+                # then any other "-orig" track.
+                video_lang = (info.get("language") or "").split("-")[0].lower()
+                orig_langs = [lang for lang in sorted(auto) if lang.endswith("-orig")]
+                preferred = [f"{video_lang}-orig", "en-orig"] if video_lang else ["en-orig"]
+                ordered = [lang for lang in preferred if lang in orig_langs]
+                ordered += [lang for lang in orig_langs if lang not in ordered]
+                for lang in ordered:
+                    candidates.append((f"auto {lang}", auto[lang]))
                 if auto.get("en"):
                     candidates.append(("auto en", auto["en"]))
                 last_error = "no subtitle tracks"
