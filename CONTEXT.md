@@ -18,4 +18,6 @@ Folded into agentic-platform (Alexandre, 2026-08-22). Since 2026-10-04 the proce
 ## Process
 URL → extract (yt-dlp captions or faster-whisper) → enhance (`src/processing/auto_enhancer.py`) → analyse (LLM → `analysis.json`) → summarise (`summary.md`) → store (`scripts/store_in_mcp_kb.py`) → stamp processed last (`src/pipeline/completion.py`).
 
+Caption track order (fixed 2026-11-17, task 1673049d; before it, alphabetical order made `ar-orig` win on dubbed videos and `wIPr9GmLRaQ` came out in Arabic): manual `en`, the video's own `<language>-orig`, `en-orig`, other `-orig`, auto `en`. Evidence: `uv run pytest tests/unit` gave 43 passed; `main.py extract` on `wIPr9GmLRaQ` on the box wrote an English `transcript_raw.txt`. `O_zcc6Xl12g` and `RiaTyJ2POVo` had the same fault and need `extract` re-run. The audio fallback (`bestaudio/best`) is not changed and not tested on a dub.
+
 History of this file: `docs/reviews/2026-10-08-context-before-trim.md` and git log.
