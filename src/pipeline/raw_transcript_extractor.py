@@ -3,6 +3,7 @@ Raw YouTube Transcript Extractor - Zero Processing
 Extracts raw VTT segments exactly as YouTube provides them
 """
 
+import html
 import json
 import os
 import re
@@ -196,7 +197,39 @@ class RawTranscriptExtractor:
 
             i += 1
 
-        return raw_segments
+        return self._collapse_rolling(raw_segments)
+
+    _INLINE_TAG = re.compile(r"<\d{2}:\d{2}:\d{2}\.\d{3}>")
+    _ANY_TAG = re.compile(r"<[^>]+>")
+
+    def _collapse_rolling(self, segments: list[dict]) -> list[dict]:
+        """YouTube auto-captions roll: every cue repeats the previous line, and the
+        new words carry inline <00:00:01.240><c> timing tags. Keep only the tagged
+        line of each tagged cue (its new words), drop the repeat-only cues, strip
+        the tags and unescape HTML entities. A file with no inline tags is left
+        as it was, apart from the unescape."""
+        rolling = any(
+            self._INLINE_TAG.search(line) for seg in segments for line in seg["text_lines"]
+        )
+        if not rolling:
+            for seg in segments:
+                seg["text_lines"] = [html.unescape(t) for t in seg["text_lines"]]
+                seg["raw_text"] = " ".join(seg["text_lines"])
+            return segments
+        out = []
+        for seg in segments:
+            tagged = [t for t in seg["text_lines"] if self._INLINE_TAG.search(t)]
+            if not tagged:
+                continue
+            lines = [html.unescape(self._ANY_TAG.sub("", t)).strip() for t in tagged]
+            seg = {
+                **seg,
+                "segment_index": len(out),
+                "text_lines": lines,
+                "raw_text": " ".join(lines),
+            }
+            out.append(seg)
+        return out
 
     def extract_and_save_raw(self, url: str) -> str:
         """Extract raw transcript and save to JSON file."""
